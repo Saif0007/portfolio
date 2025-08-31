@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import emailjs from '@emailjs/browser'
 import {
   Github,
   Linkedin,
@@ -29,6 +30,14 @@ const Portfolio = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [visibleElements, setVisibleElements] = useState(new Set())
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState('')
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
@@ -88,6 +97,54 @@ const Portfolio = () => {
       }
     }
   }, [])
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init('FsbBrJUsqiB8favTx') // Replace with your EmailJS public key
+  }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('')
+
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: 'Saif Ur Rehman',
+      }
+
+      await emailjs.send(
+        'service_bnyprho', // Replace with your EmailJS service ID
+        'template_5nptvo4', // Replace with your EmailJS template ID
+        templateParams
+      )
+
+      setSubmitStatus('success')
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      })
+    } catch (error) {
+      console.error('EmailJS error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   const skills = {
     frontend: ["HTML", "CSS", "JavaScript", "Next.js", "React"],
@@ -856,22 +913,45 @@ const Portfolio = () => {
               }`}
             >
               <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Send a Message</h3>
-              <form className="space-y-4 sm:space-y-6">
+              
+              {submitStatus === 'success' && (
+                <div className="mb-4 p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-green-600 dark:text-green-400">
+                  <p className="font-medium">Message sent successfully! I'll get back to you soon.</p>
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="mb-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-600 dark:text-red-400">
+                  <p className="font-medium">Failed to send message. Please try again or contact me directly.</p>
+                </div>
+              )}
+              
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1 sm:mb-2">Name</label>
                     <input
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
                       className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
                       placeholder="Your name"
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1 sm:mb-2">Email</label>
                     <input
                       type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
                       className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
                       placeholder="your@email.com"
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -879,23 +959,41 @@ const Portfolio = () => {
                   <label className="block text-sm font-medium mb-1 sm:mb-2">Subject</label>
                   <input
                     type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
                     className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
                     placeholder="Project discussion"
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1 sm:mb-2">Message</label>
                   <textarea
                     rows={4}
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
                     className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all resize-none"
                     placeholder="Tell me about your project..."
+                    disabled={isSubmitting}
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-[1.02] font-semibold shadow-lg hover:shadow-xl"
+                  disabled={isSubmitting}
+                  className={`w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-[1.02] font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2`}
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
               </form>
             </div>
