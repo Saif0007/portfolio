@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react"
 import {
-  ChevronDown,
   Github,
   Linkedin,
   Mail,
@@ -22,8 +21,7 @@ import {
   Star,
   Globe,
   Briefcase,
-  Moon,
-  Sun,
+  Bot,
 } from "lucide-react"
 
 const Portfolio = () => {
@@ -31,20 +29,10 @@ const Portfolio = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [visibleElements, setVisibleElements] = useState(new Set())
-  const [isDarkMode, setIsDarkMode] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true)
-      document.documentElement.classList.add("dark")
-    } else {
-      setIsDarkMode(false)
-      document.documentElement.classList.remove("dark")
-    }
+    document.documentElement.classList.add("dark")
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -101,65 +89,62 @@ const Portfolio = () => {
     }
   }, [])
 
-  const toggleTheme = () => {
-    const newTheme = !isDarkMode
-    setIsDarkMode(newTheme)
-
-    if (newTheme) {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
-    }
-  }
-
   const skills = {
-    frontend: ["HTML", "CSS", "JavaScript", "React", "Next.js"],
+    frontend: ["HTML", "CSS", "JavaScript", "Next.js", "React"],
     backend: ["Python", "Django", "Flask", "FastAPI", "REST APIs"],
     databases: ["MySQL", "PostgreSQL", "MongoDB", "SQL Server"],
     cloud: ["AWS", "EC2", "S3", "RDS", "Docker"],
-    ai: ["LangChain", "Machine Learning", "AI Integration"],
+    tools: ["Visual Studio Code", "Cursor", "Postman", "Git", "JIRA", "Zapier"],
+    ai: ["LangChain", "OpenAI", "GPT Models", "RAG Systems", "AI Integration"],
   }
 
   const projects = [
     {
-      title: "AI-Powered Analytics Dashboard",
+      title: "Contact Lens RAG Application",
       description:
-        "Full-stack web application with real-time analytics, built using Django REST API and React frontend. Features advanced data visualization and machine learning insights.",
-      tech: ["Python", "Django", "PostgreSQL", "React", "AWS"],
+        "AI-powered research chatbot system with GPT-like capabilities for contact lens research. Features comprehensive admin panel for training AI models using PDFs, Excel sheets, and automated web scraping from 40+ websites.",
+      tech: ["FastAPI", "Next.js", "OpenAI", "RAG", "Web Scraping"],
+      github: "https://github.com/Saif-Ur-Rehman0",
+      demo: "https://www.therightcontact.com/",
+      image: "/ai-news-analysis-interface-with-text-processing.png",
+      featured: true,
+    },
+    {
+      title: "PRD Generator Platform",
+      description:
+        "AI-driven PRD generation system that creates detailed product requirement documents through guided questionnaires. Integrated with JIRA and Figma APIs for automatic ticket creation and design generation.",
+      tech: ["Django", "Next.js", "OpenAI", "JIRA API", "Figma API"],
       github: "https://github.com/Saif-Ur-Rehman0",
       demo: "#",
       image: "/modern-analytics-dashboard.png",
       featured: true,
     },
     {
-      title: "E-Commerce Microservices Platform",
+      title: "Real Estate Intelligence Platform",
       description:
-        "Scalable microservices architecture with Docker containerization, featuring payment integration, inventory management, and real-time notifications.",
-      tech: ["Python", "FastAPI", "Docker", "MongoDB", "Redis"],
-      github: "https://github.com/Saif-Ur-Rehman0",
-      demo: "#",
-      image: "/e-commerce-platform-interface-with-shopping-cart.png",
-      featured: true,
-    },
-    {
-      title: "Fake News Detection System",
-      description:
-        "AI/ML-based system using hybrid feature selection techniques for fake news detection and sentiment analysis. Advanced NLP processing with 94% accuracy.",
-      tech: ["Python", "Machine Learning", "NLP", "Flask", "TensorFlow"],
-      github: "https://github.com/Saif-Ur-Rehman0",
-      demo: "#",
-      image: "/ai-news-analysis-interface-with-text-processing.png",
-    },
-    {
-      title: "Real-Time Chat Application",
-      description:
-        "WebSocket-based chat application with real-time messaging, file sharing, and user authentication. Deployed on AWS with auto-scaling capabilities.",
-      tech: ["Django", "WebSocket", "Redis", "PostgreSQL", "AWS"],
+        "Comprehensive property data scraping system from Zillow with AI-powered scope of work generator. Features image recognition technology and GPT models for room design generation and floor plan creation.",
+      tech: ["Next.js", "Django", "OpenAI", "Image Recognition", "Web Scraping"],
       github: "https://github.com/Saif-Ur-Rehman0",
       demo: "#",
       image: "/modern-chat-app.png",
+    },
+    {
+      title: "LinkedIn Ad Analytics Dashboard",
+      description:
+        "Automated ad scraping system for comprehensive company advertising analysis across LinkedIn. Built detailed analytics engine with Stripe payment integration for premium features.",
+      tech: ["Python", "LinkedIn API", "Stripe", "Analytics", "Web Scraping"],
+      github: "https://github.com/Saif-Ur-Rehman0",
+      demo: "#",
+      image: "/e-commerce-platform-interface-with-shopping-cart.png",
+    },
+    {
+      title: "Crypto Trading Analysis Chrome Extension",
+      description:
+        "Published Chrome extension providing real-time AI-driven chart analysis for traders. Features OpenAI integration for pattern recognition and Firebase authentication with tiered access system.",
+      tech: ["JavaScript", "Chrome API", "OpenAI", "Firebase", "Technical Analysis"],
+      github: "https://github.com/Saif-Ur-Rehman0",
+      demo: "https://chromewebstore.google.com/detail/crypto-trading-analysis-b/fgldmbbkdnnmjgkdldihfpieheomlkif",
+      image: "/modern-analytics-dashboard.png",
     },
   ]
 
@@ -170,7 +155,7 @@ const Portfolio = () => {
       duration: "October 2024 - Present",
       location: "Lahore",
       description:
-        "Leading a team of developers in building AI-powered solutions and managing end-to-end project delivery.",
+        "Leading development teams in building cutting-edge AI-powered solutions. Architecting scalable software systems, mentoring junior developers, and driving technical decision-making across projects.",
       current: true,
     },
     {
@@ -179,13 +164,22 @@ const Portfolio = () => {
       duration: "July 2022 - September 2024",
       location: "Lahore",
       description:
-        "Developed and deployed dynamic web applications using Python Django and REST APIs, ensuring high performance and scalability.",
+        "Developed and deployed dynamic web applications using Python Django and REST APIs. Spearheaded backend development, implemented advanced debugging techniques, and collaborated with cross-functional teams to deliver high-performance applications.",
       current: false,
     },
   ]
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const downloadResume = () => {
+    const link = document.createElement('a')
+    link.href = '/resume.pdf'
+    link.download = 'Saif_Ur_Rehman_Resume.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   const isVisible = (id: string) => visibleElements.has(id)
@@ -195,45 +189,51 @@ const Portfolio = () => {
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl animate-float"
+          className="absolute w-[600px] h-[600px] bg-gradient-to-r from-cyan-400/30 to-blue-500/20 rounded-full blur-3xl animate-float opacity-60"
           style={{
-            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
-            top: "10%",
-            left: "10%",
+            transform: `translate(${mousePosition.x * 0.03}px, ${mousePosition.y * 0.03}px)`,
+            top: "-10%",
+            left: "-10%",
           }}
         />
         <div
-          className="absolute w-72 h-72 bg-gradient-to-r from-amber-400/20 to-orange-500/20 rounded-full blur-3xl animate-float"
+          className="absolute w-[400px] h-[400px] bg-gradient-to-r from-amber-400/25 to-orange-500/15 rounded-full blur-3xl animate-float opacity-70"
           style={{
-            transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`,
-            top: "60%",
-            right: "10%",
-            animationDelay: "2s",
+            transform: `translate(${mousePosition.x * -0.02}px, ${mousePosition.y * -0.02}px)`,
+            top: "20%",
+            right: "-5%",
+            animationDelay: "1s",
           }}
         />
         <div
-          className="absolute w-64 h-64 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 rounded-full blur-3xl animate-float"
+          className="absolute w-[350px] h-[350px] bg-gradient-to-r from-emerald-400/20 to-teal-500/15 rounded-full blur-3xl animate-float opacity-50"
           style={{
-            transform: `translate(${mousePosition.x * 0.015}px, ${mousePosition.y * 0.015}px)`,
-            bottom: "20%",
-            left: "50%",
-            animationDelay: "4s",
+            transform: `translate(${mousePosition.x * 0.025}px, ${mousePosition.y * 0.025}px)`,
+            bottom: "10%",
+            left: "30%",
+            animationDelay: "3s",
           }}
+        />
+        <div className="absolute top-20 right-20 w-32 h-32 border border-cyan-500/20 rounded-full animate-spin-slow opacity-30" />
+        <div className="absolute bottom-32 left-16 w-24 h-24 border-2 border-amber-500/20 rotate-45 animate-pulse opacity-40" />
+        <div
+          className="absolute top-1/2 left-10 w-16 h-16 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-lg animate-bounce opacity-30"
+          style={{ animationDelay: "2s" }}
         />
       </div>
 
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? "glass shadow-lg" : ""}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold gradient-text">Saif Ur Rehman</div>
-            <div className="flex items-center gap-6">
-              <div className="hidden md:flex space-x-8">
+            <div className="text-xl sm:text-2xl font-bold gradient-text">Saif Ur Rehman</div>
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="hidden md:flex space-x-6 lg:space-x-8">
                 {["About", "Skills", "Projects", "Experience", "Contact"].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
-                    className={`relative px-4 py-2 rounded-lg transition-all duration-300 ${
+                    className={`relative px-3 lg:px-4 py-2 rounded-lg transition-all duration-300 text-sm lg:text-base ${
                       activeSection === item.toLowerCase()
                         ? "text-accent bg-accent/10"
                         : "text-muted hover:text-foreground hover:bg-muted/10"
@@ -243,21 +243,37 @@ const Portfolio = () => {
                   </button>
                 ))}
               </div>
-              <button
-                onClick={toggleTheme}
-                className="p-3 glass rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:scale-110"
-                aria-label="Toggle theme"
-              >
-                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center relative">
-        <div className="text-center z-10 px-6 max-w-5xl mx-auto">
+      <section
+        id="hero"
+        className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-20"
+      >
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute w-[600px] h-[600px] bg-gradient-to-r from-cyan-400/20 to-blue-500/15 rounded-full blur-3xl animate-float opacity-50"
+            style={{
+              transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+              top: "-15%",
+              left: "-15%",
+            }}
+          />
+          <div
+            className="absolute w-[400px] h-[400px] bg-gradient-to-r from-amber-400/15 to-orange-500/10 rounded-full blur-3xl animate-float opacity-40"
+            style={{
+              transform: `translate(${mousePosition.x * -0.015}px, ${mousePosition.y * -0.015}px)`,
+              top: "30%",
+              right: "-10%",
+              animationDelay: "2s",
+            }}
+          />
+        </div>
+
+        <div className="text-center z-10 px-4 sm:px-6 max-w-6xl mx-auto relative">
           <div
             data-animate="hero-content"
             id="hero-content"
@@ -265,113 +281,170 @@ const Portfolio = () => {
               isVisible("hero-content") ? "animate-slide-in-up opacity-100" : "opacity-0"
             }`}
           >
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 animate-glow">
-                <Sparkles size={16} />
-                Available for new opportunities
+            <div className="mb-6 sm:mb-8">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-cyan-500/20 text-cyan-400 rounded-full text-xs sm:text-sm font-medium animate-glow shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
+                <div className="relative">
+                  <Sparkles size={10} className="sm:w-3 sm:h-3 animate-pulse" />
+                </div>
+                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  Available for new opportunities
+                </span>
+                <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-400 rounded-full animate-pulse" />
               </div>
+            </div>
 
-              <h1 className="text-6xl md:text-8xl font-black mb-6 gradient-text leading-tight">Saif Ur Rehman</h1>
+            <div className="mb-8 sm:mb-10">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black leading-[0.9] mb-6 sm:mb-8">
+                <div className="mb-2 sm:mb-3">
+                  <span className="bg-gradient-to-r from-white via-cyan-200 to-blue-300 dark:from-gray-100 dark:via-cyan-300 dark:to-blue-400 bg-clip-text text-transparent drop-shadow-2xl">
+                    M. Saif{" "}
+                  </span>
+                  <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient-x">
+                    Ur Rehman
+                  </span>
+                </div>
+              </h1>
+            </div>
 
-              <div className="text-2xl md:text-4xl font-bold text-muted mb-6">Senior Full Stack Developer</div>
+            <div className="mb-10 sm:mb-12">
+              <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold mb-4 sm:mb-6">
+                <span className="bg-gradient-to-r from-gray-600 to-gray-800 dark:from-gray-300 dark:to-gray-100 bg-clip-text text-transparent">
+                  Software Engineer
+                </span>
+                <span className="mx-2 sm:mx-3 text-cyan-500 text-lg sm:text-xl md:text-2xl lg:text-3xl">|</span>
+                <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                  FAST'22
+                </span>
+              </div>
+              <div className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 mx-auto rounded-full animate-pulse" />
+            </div>
 
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-                Building scalable web applications with cutting-edge technologies. Specialized in Python, Django, AI/ML
-                integration, and cloud solutions.
+            <div className="mb-12 sm:mb-16">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light px-2 sm:px-4">
+                Leading development teams in building{" "}
+                <span className="text-cyan-400 font-semibold">cutting-edge AI-powered solutions</span>.
+                <br className="hidden sm:block" />
+                Specialized in <span className="text-amber-400 font-semibold">Python, Django, AI/ML integration</span>,
+                and <span className="text-emerald-400 font-semibold">scalable cloud architectures</span>.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center mb-16 sm:mb-20 px-2">
               <button
                 onClick={() => scrollToSection("projects")}
-                className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 font-semibold"
+                className="group relative px-5 sm:px-6 md:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white rounded-2xl hover:from-cyan-600 hover:via-blue-700 hover:to-purple-700 transition-all duration-500 transform hover:scale-105 shadow-2xl hover:shadow-cyan-500/25 flex items-center justify-center gap-2 sm:gap-3 font-bold text-sm sm:text-base md:text-lg overflow-hidden"
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Sparkles
+                  size={16}
+                  className="sm:w-[18px] sm:h-[18px] group-hover:rotate-12 transition-transform duration-300"
+                />
                 View My Work
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight
+                  size={16}
+                  className="sm:w-[18px] sm:h-[18px] group-hover:translate-x-2 transition-transform duration-300"
+                />
               </button>
-              <button className="px-8 py-4 border-2 border-cyan-500/30 bg-card text-card-foreground rounded-xl hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10 hover:border-cyan-400 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 font-semibold">
-                <Download size={20} />
+
+              <button onClick={downloadResume} className="group relative px-5 sm:px-6 md:px-8 py-3 sm:py-4 border-2 border-cyan-500/30 bg-card/80 backdrop-blur-sm text-card-foreground rounded-2xl hover:bg-gradient-to-r hover:from-cyan-500/10 hover:via-blue-500/10 hover:to-purple-500/10 hover:border-cyan-400/60 transition-all duration-500 transform hover:scale-105 shadow-xl hover:shadow-blue-500/20 flex items-center justify-center gap-2 sm:gap-3 font-bold text-sm sm:text-base md:text-lg">
+                <Download
+                  size={16}
+                  className="sm:w-[18px] sm:h-[18px] group-hover:-translate-y-1 transition-transform duration-300"
+                />
                 Download Resume
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </button>
             </div>
 
-            <div className="flex justify-center space-x-6">
+            <div className="flex justify-center space-x-3 sm:space-x-4 md:space-x-6">
               {[
                 {
                   icon: Linkedin,
                   href: "https://linkedin.com/in/saif-ur-rehman-404650218",
-                  color: "hover:text-blue-500 hover:bg-blue-500/10",
+                  color: "hover:text-blue-500 hover:bg-blue-500/20 hover:border-blue-500/30 hover:shadow-blue-500/25",
+                  label: "LinkedIn",
                 },
                 {
                   icon: Github,
                   href: "https://github.com/Saif-Ur-Rehman0",
-                  color: "hover:text-gray-600 hover:bg-gray-600/10",
+                  color:
+                    "hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-600/20 hover:border-gray-500/30 hover:shadow-gray-500/25",
+                  label: "GitHub",
                 },
-                { icon: Mail, href: "mailto:syfin008@gmail.com", color: "hover:text-amber-500 hover:bg-amber-500/10" },
-              ].map(({ icon: Icon, href, color }, index) => (
+                {
+                  icon: Mail,
+                  href: "mailto:syfin008@gmail.com",
+                  color:
+                    "hover:text-amber-500 hover:bg-amber-500/20 hover:border-amber-500/30 hover:shadow-amber-500/25",
+                  label: "Email",
+                },
+                {
+                  icon: Phone,
+                  href: "tel:+923224016585",
+                  color:
+                    "hover:text-emerald-500 hover:bg-emerald-500/20 hover:border-emerald-500/30 hover:shadow-emerald-500/25",
+                  label: "Phone",
+                },
+              ].map(({ icon: Icon, href, color, label }, index) => (
                 <a
                   key={index}
                   href={href}
-                  className={`p-4 glass rounded-xl ${color} transition-all duration-300 transform hover:scale-110 hover:shadow-lg`}
+                  className={`group relative p-2.5 sm:p-3 md:p-4 glass rounded-2xl ${color} transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-lg border border-border/50`}
+                  aria-label={label}
                 >
-                  <Icon size={24} />
+                  <Icon size={18} className="sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110" />
+                  <div className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm -z-10" />
                 </a>
               ))}
             </div>
           </div>
         </div>
-
-        <button
-          onClick={() => scrollToSection("about")}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce p-2 glass rounded-full"
-        >
-          <ChevronDown size={32} className="text-accent" />
-        </button>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 relative">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="about" className="py-16 sm:py-20 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div
             data-animate="about-header"
             id="about-header"
-            className={`text-center mb-16 transition-all duration-1000 ${
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
               isVisible("about-header") ? "animate-slide-in-up opacity-100" : "opacity-0"
             }`}
           >
-            <h2 className="text-5xl font-black mb-6 gradient-text">About Me</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+            <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">About Me</h2>
+            <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div
               data-animate="about-content"
               id="about-content"
-              className={`space-y-6 transition-all duration-1000 delay-200 ${
+              className={`space-y-4 sm:space-y-6 transition-all duration-1000 delay-200 ${
                 isVisible("about-content") ? "animate-slide-in-up opacity-100" : "opacity-0"
               }`}
             >
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                I'm a passionate Senior Full Stack Developer with over 2+ years of experience in building robust web
-                applications. Currently leading a team at Tron AI, I specialize in creating scalable solutions using
-                modern technologies.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                I'm a passionate Software Engineer with 3+ years of experience in building robust, scalable web
+                applications. Currently serving as a Senior Software Engineer and Team Lead at Tron AI, where I
+                architect cutting-edge AI-powered solutions and mentor development teams.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                My expertise spans across Python Django, REST APIs, cloud technologies, and AI/ML integration. I'm
-                passionate about writing clean, efficient code and mentoring junior developers.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                My expertise spans full-stack development with Python Django, REST APIs, AI/ML integration, and cloud
+                technologies. I'm passionate about leveraging artificial intelligence to solve complex business problems
+                and creating seamless user experiences.
               </p>
 
-              <div className="grid grid-cols-2 gap-6 mt-8">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 {[
-                  { number: "2+", label: "Years Experience", color: "text-cyan-500" },
-                  { number: "15+", label: "Projects Completed", color: "text-amber-500" },
+                  { number: "3+", label: "Years Experience", color: "text-cyan-500" },
+                  { number: "25+", label: "Projects Delivered", color: "text-amber-500" },
                 ].map((stat, index) => (
                   <div
                     key={index}
-                    className="text-center p-6 glass rounded-xl hover:scale-105 transition-transform duration-300"
+                    className="text-center p-4 sm:p-6 glass rounded-xl hover:scale-105 transition-transform duration-300"
                   >
-                    <div className={`text-3xl font-black ${stat.color} mb-2`}>{stat.number}</div>
-                    <div className="text-muted-foreground font-medium">{stat.label}</div>
+                    <div className={`text-2xl sm:text-3xl font-black ${stat.color} mb-1 sm:mb-2`}>{stat.number}</div>
+                    <div className="text-muted-foreground font-medium text-sm sm:text-base">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -380,25 +453,29 @@ const Portfolio = () => {
             <div
               data-animate="about-education"
               id="about-education"
-              className={`glass rounded-2xl p-8 transition-all duration-1000 delay-400 ${
+              className={`glass rounded-2xl p-6 sm:p-8 transition-all duration-1000 delay-400 ${
                 isVisible("about-education") ? "animate-slide-in-up opacity-100" : "opacity-0"
               }`}
             >
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
                 <Award className="text-amber-500" />
                 Education & Certifications
               </h3>
-              <div className="space-y-6">
-                <div className="border-l-4 border-cyan-500 pl-6">
-                  <h4 className="text-xl font-bold text-cyan-500 mb-2">Bachelor's of Computer Science</h4>
+              <div className="space-y-4 sm:space-y-6">
+                <div className="border-l-4 border-cyan-500 pl-4 sm:pl-6">
+                  <h4 className="text-xl font-bold text-cyan-500 mb-2">Bachelor of Computer Science</h4>
                   <p className="text-foreground font-medium">FAST NUCES, Lahore</p>
                   <p className="text-muted-foreground text-sm">August 2018 - June 2022</p>
+                  <p className="text-muted-foreground text-sm mt-2">
+                    Key Coursework: Programming Fundamentals, Design and Analysis of Algorithms, Databases, Object
+                    Oriented Programming, Data Structures
+                  </p>
                 </div>
                 <div className="space-y-3">
                   {[
-                    "Python For Programmers - Codecademy",
-                    "Django Framework - Great Learning",
-                    "JavaScript Course - Codecademy",
+                    "Python For Programmers Course - Codecademy",
+                    "Django Framework Course - Great Learning",
+                    "Learn JavaScript Course - Codecademy",
                   ].map((cert, index) => (
                     <div
                       key={index}
@@ -416,20 +493,20 @@ const Portfolio = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-card">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="skills" className="py-16 sm:py-20 bg-card">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div
             data-animate="skills-header"
             id="skills-header"
-            className={`text-center mb-16 transition-all duration-1000 ${
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
               isVisible("skills-header") ? "animate-slide-in-up opacity-100" : "opacity-0"
             }`}
           >
-            <h2 className="text-5xl font-black mb-6 gradient-text">Skills & Technologies</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+            <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">Skills & Technologies</h2>
+            <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 title: "Frontend",
@@ -461,29 +538,36 @@ const Portfolio = () => {
               },
               {
                 title: "AI & ML",
-                icon: Users,
+                icon: Bot,
                 skills: skills.ai,
                 color: "from-purple-500/20 to-pink-500/10",
                 iconColor: "text-purple-500",
+              },
+              {
+                title: "Development Tools",
+                icon: Users,
+                skills: skills.tools,
+                color: "from-rose-500/20 to-red-500/10",
+                iconColor: "text-rose-500",
               },
             ].map((category, index) => (
               <div
                 key={index}
                 data-animate={`skill-${index}`}
                 id={`skill-${index}`}
-                className={`bg-gradient-to-br ${category.color} backdrop-blur-sm rounded-2xl p-6 hover:scale-105 transition-all duration-300 ${
+                className={`bg-gradient-to-br ${category.color} backdrop-blur-sm rounded-2xl p-5 sm:p-6 hover:scale-105 transition-all duration-300 ${
                   isVisible(`skill-${index}`) ? `animate-fade-in-scale opacity-100 stagger-${index + 1}` : "opacity-0"
                 }`}
               >
-                <div className="flex items-center mb-4">
-                  <category.icon className={`${category.iconColor} mr-3`} size={24} />
-                  <h3 className={`text-xl font-bold ${category.iconColor}`}>{category.title}</h3>
+                <div className="flex items-center mb-3 sm:mb-4">
+                  <category.icon className={`${category.iconColor} mr-2 sm:mr-3`} size={20} />
+                  <h3 className={`text-lg sm:text-xl font-bold ${category.iconColor}`}>{category.title}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="px-3 py-1 bg-background/50 backdrop-blur-sm rounded-full text-sm font-medium border border-border/50 hover:bg-background/70 transition-colors"
+                      className="px-2 py-1 bg-background/50 backdrop-blur-sm rounded-full text-xs font-medium border border-border/50 hover:bg-background/70 transition-colors"
                     >
                       {skill}
                     </span>
@@ -496,21 +580,21 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="projects" className="py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div
             data-animate="projects-header"
             id="projects-header"
-            className={`text-center mb-16 transition-all duration-1000 ${
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
               isVisible("projects-header") ? "animate-slide-in-up opacity-100" : "opacity-0"
             }`}
           >
-            <h2 className="text-5xl font-black mb-6 gradient-text">Featured Projects</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+            <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">Featured Projects</h2>
+            <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
           </div>
 
           {/* Featured Projects Grid */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {projects
               .filter((p) => p.featured)
               .map((project, index) => (
@@ -528,47 +612,47 @@ const Portfolio = () => {
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-48 sm:h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full text-xs font-bold">
+                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
+                      <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full text-xs font-bold">
                         Featured
                       </span>
                     </div>
                   </div>
 
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-3 group-hover:text-cyan-500 transition-colors">
+                  <div className="p-5 sm:p-8">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 group-hover:text-cyan-500 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">{project.description}</p>
+                    <p className="text-muted-foreground mb-4 sm:mb-6 leading-relaxed">{project.description}</p>
 
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                       {project.tech.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-600 dark:text-cyan-400 rounded-full text-sm font-medium border border-cyan-500/20"
+                          className="px-2 py-0.5 sm:px-3 sm:py-1 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-600 dark:text-cyan-400 rounded-full text-xs font-medium border border-cyan-500/20"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex gap-2 sm:gap-4">
                       <a
                         href={project.github}
-                        className="flex items-center gap-2 px-6 py-3 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground rounded-xl transition-all duration-300 font-medium"
+                        className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground rounded-xl transition-all duration-300 font-medium text-sm"
                       >
-                        <Github size={18} />
+                        <Github size={16} />
                         Code
                       </a>
                       <a
                         href={project.demo}
-                        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl transition-all duration-300 font-medium"
+                        className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
                       >
-                        <ExternalLink size={18} />
-                        Live Demo
+                        <ExternalLink size={16} />
+                        Live Website
                       </a>
                     </div>
                   </div>
@@ -577,7 +661,7 @@ const Portfolio = () => {
           </div>
 
           {/* Other Projects */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             {projects
               .filter((p) => !p.featured)
               .map((project, index) => (
@@ -585,36 +669,36 @@ const Portfolio = () => {
                   key={index}
                   data-animate={`project-${index}`}
                   id={`project-${index}`}
-                  className={`glass rounded-xl p-6 hover:scale-105 transition-all duration-300 ${
+                  className={`glass rounded-xl p-5 sm:p-6 hover:scale-105 transition-all duration-300 ${
                     isVisible(`project-${index}`)
                       ? `animate-fade-in-scale opacity-100 stagger-${index + 3}`
                       : "opacity-0"
                   }`}
                 >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/20">
-                      <Globe className="text-cyan-500" size={20} />
+                  <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/20">
+                      <Globe className="text-cyan-500" size={18} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
+                      <h3 className="text-lg font-bold mb-1 sm:mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{project.description}</p>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
                     {project.tech.slice(0, 3).map((tech, techIndex) => (
-                      <span key={techIndex} className="px-2 py-1 bg-muted/50 text-muted-foreground rounded text-xs">
+                      <span key={techIndex} className="px-1.5 py-0.5 bg-muted/50 text-muted-foreground rounded text-xs">
                         {tech}
                       </span>
                     ))}
                     {project.tech.length > 3 && (
-                      <span className="px-2 py-1 bg-muted/50 text-muted-foreground rounded text-xs">
+                      <span className="px-1.5 py-0.5 bg-muted/50 text-muted-foreground rounded text-xs">
                         +{project.tech.length - 3} more
                       </span>
                     )}
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-2 sm:gap-3">
                     <a href={project.github} className="text-muted-foreground hover:text-cyan-500 transition-colors">
                       <Github size={16} />
                     </a>
@@ -629,55 +713,55 @@ const Portfolio = () => {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 bg-card">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="experience" className="py-16 sm:py-20 bg-card">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div
             data-animate="experience-header"
             id="experience-header"
-            className={`text-center mb-16 transition-all duration-1000 ${
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
               isVisible("experience-header") ? "animate-slide-in-up opacity-100" : "opacity-0"
             }`}
           >
-            <h2 className="text-5xl font-black mb-6 gradient-text">Experience</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+            <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">Experience</h2>
+            <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {experience.map((exp, index) => (
               <div
                 key={index}
                 data-animate={`experience-${index}`}
                 id={`experience-${index}`}
-                className={`glass rounded-2xl p-8 hover:bg-background/5 transition-all duration-300 ${
+                className={`glass rounded-2xl p-6 sm:p-8 hover:bg-background/5 transition-all duration-300 ${
                   isVisible(`experience-${index}`)
                     ? `animate-slide-in-up opacity-100 stagger-${index + 1}`
                     : "opacity-0"
                 }`}
               >
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-                  <div className="flex items-start gap-4">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 sm:mb-6">
+                  <div className="flex items-start gap-3 sm:gap-4">
                     <div
-                      className={`p-3 rounded-xl ${exp.current ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30" : "bg-muted/20"}`}
+                      className={`p-2 rounded-xl ${exp.current ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30" : "bg-muted/20"}`}
                     >
-                      <Briefcase className={exp.current ? "text-cyan-500" : "text-muted-foreground"} size={24} />
+                      <Briefcase className={exp.current ? "text-cyan-500" : "text-muted-foreground"} size={20} />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-cyan-500 mb-2">{exp.position}</h3>
-                      <h4 className="text-xl font-semibold mb-2">{exp.company}</h4>
+                      <h3 className="text-xl font-bold text-cyan-500 mb-1 sm:mb-2">{exp.position}</h3>
+                      <h4 className="text-lg font-semibold mb-1 sm:mb-2">{exp.company}</h4>
                       {exp.current && (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-emerald-500/10 to-green-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium border border-emerald-500/20">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-emerald-500/10 to-green-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-medium border border-emerald-500/20">
                           <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                           Current Position
                         </span>
                       )}
                     </div>
                   </div>
-                  <div className="flex flex-col lg:items-end mt-4 lg:mt-0 space-y-2">
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                  <div className="flex flex-col lg:items-end mt-2 lg:mt-0 space-y-1 sm:space-y-2">
+                    <div className="flex items-center gap-2 text-muted-foreground text-sm">
                       <Calendar size={16} />
                       <span className="font-medium">{exp.duration}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                    <div className="flex items-center gap-2 text-muted-foreground text-sm">
                       <MapPin size={16} />
                       <span className="font-medium">{exp.location}</span>
                     </div>
@@ -691,36 +775,36 @@ const Portfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="contact" className="py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div
             data-animate="contact-header"
             id="contact-header"
-            className={`text-center mb-16 transition-all duration-1000 ${
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
               isVisible("contact-header") ? "animate-slide-in-up opacity-100" : "opacity-0"
             }`}
           >
-            <h2 className="text-5xl font-black mb-6 gradient-text">Let's Connect</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+            <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">Let's Connect</h2>
+            <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
             <div
               data-animate="contact-content"
               id="contact-content"
-              className={`space-y-8 transition-all duration-1000 delay-200 ${
+              className={`space-y-6 transition-all duration-1000 delay-200 ${
                 isVisible("contact-content") ? "animate-slide-in-up opacity-100" : "opacity-0"
               }`}
             >
               <div>
-                <h3 className="text-3xl font-bold mb-6">Get In Touch</h3>
-                <p className="text-muted-foreground leading-relaxed text-lg mb-8">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Get In Touch</h3>
+                <p className="text-muted-foreground leading-relaxed text-lg mb-6 sm:mb-8">
                   I'm always interested in hearing about new opportunities, interesting projects, or just having a chat
                   about technology. Feel free to reach out!
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {[
                   {
                     icon: Mail,
@@ -748,16 +832,16 @@ const Portfolio = () => {
                   <a
                     key={index}
                     href={contact.href}
-                    className={`flex items-center gap-6 p-6 glass rounded-xl hover:bg-background/5 transition-all duration-300 group border ${contact.color.split(" ").slice(3).join(" ")}`}
+                    className={`flex items-center gap-4 sm:gap-6 p-5 sm:p-6 glass rounded-xl hover:bg-background/5 transition-all duration-300 group border ${contact.color.split(" ").slice(3).join(" ")}`}
                   >
                     <div
-                      className={`p-4 rounded-xl ${contact.color.split(" ").slice(0, 3).join(" ")} group-hover:scale-110 transition-transform border`}
+                      className={`p-3 rounded-xl ${contact.color.split(" ").slice(0, 3).join(" ")} group-hover:scale-110 transition-transform border`}
                     >
-                      <contact.icon size={24} />
+                      <contact.icon size={20} />
                     </div>
                     <div>
                       <div className="text-lg font-bold">{contact.label}</div>
-                      <div className="text-muted-foreground">{contact.value}</div>
+                      <div className="text-muted-foreground text-sm">{contact.value}</div>
                     </div>
                   </a>
                 ))}
@@ -767,49 +851,49 @@ const Portfolio = () => {
             <div
               data-animate="contact-form"
               id="contact-form"
-              className={`glass rounded-2xl p-8 transition-all duration-1000 delay-400 ${
+              className={`glass rounded-2xl p-6 sm:p-8 transition-all duration-1000 delay-400 ${
                 isVisible("contact-form") ? "animate-slide-in-up opacity-100" : "opacity-0"
               }`}
             >
-              <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Send a Message</h3>
+              <form className="space-y-4 sm:space-y-6">
+                <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Name</label>
+                    <label className="block text-sm font-medium mb-1 sm:mb-2">Name</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+                      className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Email</label>
+                    <label className="block text-sm font-medium mb-1 sm:mb-2">Email</label>
                     <input
                       type="email"
-                      className="w-full px-4 py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+                      className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Subject</label>
+                  <label className="block text-sm font-medium mb-1 sm:mb-2">Subject</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
                     placeholder="Project discussion"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Message</label>
+                  <label className="block text-sm font-medium mb-1 sm:mb-2">Message</label>
                   <textarea
-                    rows={5}
-                    className="w-full px-4 py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all resize-none"
+                    rows={4}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-input border border-border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all resize-none"
                     placeholder="Tell me about your project..."
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-[1.02] font-semibold shadow-lg hover:shadow-xl"
+                  className="w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-[1.02] font-semibold shadow-lg hover:shadow-xl"
                 >
                   Send Message
                 </button>
@@ -820,14 +904,14 @@ const Portfolio = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-border bg-card">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="py-8 sm:py-12 border-t border-border bg-card">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
             <div className="text-center md:text-left">
-              <div className="text-xl font-bold gradient-text mb-2">Saif Ur Rehman</div>
-              <p className="text-muted-foreground">© 2024 Built with React & Tailwind CSS</p>
+              <div className="text-lg sm:text-xl font-bold gradient-text mb-1 sm:mb-2">Saif Ur Rehman</div>
+              <p className="text-muted-foreground text-sm sm:text-base">© 2025 Built with Next JS & Tailwind</p>
             </div>
-            <div className="flex space-x-6">
+            <div className="flex space-x-4 sm:space-x-6">
               {[
                 {
                   icon: Github,
@@ -844,9 +928,9 @@ const Portfolio = () => {
                 <a
                   key={index}
                   href={href}
-                  className={`p-3 glass rounded-lg ${color} transition-all duration-300 transform hover:scale-110`}
+                  className={`p-2.5 sm:p-3 glass rounded-lg ${color} transition-all duration-300 transform hover:scale-110`}
                 >
-                  <Icon size={20} />
+                  <Icon size={18} className="sm:w-5 sm:h-5" />
                 </a>
               ))}
             </div>
