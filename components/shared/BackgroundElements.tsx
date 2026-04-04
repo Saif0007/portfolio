@@ -20,7 +20,7 @@ export const BackgroundElements = ({ mousePosition }: BackgroundElementsProps) =
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
       {/* Main floating blobs with parallax */}
       <motion.div
-        className="absolute w-[600px] h-[600px] bg-gradient-to-r from-cyan-400/30 to-blue-500/20 rounded-full blur-3xl opacity-60"
+        className="absolute w-[600px] h-[600px] bg-gradient-to-r from-emerald-400/30 to-teal-500/20 rounded-full blur-3xl opacity-60"
         style={{
           y: y1,
           x: mousePosition.x * 0.03,
@@ -80,7 +80,7 @@ export const BackgroundElements = ({ mousePosition }: BackgroundElementsProps) =
 
       {/* Animated geometric shapes */}
       <motion.div
-        className="absolute top-20 right-20 w-32 h-32 border border-cyan-500/20 rounded-full opacity-30"
+        className="absolute top-20 right-20 w-32 h-32 border border-emerald-500/20 rounded-full opacity-30"
         style={{ rotate: rotate1 }}
         animate={{
           scale: [1, 1.2, 1],
@@ -123,7 +123,7 @@ export const BackgroundElements = ({ mousePosition }: BackgroundElementsProps) =
       {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+          className="absolute w-1 h-1 bg-emerald-400/30 rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,

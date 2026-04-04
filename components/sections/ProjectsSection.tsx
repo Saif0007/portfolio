@@ -18,7 +18,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
           }`}
         >
           <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">Featured Projects</h2>
-          <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+          <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full"></div>
         </div>
 
         {/* Featured Projects Grid */}
@@ -44,14 +44,14 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
                   <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
-                    <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full text-xs font-bold">
+                    <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-xs font-bold">
                       Featured
                     </span>
                   </div>
                 </div>
 
                 <div className="p-5 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 group-hover:text-cyan-500 transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 group-hover:text-emerald-500 transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-muted-foreground mb-4 sm:mb-6 leading-relaxed">{project.description}</p>
@@ -60,7 +60,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-2 py-0.5 sm:px-3 sm:py-1 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-600 dark:text-cyan-400 rounded-full text-xs font-medium border border-cyan-500/20"
+                        className="px-2 py-0.5 sm:px-3 sm:py-1 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-medium border border-emerald-500/20"
                       >
                         {tech}
                       </span>
@@ -73,7 +73,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
+                        className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
                       >
                         <ExternalLink size={16} />
                         Live Website
@@ -81,7 +81,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                     )}
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 rounded-xl transition-all duration-300 font-medium text-sm"
+                      className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 rounded-xl transition-all duration-300 font-medium text-sm"
                     >
                       <ArrowRight size={16} />
                       Details
@@ -121,8 +121,8 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                 <div className="p-5">
                   <div className="flex items-start gap-3 mb-3">
                     {!project.image && (
-                      <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/20 shrink-0">
-                        <Globe className="text-cyan-500" size={18} />
+                      <div className="p-1.5 sm:p-2 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-lg border border-emerald-500/20 shrink-0">
+                        <Globe className="text-emerald-500" size={18} />
                       </div>
                     )}
                     <div className="flex-1">
@@ -158,7 +158,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                     )}
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="ml-auto flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
+                      className="ml-auto flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 transition-colors"
                     >
                       View Details
                       <ArrowRight size={12} />

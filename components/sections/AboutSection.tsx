@@ -14,7 +14,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
   const stats = [
-    { number: "3+", label: "Years Experience", color: "text-cyan-500" },
+    { number: "3+", label: "Years Experience", color: "text-emerald-500" },
     { number: "25+", label: "Projects Delivered", color: "text-amber-500" },
     { number: "3", label: "Live Voice AI Agents", color: "text-purple-500" },
     { number: "5+", label: "Industries Served", color: "text-emerald-500" },
@@ -25,8 +25,8 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
       icon: Mic,
       title: "AI Voice Agents",
       description: "Production inbound & outbound voice agents with Twilio, Retell AI, Deepgram, and ElevenLabs — live in healthcare recruitment and B2B SaaS.",
-      color: "text-cyan-500",
-      bg: "bg-cyan-500/10 border-cyan-500/20",
+      color: "text-emerald-500",
+      bg: "bg-emerald-500/10 border-emerald-500/20",
     },
     {
       icon: LayoutDashboard,
@@ -62,7 +62,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
             About Me
           </motion.h2>
           <motion.div
-            className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"
+            className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full"
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -82,7 +82,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              As a <span className="text-cyan-400 font-semibold">Full Stack AI Engineer</span>, I build production AI systems that are live and actively used — not demos. That includes{" "}
+              As a <span className="text-emerald-400 font-semibold">Full Stack AI Engineer</span>, I build production AI systems that are live and actively used — not demos. That includes{" "}
               <span className="text-purple-400 font-semibold">AI voice agents</span> handling real inbound and outbound calls, multi-tenant SaaS platforms with white-label dashboards, RAG-based knowledge systems, and enterprise integrations with Salesforce, Twilio, Google Calendar, and more.
             </motion.p>
             <motion.p
@@ -109,7 +109,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
                   whileHover={{
                     scale: 1.1,
                     rotateY: 10,
-                    boxShadow: "0 20px 40px rgba(6, 182, 212, 0.3)",
+                    boxShadow: "0 20px 40px rgba(16, 185, 129, 0.3)",
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -138,7 +138,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
             whileHover={{
-              boxShadow: "0 20px 60px rgba(6, 182, 212, 0.2)",
+              boxShadow: "0 20px 60px rgba(16, 185, 129, 0.2)",
             }}
           >
             <motion.h3
@@ -165,13 +165,13 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
 
             <div className="space-y-4 sm:space-y-6">
               <motion.div
-                className="border-l-4 border-cyan-500 pl-4 sm:pl-6"
+                className="border-l-4 border-emerald-500 pl-4 sm:pl-6"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                whileHover={{ x: 10, borderColor: "#22d3ee" }}
+                whileHover={{ x: 10, borderColor: "#34d399" }}
               >
-                <h4 className="text-xl font-bold text-cyan-500 mb-2">Bachelor of Computer Science</h4>
+                <h4 className="text-xl font-bold text-emerald-500 mb-2">Bachelor of Computer Science</h4>
                 <p className="text-foreground font-medium">FAST NUCES, Lahore</p>
                 <p className="text-muted-foreground text-sm">August 2018 — June 2022</p>
               </motion.div>

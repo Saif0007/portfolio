@@ -31,7 +31,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
     {
       icon: Linkedin,
       href: "https://linkedin.com/in/saif-ur-rehman-404650218",
-      color: "hover:text-blue-500 hover:bg-blue-500/20 hover:border-blue-500/30 hover:shadow-blue-500/25",
+      color: "hover:text-teal-500 hover:bg-teal-500/20 hover:border-teal-500/30 hover:shadow-teal-500/25",
       label: "LinkedIn",
     },
     {
@@ -69,7 +69,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
       {/* Animated Background Blobs with Parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute w-[600px] h-[600px] bg-gradient-to-r from-cyan-400/20 to-blue-500/15 rounded-full blur-3xl opacity-50"
+          className="absolute w-[600px] h-[600px] bg-gradient-to-r from-emerald-400/20 to-teal-500/15 rounded-full blur-3xl opacity-50"
           style={{ y: y1, x: mousePosition.x * 0.02, top: "-15%", left: "-15%" }}
           animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -98,7 +98,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
         {/* Available Badge with Glow */}
         <motion.div className="mb-6 sm:mb-8" variants={slideUpVariants}>
           <motion.div
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-cyan-500/20 text-cyan-400 rounded-full text-xs sm:text-sm font-medium shadow-lg"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-purple-500/10 backdrop-blur-sm border border-emerald-500/20 text-emerald-400 rounded-full text-xs sm:text-sm font-medium shadow-lg"
             variants={glowVariants}
             initial="initial"
             animate="animate"
@@ -107,7 +107,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
             <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 2, repeat: Infinity }}>
               <Sparkles size={10} className="sm:w-3 sm:h-3" />
             </motion.div>
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
               Available for new opportunities
             </span>
             <motion.div
@@ -123,7 +123,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
           <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black leading-[0.9] mb-6 sm:mb-8">
             <div className="mb-2 sm:mb-3">
               <motion.span
-                className="bg-gradient-to-r from-white via-cyan-200 to-blue-300 dark:from-gray-100 dark:via-cyan-300 dark:to-blue-400 bg-clip-text text-transparent drop-shadow-2xl inline-block mr-7"
+                className="bg-gradient-to-r from-white via-emerald-200 to-teal-300 dark:from-gray-100 dark:via-emerald-300 dark:to-teal-400 bg-clip-text text-transparent drop-shadow-2xl inline-block mr-7"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -131,7 +131,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
                 M. Saif
               </motion.span>
               <motion.span
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent inline-block"
+                className="bg-gradient-to-r from-emerald-400 via-teal-500 to-purple-600 bg-clip-text text-transparent inline-block"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{
                   opacity: 1,
@@ -162,7 +162,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.span
-              className="bg-gradient-to-r from-purple-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-purple-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent"
               style={{ backgroundSize: "200% 200%" }}
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -171,13 +171,13 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
             >
               Full Stack AI Engineer
             </motion.span>
-            <span className="mx-2 sm:mx-3 text-cyan-500 text-lg sm:text-xl md:text-2xl lg:text-3xl">|</span>
+            <span className="mx-2 sm:mx-3 text-emerald-500 text-lg sm:text-xl md:text-2xl lg:text-3xl">|</span>
             <span className="bg-gradient-to-r from-gray-600 to-gray-800 dark:from-gray-300 dark:to-gray-100 bg-clip-text text-transparent">
               FAST'22
             </span>
           </motion.div>
           <motion.div
-            className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 mx-auto rounded-full"
+            className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-purple-500 mx-auto rounded-full"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
@@ -194,8 +194,8 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
           >
             Building{" "}
             <motion.span
-              className="text-cyan-400 font-semibold"
-              whileHover={{ scale: 1.05, color: "#22d3ee" }}
+              className="text-emerald-400 font-semibold"
+              whileHover={{ scale: 1.05, color: "#34d399" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               production AI voice agents
@@ -237,9 +237,9 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
         >
           <motion.button
             onClick={() => scrollToSection("projects")}
-            className="group relative px-5 sm:px-6 md:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white rounded-2xl overflow-hidden font-bold text-sm sm:text-base md:text-lg"
+            className="group relative px-5 sm:px-6 md:px-8 py-3 sm:py-4 bg-gradient-to-r from-emerald-500 via-teal-600 to-purple-600 text-white rounded-2xl overflow-hidden font-bold text-sm sm:text-base md:text-lg"
             variants={scaleVariants}
-            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(6, 182, 212, 0.4)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(16, 185, 129, 0.4)" }}
             whileTap={{ scale: 0.95 }}
             onHoverStart={() => setHoveredButton("projects")}
             onHoverEnd={() => setHoveredButton(null)}
@@ -269,19 +269,19 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
 
           <motion.button
             onClick={downloadResume}
-            className="group relative px-5 sm:px-6 md:px-8 py-3 sm:py-4 border-2 border-cyan-500/30 bg-card/80 backdrop-blur-sm text-card-foreground rounded-2xl font-bold text-sm sm:text-base md:text-lg overflow-hidden"
+            className="group relative px-5 sm:px-6 md:px-8 py-3 sm:py-4 border-2 border-emerald-500/30 bg-card/80 backdrop-blur-sm text-card-foreground rounded-2xl font-bold text-sm sm:text-base md:text-lg overflow-hidden"
             variants={scaleVariants}
             whileHover={{
               scale: 1.05,
-              borderColor: "rgba(6, 182, 212, 0.6)",
-              boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
+              borderColor: "rgba(16, 185, 129, 0.6)",
+              boxShadow: "0 20px 40px rgba(20, 184, 166, 0.3)",
             }}
             whileTap={{ scale: 0.95 }}
             onHoverStart={() => setHoveredButton("resume")}
             onHoverEnd={() => setHoveredButton(null)}
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10"
+              className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-purple-500/10"
               initial={{ opacity: 0 }}
               animate={{ opacity: hoveredButton === "resume" ? 1 : 0 }}
               transition={{ duration: 0.3 }}

@@ -60,7 +60,7 @@ export const ContactSection = ({ isVisible }: ContactSectionProps) => {
           }`}
         >
           <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">Let's Connect</h2>
-          <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+          <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full"></div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
@@ -99,7 +99,7 @@ export const ContactSection = ({ isVisible }: ContactSectionProps) => {
                   label: "LinkedIn",
                   value: "Connect with me",
                   href: "https://linkedin.com/in/saif-ur-rehman-404650218",
-                  color: "bg-gradient-to-r from-blue-500/10 to-cyan-500/10 text-blue-500 border-blue-500/20",
+                  color: "bg-gradient-to-r from-teal-500/10 to-emerald-500/10 text-teal-500 border-teal-500/20",
                 },
               ].map((contact, index) => (
                 <a
@@ -200,7 +200,7 @@ export const ContactSection = ({ isVisible }: ContactSectionProps) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-[1.02] font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2`}
+                className={`w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-[1.02] font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2`}
               >
                 {isSubmitting ? (
                   <>

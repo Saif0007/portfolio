@@ -17,7 +17,7 @@ export const ExperienceSection = ({ isVisible }: ExperienceSectionProps) => {
           }`}
         >
           <h2 className="text-4xl sm:text-5xl font-black mb-4 sm:mb-6 gradient-text">Experience</h2>
-          <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+          <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full"></div>
         </div>
 
         <div className="space-y-6 sm:space-y-8">
@@ -35,12 +35,12 @@ export const ExperienceSection = ({ isVisible }: ExperienceSectionProps) => {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 sm:mb-6">
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div
-                    className={`p-2 rounded-xl ${exp.current ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30" : "bg-muted/20"}`}
+                    className={`p-2 rounded-xl ${exp.current ? "bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30" : "bg-muted/20"}`}
                   >
-                    <Briefcase className={exp.current ? "text-cyan-500" : "text-muted-foreground"} size={20} />
+                    <Briefcase className={exp.current ? "text-emerald-500" : "text-muted-foreground"} size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-cyan-500 mb-1 sm:mb-2">{exp.position}</h3>
+                    <h3 className="text-xl font-bold text-emerald-500 mb-1 sm:mb-2">{exp.position}</h3>
                     <h4 className="text-lg font-semibold mb-1 sm:mb-2">{exp.company}</h4>
                     {exp.current && (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-emerald-500/10 to-green-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-medium border border-emerald-500/20">

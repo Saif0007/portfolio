@@ -32,24 +32,24 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const isVoiceProject = isPioneer || isAuralis
 
   const roleColors = [
-    { border: "border-purple-500/20", bg: "from-purple-500/5 to-blue-500/5", dot: "bg-purple-400", text: "text-purple-400" },
-    { border: "border-cyan-500/20",   bg: "from-cyan-500/5 to-blue-500/5",   dot: "bg-cyan-400",   text: "text-cyan-400" },
-    { border: "border-blue-500/20",   bg: "from-blue-500/5 to-indigo-500/5", dot: "bg-blue-400",   text: "text-blue-400" },
+    { border: "border-purple-500/20", bg: "from-purple-500/5 to-teal-500/5", dot: "bg-purple-400", text: "text-purple-400" },
+    { border: "border-emerald-500/20",   bg: "from-emerald-500/5 to-teal-500/5",   dot: "bg-emerald-400",   text: "text-emerald-400" },
+    { border: "border-teal-500/20",   bg: "from-teal-500/5 to-indigo-500/5", dot: "bg-teal-400",   text: "text-teal-400" },
   ]
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Background gradient blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
         {/* Back link */}
         <Link
           href="/#projects"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-cyan-500 transition-colors mb-10 group text-sm"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-emerald-500 transition-colors mb-10 group text-sm"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to Portfolio
@@ -59,23 +59,23 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="mb-10 sm:mb-14">
           <div className="flex flex-wrap items-center gap-2 mb-4">
             {project.featured && (
-              <span className="inline-block px-3 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full text-xs font-bold">
+              <span className="inline-block px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-xs font-bold">
                 Featured Project
               </span>
             )}
             {isAuralis && (
-              <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-400 border border-purple-500/30 rounded-full text-xs font-bold">
+              <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500/20 to-teal-500/20 text-purple-400 border border-purple-500/30 rounded-full text-xs font-bold">
                 B2B SaaS · Multi-Tenant
               </span>
             )}
             {isPioneer && (
-              <span className="inline-block px-3 py-1 bg-gradient-to-r from-green-500/20 to-cyan-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">
+              <span className="inline-block px-3 py-1 bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">
                 Healthcare Recruitment
               </span>
             )}
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-black mb-4 bg-gradient-to-r from-emerald-400 via-teal-400 to-purple-400 bg-clip-text text-transparent leading-tight">
             {project.title}
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
@@ -106,7 +106,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
               >
                 <Globe size={16} />
                 Live Website
@@ -127,7 +127,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent mb-10 sm:mb-14" />
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent mb-10 sm:mb-14" />
 
         {/* Screenshot Gallery */}
         {project.images && project.images.length > 0 ? (
@@ -155,7 +155,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="px-3 py-1.5 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-400 rounded-full text-sm font-medium border border-cyan-500/20"
+                className="px-3 py-1.5 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 text-emerald-400 rounded-full text-sm font-medium border border-emerald-500/20"
               >
                 {t}
               </span>
@@ -177,12 +177,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <h2 className="text-xl font-bold mb-6 text-foreground">How a Call Works</h2>
             <div className="relative">
               {/* Vertical line */}
-              <div className="absolute left-4 top-4 bottom-4 w-px bg-gradient-to-b from-cyan-500/50 via-blue-500/30 to-transparent" />
+              <div className="absolute left-4 top-4 bottom-4 w-px bg-gradient-to-b from-emerald-500/50 via-teal-500/30 to-transparent" />
               <ol className="space-y-4 pl-12">
                 {project.pipeline.map((step, i) => (
                   <li key={i} className="relative">
                     {/* Step dot */}
-                    <span className="absolute -left-8 flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400 text-xs font-bold">
+                    <span className="absolute -left-8 flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
                       {i + 1}
                     </span>
                     <p className="text-sm text-muted-foreground leading-relaxed pt-1">{step}</p>
@@ -201,16 +201,16 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               {project.agents.map((agent) => (
                 <div
                   key={agent.name}
-                  className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 p-6"
+                  className="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 p-6"
                 >
                   <div className="flex items-start justify-between mb-3 gap-3">
                     <div>
                       <h3 className="text-lg font-bold text-foreground">{agent.name}</h3>
-                      <span className="text-xs text-cyan-400 font-medium">{agent.role}</span>
+                      <span className="text-xs text-emerald-400 font-medium">{agent.role}</span>
                     </div>
                     <a
                       href={`tel:${agent.phone.replace(/[\s()+-]/g, "")}`}
-                      className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono hover:bg-cyan-500/20 transition-colors"
+                      className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono hover:bg-emerald-500/20 transition-colors"
                     >
                       <Phone size={12} />
                       {agent.phone}
@@ -220,7 +220,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   <ul className="space-y-2">
                     {agent.capabilities.map((cap) => (
                       <li key={cap} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 size={14} className="text-cyan-500 mt-0.5 shrink-0" />
+                        <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" />
                         {cap}
                       </li>
                     ))}
@@ -229,7 +229,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               ))}
             </div>
             {project.liveNote && (
-              <div className="mt-4 flex items-center gap-2 text-xs text-cyan-400">
+              <div className="mt-4 flex items-center gap-2 text-xs text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 {project.liveNote}
               </div>
@@ -282,7 +282,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   key={feature}
                   className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40"
                 >
-                  <CheckCircle2 size={16} className="text-cyan-500 mt-0.5 shrink-0" />
+                  <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 shrink-0" />
                   <span className="text-sm text-muted-foreground">{feature}</span>
                 </div>
               ))}
@@ -302,7 +302,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="border-t border-border/40 pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <Link
             href="/#projects"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-cyan-500 transition-colors group text-sm"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-emerald-500 transition-colors group text-sm"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             All Projects
@@ -312,7 +312,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <ExternalLink size={14} />
               {project.demo}

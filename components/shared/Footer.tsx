@@ -19,7 +19,7 @@ export const Footer = () => {
               {
                 icon: Linkedin,
                 href: "https://linkedin.com/in/saif-ur-rehman-404650218",
-                color: "hover:bg-blue-500/10 hover:text-blue-500",
+                color: "hover:bg-teal-500/10 hover:text-teal-500",
               },
               {
                 icon: Briefcase,

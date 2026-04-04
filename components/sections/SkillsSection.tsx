@@ -28,17 +28,17 @@ export const SkillsSection = ({ isVisible }: SkillsSectionProps) => {
       title: "Backend",
       icon: Zap,
       skills: skills.backend,
-      color: "from-cyan-500/20 to-teal-500/10",
-      iconColor: "text-cyan-500",
-      hoverGlow: "rgba(6, 182, 212, 0.4)",
+      color: "from-emerald-500/20 to-teal-500/10",
+      iconColor: "text-emerald-500",
+      hoverGlow: "rgba(16, 185, 129, 0.4)",
     },
     {
       title: "Frontend",
       icon: Code,
       skills: skills.frontend,
-      color: "from-blue-500/20 to-cyan-500/10",
-      iconColor: "text-blue-500",
-      hoverGlow: "rgba(59, 130, 246, 0.4)",
+      color: "from-teal-500/20 to-emerald-500/10",
+      iconColor: "text-teal-500",
+      hoverGlow: "rgba(20, 184, 166, 0.4)",
     },
     {
       title: "Databases",
@@ -92,7 +92,7 @@ export const SkillsSection = ({ isVisible }: SkillsSectionProps) => {
             Skills & Technologies
           </motion.h2>
           <motion.div
-            className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"
+            className="w-20 sm:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full"
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
