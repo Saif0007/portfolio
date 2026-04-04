@@ -40,6 +40,19 @@ const Portfolio = () => {
 
       <Navigation activeSection={activeSection} isScrolled={isScrolled} scrollToSection={scrollToSection} />
 
+      {/* Back to top button */}
+      {activeSection !== "hero" && (
+        <button
+          onClick={() => scrollToSection("hero")}
+          aria-label="Back to top"
+          className="fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all duration-200 hover:scale-110"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+          </svg>
+        </button>
+      )}
+
       <HeroSection
         mousePosition={mousePosition}
         isVisible={isVisible}
