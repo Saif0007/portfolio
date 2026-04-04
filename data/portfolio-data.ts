@@ -274,6 +274,30 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "Trade Gekko — AI Crypto Trading Platform",
+    slug: "trade-gekko",
+    description:
+      "Full-stack SaaS platform that lets subscribers deploy autonomous AI trading bots on Coinbase. Generates signals from 42 LSTM models across 6 crypto assets and 7 timeframes, executes live market orders with stop-loss/take-profit, and gates features behind Stripe subscription tiers.",
+    tech: ["Django", "Next.js", "TensorFlow", "LSTM", "Coinbase API", "Stripe", "PostgreSQL", "APScheduler"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "https://www.tradegekko.com/",
+    image: "/trade-gekko.png",
+    featured: true,
+    overview:
+      "Trade Gekko is a production SaaS platform where subscribers connect their Coinbase account and deploy AI-driven trading bots across 6 crypto assets (BTC, ETH, SOL, XRP, DOGE, LINK) over 7 timeframes (1m → 1d). The platform trains 42 LSTM models daily, generates signals every 15 minutes using a hybrid ML + technical analysis pipeline, and executes live market orders autonomously — complete with trailing stop-loss, take-profit, dynamic position sizing, and multi-timeframe confirmation guards.",
+    features: [
+      "42 LSTM models — one per symbol × timeframe, retrained daily at 12 AM UTC",
+      "Hybrid signal engine: LSTM predictions combined with RSI, MACD, Bollinger Bands, Fibonacci, ATR, and news sentiment scoring",
+      "Autonomous bot lifecycle: BUY → position management → SELL with trailing stop-loss and take-profit",
+      "Dynamic position sizing: scales with ML confidence, drawdown streak, and live volatility (high-vol halves size)",
+      "Multi-timeframe confirmation — higher TF SELL blocks lower TF BUY to prevent counter-trend entries",
+      "Signal quality filters: min 35% confidence, trend strength ≥ 2%, R/R ≥ 1.2, no EXTREME risk signals",
+      "Live Coinbase Advanced Trade order execution with Fernet-encrypted per-user API keys",
+      "Real-time PnL streaming via SSE, backtesting engine, and timeframe performance optimizer (runs daily)",
+      "Stripe subscription tiers (Starter / Pro / Elite) with plan-gated bot access and webhook-synced status",
+    ],
+  },
+  {
     title: "TheRightContact.com — AI Contact Lens Platform",
     slug: "contact-lens-rag",
     description:
