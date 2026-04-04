@@ -321,7 +321,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "Django", "OpenAI", "Image Recognition", "Web Scraping"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "#",
-    image: "/modern-chat-app.png",
+    image: "/real-estate-intelligence.png",
     overview:
       "A real estate intelligence tool that ingests property listings from Zillow, uses computer vision to analyze room images, and generates AI-powered renovation scope of work documents and conceptual floor plans.",
     features: [
