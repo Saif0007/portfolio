@@ -1,145 +1,82 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 
 interface BackgroundElementsProps {
   mousePosition: { x: number; y: number }
 }
 
 export const BackgroundElements = ({ mousePosition }: BackgroundElementsProps) => {
-  const { scrollY } = useScroll()
-
-  // Parallax effects with different speeds
-  const y1 = useTransform(scrollY, [0, 1000], [0, 300])
-  const y2 = useTransform(scrollY, [0, 1000], [0, -200])
-  const y3 = useTransform(scrollY, [0, 1000], [0, 150])
-  const rotate1 = useTransform(scrollY, [0, 1000], [0, 360])
-  const rotate2 = useTransform(scrollY, [0, 1000], [0, -360])
-
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Main floating blobs with parallax */}
-      <motion.div
-        className="absolute w-[600px] h-[600px] bg-gradient-to-r from-emerald-400/30 to-teal-500/20 rounded-full blur-3xl opacity-60"
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+      {/* Subtle grid */}
+      <div
+        className="absolute inset-0 opacity-[0.025]"
         style={{
-          y: y1,
-          x: mousePosition.x * 0.03,
+          backgroundImage: `linear-gradient(rgba(16,185,129,0.6) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(16,185,129,0.6) 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      {/* Top-left emerald glow */}
+      <motion.div
+        className="absolute w-[600px] h-[600px] rounded-full"
+        style={{
+          background: "radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)",
           top: "-10%",
           left: "-10%",
+          x: mousePosition.x * 0.02,
         }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.6, 0.4, 0.6],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
+      {/* Bottom-right amber glow */}
       <motion.div
-        className="absolute w-[400px] h-[400px] bg-gradient-to-r from-amber-400/25 to-orange-500/15 rounded-full blur-3xl opacity-70"
+        className="absolute w-[400px] h-[400px] rounded-full"
         style={{
-          y: y2,
-          x: mousePosition.x * -0.02,
-          top: "20%",
+          background: "radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%)",
+          bottom: "5%",
           right: "-5%",
+          x: mousePosition.x * -0.015,
         }}
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.7, 0.5, 0.7],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
+        animate={{ scale: [1, 1.15, 1] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 
+      {/* Rotating ring — top right */}
       <motion.div
-        className="absolute w-[350px] h-[350px] bg-gradient-to-r from-emerald-400/20 to-teal-500/15 rounded-full blur-3xl opacity-50"
-        style={{
-          y: y3,
-          x: mousePosition.x * 0.025,
-          bottom: "10%",
-          left: "30%",
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.5, 0.3, 0.5],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
+        className="absolute top-24 right-16 w-28 h-28 rounded-full border border-emerald-500/10"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       />
-
-      {/* Animated geometric shapes */}
       <motion.div
-        className="absolute top-20 right-20 w-32 h-32 border border-emerald-500/20 rounded-full opacity-30"
-        style={{ rotate: rotate1 }}
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+        className="absolute top-24 right-16 w-20 h-20 rounded-full border border-emerald-500/5"
+        style={{ margin: "16px" }}
+        animate={{ rotate: -360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
 
-      <motion.div
-        className="absolute bottom-32 left-16 w-24 h-24 border-2 border-amber-500/20 rotate-45 opacity-40"
-        style={{ rotate: rotate2 }}
-        animate={{
-          scale: [1, 1.3, 1],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
-      <motion.div
-        className="absolute top-1/2 left-10 w-16 h-16 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-lg opacity-30"
-        animate={{
-          y: [0, -30, 0],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      />
-
-      {/* Floating particles */}
-      {[...Array(15)].map((_, i) => (
+      {/* Small floating squares */}
+      {[
+        { top: "15%", left: "8%", size: 6, delay: 0 },
+        { top: "65%", left: "4%", size: 4, delay: 1.5 },
+        { top: "40%", right: "6%", size: 5, delay: 3 },
+        { top: "80%", right: "12%", size: 3, delay: 0.8 },
+      ].map((item, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-emerald-400/30 rounded-full"
+          className="absolute rounded-sm border border-emerald-500/20 bg-emerald-500/5"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            top: item.top,
+            left: "left" in item ? item.left : undefined,
+            right: "right" in item ? item.right : undefined,
+            width: item.size * 4,
+            height: item.size * 4,
           }}
-          animate={{
-            y: [0, -100, 0],
-            x: [0, Math.random() * 50 - 25, 0],
-            opacity: [0, 1, 0],
-            scale: [0, 1.5, 0],
-          }}
-          transition={{
-            duration: 5 + Math.random() * 5,
-            repeat: Infinity,
-            delay: Math.random() * 5,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, -12, 0], rotate: [0, 45, 0] }}
+          transition={{ duration: 6 + i, repeat: Infinity, ease: "easeInOut", delay: item.delay }}
         />
       ))}
     </div>
