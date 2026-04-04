@@ -1,6 +1,6 @@
 "use client"
 
-import { Code, Database, Cloud, Zap, Users, Bot } from "lucide-react"
+import { Code, Database, Cloud, Zap, Plug, Wrench, Bot } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 import { skills } from "@/data/portfolio-data"
@@ -57,12 +57,20 @@ export const SkillsSection = ({ isVisible }: SkillsSectionProps) => {
       hoverGlow: "rgba(251, 191, 36, 0.4)",
     },
     {
-      title: "Development Tools",
-      icon: Users,
-      skills: skills.tools,
+      title: "Integrations & APIs",
+      icon: Plug,
+      skills: skills.integrations,
       color: "from-rose-500/20 to-red-500/10",
       iconColor: "text-rose-500",
       hoverGlow: "rgba(244, 63, 94, 0.4)",
+    },
+    {
+      title: "Dev Tools",
+      icon: Wrench,
+      skills: skills.tools,
+      color: "from-slate-500/20 to-gray-500/10",
+      iconColor: "text-slate-400",
+      hoverGlow: "rgba(100, 116, 139, 0.4)",
     },
   ]
 
@@ -92,7 +100,7 @@ export const SkillsSection = ({ isVisible }: SkillsSectionProps) => {
         </motion.div>
 
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}

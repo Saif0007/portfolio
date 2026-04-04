@@ -36,21 +36,28 @@ export const skills = {
     "GraphQL",
     "WebSockets",
   ],
-  databases: ["PostgreSQL", "MySQL", "MongoDB", "Supabase", "Firebase", "SQL Server"],
+  databases: ["PostgreSQL", "MySQL", "MongoDB", "Supabase", "Redis", "Firebase", "SQL Server"],
   cloud: ["AWS (EC2, S3, Lambda)", "Docker", "Vercel", "Heroku", "CI/CD Pipelines"],
-  tools: [
+  integrations: [
     "Twilio",
     "Retell AI",
     "Deepgram",
     "ElevenLabs",
     "Salesforce API",
+    "Google Calendar API",
+    "Microsoft Graph API",
+    "Stripe",
+    "Coinbase Advanced Trade",
+    "Zapier",
+  ],
+  tools: [
     "Git",
+    "GitHub Actions",
+    "Docker",
+    "Postman",
     "VS Code",
     "Cursor",
-    "Postman",
     "JIRA",
-    "Zapier",
-    "Stripe Integration",
   ],
 }
 
@@ -325,7 +332,7 @@ export const projects: Project[] = [
     title: "PRD Generator Platform",
     slug: "prd-generator",
     description:
-      "AI-driven PRD generation system that creates detailed product requirement documents through guided questionnaires. Integrated with JIRA and Figma APIs for automatic ticket creation and design generation.",
+      "AI-driven PRD generation system that creates detailed product requirement documents through guided questionnaires. Integrated with JIRA and Figma APIs for automatic ticket creation and design generation. Built as an internal tool for a product team — no public demo.",
     tech: ["Django", "Next.js", "OpenAI", "JIRA API", "Figma API"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "#",

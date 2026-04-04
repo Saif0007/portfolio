@@ -1,9 +1,9 @@
 "use client"
 
-import { Award, Star } from "lucide-react"
+import { Award, Mic, LayoutDashboard, BrainCircuit } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { containerVariants, slideUpVariants, scaleVariants, fadeInVariants } from "@/lib/animations/variants"
+import { containerVariants, scaleVariants, fadeInVariants } from "@/lib/animations/variants"
 
 interface AboutSectionProps {
   isVisible: (id: string) => boolean
@@ -20,10 +20,28 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
     { number: "5+", label: "Industries Served", color: "text-emerald-500" },
   ]
 
-  const certifications = [
-    "Python For Programmers Course - Codecademy",
-    "Django Framework Course - Great Learning",
-    "Learn JavaScript Course - Codecademy",
+  const specializations = [
+    {
+      icon: Mic,
+      title: "AI Voice Agents",
+      description: "Production inbound & outbound voice agents with Twilio, Retell AI, Deepgram, and ElevenLabs — live in healthcare recruitment and B2B SaaS.",
+      color: "text-cyan-500",
+      bg: "bg-cyan-500/10 border-cyan-500/20",
+    },
+    {
+      icon: LayoutDashboard,
+      title: "Multi-Tenant SaaS",
+      description: "White-label B2B platforms with role-based access, tenant isolation, Stripe billing, and full admin dashboards.",
+      color: "text-purple-400",
+      bg: "bg-purple-500/10 border-purple-500/20",
+    },
+    {
+      icon: BrainCircuit,
+      title: "AI & ML Systems",
+      description: "RAG pipelines, LSTM trading models, GPT-powered apps, and enterprise integrations with Salesforce, Google Calendar, and more.",
+      color: "text-amber-400",
+      bg: "bg-amber-500/10 border-amber-500/20",
+    },
   ]
 
   return (
@@ -142,7 +160,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
               >
                 <Award className="text-amber-500" />
               </motion.div>
-              Education & Certifications
+              Education
             </motion.h3>
 
             <div className="space-y-4 sm:space-y-6">
@@ -155,11 +173,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
               >
                 <h4 className="text-xl font-bold text-cyan-500 mb-2">Bachelor of Computer Science</h4>
                 <p className="text-foreground font-medium">FAST NUCES, Lahore</p>
-                <p className="text-muted-foreground text-sm">August 2018 - June 2022</p>
-                <p className="text-muted-foreground text-sm mt-2">
-                  Key Coursework: Programming Fundamentals, Design and Analysis of Algorithms, Databases, Object
-                  Oriented Programming, Data Structures
-                </p>
+                <p className="text-muted-foreground text-sm">August 2018 — June 2022</p>
               </motion.div>
 
               <motion.div
@@ -168,33 +182,20 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
               >
-                {certifications.map((cert, index) => (
+                <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Core Specializations</p>
+                {specializations.map((spec, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-center gap-3 p-3 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-lg border border-cyan-500/20 cursor-pointer"
+                    className={`flex items-start gap-3 p-3 rounded-lg border ${spec.bg} cursor-pointer`}
                     variants={fadeInVariants("left")}
-                    whileHover={{
-                      scale: 1.05,
-                      x: 10,
-                      backgroundColor: "rgba(6, 182, 212, 0.1)",
-                      borderColor: "rgba(6, 182, 212, 0.4)",
-                    }}
+                    whileHover={{ scale: 1.03, x: 6 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <motion.div
-                      animate={{
-                        rotate: [0, 360],
-                        scale: [1, 1.2, 1],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: index * 0.5,
-                      }}
-                    >
-                      <Star className="text-amber-500 flex-shrink-0" size={16} />
-                    </motion.div>
-                    <span className="text-sm font-medium">{cert}</span>
+                    <spec.icon className={`${spec.color} shrink-0 mt-0.5`} size={18} />
+                    <div>
+                      <p className={`text-sm font-semibold ${spec.color}`}>{spec.title}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{spec.description}</p>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
