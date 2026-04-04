@@ -180,18 +180,21 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
 
           {/* ── RIGHT: Animated code visual ── */}
           <motion.div
-            className="relative flex items-center justify-center order-1 lg:order-2 pb-16"
+            className="flex items-center justify-center order-1 lg:order-2"
             style={{ y: yParallax }}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3 }}
           >
+            {/* Inner wrapper — stat cards anchor to this */}
+            <div className="relative w-full max-w-[440px] mx-auto">
             {/* Outer glow ring */}
-            <div className="absolute w-[380px] h-[380px] rounded-full border border-emerald-500/10 animate-spin-slow" />
-            <div className="absolute w-[320px] h-[320px] rounded-full border border-purple-500/10" style={{ animation: "spinSlow 30s linear infinite reverse" }} />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-[380px] h-[380px] rounded-full border border-emerald-500/10 animate-spin-slow" />
+            </div>
 
             {/* Main terminal card */}
-            <div className="relative w-full max-w-[440px] rounded-2xl border border-border bg-[#0a1628] shadow-[0_0_60px_rgba(16,185,129,0.1)] overflow-hidden">
+            <div className="relative w-full rounded-2xl border border-border bg-[#0a1628] shadow-[0_0_60px_rgba(16,185,129,0.1)] overflow-hidden">
 
               {/* Terminal title bar */}
               <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-[#060d1f]">
@@ -252,9 +255,9 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               </div>
             </div>
 
-            {/* Stat cards — corners of the terminal, offset outward */}
+            {/* Stat cards — anchored to terminal corners */}
             <motion.div
-              className="absolute -bottom-5 -left-6 flex items-center gap-3 px-4 py-3 rounded-xl border border-emerald-500/20 bg-card/95 backdrop-blur-sm shadow-xl"
+              className="absolute -bottom-5 -left-5 flex items-center gap-3 px-4 py-3 rounded-xl border border-emerald-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
@@ -263,13 +266,15 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
             </motion.div>
 
             <motion.div
-              className="absolute -top-5 -right-6 flex items-center gap-3 px-4 py-3 rounded-xl border border-purple-500/20 bg-card/95 backdrop-blur-sm shadow-xl"
+              className="absolute -top-5 -right-5 flex items-center gap-3 px-4 py-3 rounded-xl border border-purple-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             >
               <div className="text-2xl font-black text-purple-400">3+</div>
               <div className="text-[10px] text-muted-foreground font-medium leading-tight">Years<br />Experience</div>
             </motion.div>
+
+            </div>{/* end inner wrapper */}
           </motion.div>
         </div>
       </motion.div>
