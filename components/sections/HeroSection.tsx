@@ -31,12 +31,6 @@ const codeLines = [
   { indent: 0, tokens: [{ t: "agent ", c: "text-foreground" }, { t: "= ", c: "text-amber-400" }, { t: "VoiceAgent()", c: "text-emerald-400" }] },
 ]
 
-const floatingBadges = [
-  { label: "Voice AI", color: "border-emerald-500/40 text-emerald-400 bg-emerald-500/10", x: "right-4", y: "top-6" },
-  { label: "RAG System", color: "border-purple-500/40 text-purple-400 bg-purple-500/10", x: "left-2", y: "top-16" },
-  { label: "Multi-Tenant", color: "border-amber-500/40 text-amber-400 bg-amber-500/10", x: "right-2", y: "bottom-16" },
-  { label: "LangChain", color: "border-teal-500/40 text-teal-400 bg-teal-500/10", x: "left-4", y: "bottom-8" },
-]
 
 export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloadResume }: HeroSectionProps) => {
   const { scrollY } = useScroll()
@@ -93,7 +87,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
         initial="hidden"
         animate="visible"
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-120px)]">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-8">
 
           {/* ── LEFT: Text content ── */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
@@ -185,7 +179,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
 
           {/* ── RIGHT: Animated code visual ── */}
           <motion.div
-            className="relative flex items-center justify-center order-1 lg:order-2"
+            className="relative flex items-center justify-center order-1 lg:order-2 pb-16"
             style={{ y: yParallax }}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -257,42 +251,41 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               </div>
             </div>
 
-            {/* Floating badges */}
-            {floatingBadges.map((badge, i) => (
+            {/* Stat cards — placed below the terminal, side by side */}
+            <div className="absolute -bottom-14 left-0 right-0 flex gap-3 justify-center">
               <motion.div
-                key={i}
-                className={`absolute px-3 py-1.5 rounded-lg border text-[11px] font-semibold font-mono ${badge.color} ${badge.x} ${badge.y}`}
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 3 + i * 0.7, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+                className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-emerald-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               >
-                {badge.label}
+                <div className="text-xl font-black text-emerald-400">3+</div>
+                <div className="text-[10px] text-muted-foreground font-medium leading-tight">Live Voice<br />Agents</div>
               </motion.div>
-            ))}
 
-            {/* Floating stat cards */}
-            <motion.div
-              className="absolute -bottom-4 -left-4 px-4 py-3 rounded-xl border border-emerald-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            >
-              <div className="text-xl font-black text-emerald-400">3+</div>
-              <div className="text-[10px] text-muted-foreground font-medium">Live Voice Agents</div>
-            </motion.div>
+              <motion.div
+                className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-purple-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                <div className="text-xl font-black text-purple-400">25+</div>
+                <div className="text-[10px] text-muted-foreground font-medium leading-tight">Projects<br />Shipped</div>
+              </motion.div>
 
-            <motion.div
-              className="absolute -top-4 -right-2 px-4 py-3 rounded-xl border border-purple-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            >
-              <div className="text-xl font-black text-purple-400">25+</div>
-              <div className="text-[10px] text-muted-foreground font-medium">Projects Shipped</div>
-            </motion.div>
+              <motion.div
+                className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-amber-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              >
+                <div className="text-xl font-black text-amber-400">3+</div>
+                <div className="text-[10px] text-muted-foreground font-medium leading-tight">Years<br />Experience</div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </motion.div>
 
       {/* Tech Marquee */}
-      <div className="w-full border-t border-b border-border/60 py-3 overflow-hidden mt-auto">
+      <div className="w-full border-t border-b border-border/60 py-3 overflow-hidden mt-10">
         <div className="flex animate-marquee gap-8 whitespace-nowrap" style={{ width: "max-content" }}>
           {[...techStack, ...techStack].map((tech, i) => (
             <span key={i} className="inline-flex items-center gap-2 text-muted-foreground text-xs font-mono shrink-0">
