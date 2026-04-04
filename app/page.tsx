@@ -27,8 +27,8 @@ const Portfolio = () => {
 
   const downloadResume = () => {
     const link = document.createElement("a")
-    link.href = "/resume.pdf"
-    link.download = "Saif_Ur_Rehman_Resume.pdf"
+    link.href = "/resume.html"
+    link.download = "Saif_Ur_Rehman_Resume.html"
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
