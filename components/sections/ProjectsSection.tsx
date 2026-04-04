@@ -1,4 +1,5 @@
-import { Github, ExternalLink, Globe } from "lucide-react"
+import Link from "next/link"
+import { Github, ExternalLink, Globe, ArrowRight } from "lucide-react"
 import { projects } from "@/data/portfolio-data"
 
 interface ProjectsSectionProps {
@@ -66,21 +67,32 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                     ))}
                   </div>
 
-                  <div className="flex gap-2 sm:gap-4">
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
                     <a
                       href={project.github}
-                      className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground rounded-xl transition-all duration-300 font-medium text-sm"
+                      className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground rounded-xl transition-all duration-300 font-medium text-sm"
                     >
                       <Github size={16} />
                       Code
                     </a>
-                    <a
-                      href={project.demo}
-                      className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
+                    {project.demo && project.demo !== "#" && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
+                      >
+                        <ExternalLink size={16} />
+                        Live Website
+                      </a>
+                    )}
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 rounded-xl transition-all duration-300 font-medium text-sm"
                     >
-                      <ExternalLink size={16} />
-                      Live Website
-                    </a>
+                      <ArrowRight size={16} />
+                      Details
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -125,13 +137,27 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                   )}
                 </div>
 
-                <div className="flex gap-2 sm:gap-3">
+                <div className="flex items-center gap-3">
                   <a href={project.github} className="text-muted-foreground hover:text-cyan-500 transition-colors">
                     <Github size={16} />
                   </a>
-                  <a href={project.demo} className="text-muted-foreground hover:text-amber-500 transition-colors">
-                    <ExternalLink size={16} />
-                  </a>
+                  {project.demo && project.demo !== "#" && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-amber-500 transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                  )}
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="ml-auto flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
+                  >
+                    View Details
+                    <ArrowRight size={12} />
+                  </Link>
                 </div>
               </div>
             ))}

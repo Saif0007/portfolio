@@ -49,9 +49,170 @@ export const skills = {
   ],
 }
 
-export const projects = [
+export interface ProjectAgent {
+  name: string
+  role: string
+  phone: string
+  description: string
+  capabilities: string[]
+}
+
+export interface ProjectRole {
+  name: string
+  description: string
+  permissions: string[]
+}
+
+export interface Project {
+  title: string
+  slug: string
+  description: string
+  tech: string[]
+  github?: string
+  demo?: string
+  image: string
+  featured?: boolean
+  // Detail page fields
+  overview?: string
+  agents?: ProjectAgent[]
+  roles?: ProjectRole[]
+  pipeline?: string[]
+  features?: string[]
+  challenges?: string[]
+  liveNote?: string
+  testPhone?: string
+}
+
+export const projects: Project[] = [
+  {
+    title: "Pioneer Voice AI Platform",
+    slug: "pioneer-voice-ai",
+    description:
+      "End-to-end AI voice agent platform for Pioneer Healthcare Recruitment Agency featuring two production voice agents, a full-stack admin dashboard with call analytics, knowledge base management, and automated re-engagement campaigns.",
+    tech: ["Retell AI", "Twilio", "Next.js", "Supabase", "Outlook API", "Salesforce"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "https://voice-ai-live.pioneercommission.com/",
+    image: "/modern-analytics-dashboard.png",
+    featured: true,
+    overview:
+      "Built a production-grade AI voice platform for Pioneer, a healthcare recruitment agency. The platform comprises two autonomous voice agents and a comprehensive admin dashboard that gives the Pioneer internal team full visibility and control over all AI-driven calls, knowledge bases, and scheduled campaigns.",
+    agents: [
+      {
+        name: "Penny — AI Receptionist",
+        role: "After-Hours Inbound Agent",
+        phone: "+1 (858) 298-2653",
+        description:
+          "Penny handles all inbound calls after business hours. She collects 14+ data points from callers, runs a smart processing flow to detect clients vs. candidates vs. payroll inquiries, updates Salesforce in real time, sends follow-up emails and SMS, and schedules Microsoft/Teams calendar events with the assigned recruiter when requested.",
+        capabilities: [
+          "Collects caller profile: name, profession, assignment type, preferred location, start date, experience, and more",
+          "Detects client calls and payroll inquiries — routes each to the correct internal team via email",
+          "Looks up existing Salesforce contacts by phone + email; creates activity tasks on every call",
+          "Updates Salesforce fields: discipline, job type, desired states, available start date, and activity dates",
+          "Sends personalized follow-up email + SMS to callers with open job links",
+          "Schedules Microsoft/Teams calendar events with recruiters and creates Salesforce follow-up tasks with 1-hour reminders",
+          "12-month last-activity check — flags long-inactive contacts to the lead distribution team",
+        ],
+      },
+      {
+        name: "Re-Engagement Agent",
+        role: "Outbound Re-Engagement",
+        phone: "+1 (858) 293-8436",
+        description:
+          "Proactively calls cold and inactive candidates (6+ months no activity) from Salesforce. Follows a structured multi-turn conversational flow, updates candidate profiles, and triggers recruiter follow-up — fully automated with pre-batch admin notifications and opt-out compliance built in.",
+        capabilities: [
+          "Queries Salesforce for Cold/Warm/New Lead contacts inactive 6+ months; respects Do Not Contact flags",
+          "Batch scheduling: up to 50 candidates per batch at configurable times (9:00 AM, 3:30 PM, 12:00 AM PST)",
+          "30-minute advance notification to all portal admins before each batch dispatches",
+          "Captures updated profile: availability, assignment type, discipline, license status, licensed/desired states",
+          "Action flags: opt-in for email/SMS job links, schedule recruiter meeting, lead distribution trigger",
+          "Opt-out compliance: sets Salesforce Do Not Contact + marks status as Unsubscribed on any opt-out",
+          "All outcomes logged: voicemail, no engagement, full conversation — Salesforce activity task created on every call",
+        ],
+      },
+    ],
+    features: [
+      "Call logs with recordings, transcripts, and per-call outcome status",
+      "Scheduled events view synced with Microsoft/Outlook Calendar",
+      "Call analytics dashboard — volume, duration, outcomes, booking trends",
+      "Knowledge base management — attach and update knowledge bases per agent",
+      "User management with Admin and Viewer role permissions",
+      "Batch scheduler — queue re-engagement campaigns with configurable batch size and call times",
+      "Pre-dispatch notification system — admins receive email + in-portal alerts 30 minutes before each batch",
+    ],
+    liveNote: "Live and actively used by the Pioneer internal team.",
+  },
+  {
+    title: "Auralis Labs — Multi-Tenant Voice AI Platform",
+    slug: "auralis-labs-voice-ai",
+    description:
+      "Production-grade B2B multi-tenant conversational AI voice platform that handles inbound calls, books appointments in real time, and ships a white-label dashboard — all fully isolated per tenant business.",
+    tech: ["Deepgram", "ElevenLabs", "Twilio", "Next.js", "FastAPI", "OpenAI GPT-4o", "Supabase", "Google Calendar", "Redis", "AWS"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "https://www.auralislabs.co/",
+    image: "/modern-analytics-dashboard.png",
+    featured: true,
+    testPhone: "+1 (857) 767-7618",
+    overview:
+      "Built a production-grade multi-tenant SaaS voice AI platform for Maximus Virgili (Auralis Labs). Each business that onboards gets their own dedicated phone number, a fully configurable AI voice agent with a custom personality, real-time Google Calendar integration for appointment booking, and a white-label dashboard. The platform is architected from day one for B2B scale — adding a new industry vertical (dental, med spa, salon) is a configuration change, not a code change.",
+    pipeline: [
+      "Caller dials the tenant's dedicated Twilio number",
+      "Twilio streams call audio over WebSocket to FastAPI orchestrator",
+      "Deepgram STT transcribes speech in real time with <300ms latency",
+      "OpenAI GPT-4o handles conversation, extracts booking intent via slot-filling state machine",
+      "Google Calendar FreeBusy API checks real-time availability and books the appointment",
+      "ElevenLabs streams natural-sounding voice response back to the caller",
+      "Full transcript, outcome, and call metadata saved to Supabase in real time",
+    ],
+    roles: [
+      {
+        name: "Platform Admin",
+        description: "Auralis Labs team — manages the entire platform across all tenant businesses.",
+        permissions: [
+          "Create and manage tenant business accounts",
+          "Assign Twilio numbers to tenants",
+          "View aggregate analytics across all tenants",
+          "Monitor system health, error rates, and call quality",
+          "Manage platform-level settings and billing",
+        ],
+      },
+      {
+        name: "Business Owner",
+        description: "Tenant business owner — has full control over their own agent and data.",
+        permissions: [
+          "Configure agent personality, greeting, and voice",
+          "Set agent system prompt and conversational guidelines",
+          "Connect and manage Google Calendar OAuth",
+          "View call logs, full transcripts, and recordings",
+          "Manage business hours, services, and booking rules",
+          "Add and manage viewer users for their account",
+        ],
+      },
+      {
+        name: "Viewer",
+        description: "Read-only team members — can monitor activity without making changes.",
+        permissions: [
+          "View call logs and transcripts",
+          "View appointment bookings and calendar",
+          "View analytics and performance metrics",
+          "No configuration or settings access",
+        ],
+      },
+    ],
+    features: [
+      "Call logs with full transcripts and recordings per tenant",
+      "Real-time appointment booking via Google Calendar integration",
+      "Analytics dashboard — call volume, booking success rate, error patterns",
+      "Agent configuration — system prompt, voice selection, greeting, business hours",
+      "White-label dashboard with per-tenant branding",
+      "Sub-2-second voice response latency via parallel streaming pipeline",
+      "30+ concurrent calls per instance with horizontal scaling",
+      "Multi-tenant data isolation enforced via Supabase Row-Level Security",
+    ],
+    liveNote: "Live B2B platform actively onboarding businesses. Test tenant available at +1 (857) 767-7618.",
+  },
   {
     title: "Contact Lens RAG Application",
+    slug: "contact-lens-rag",
     description:
       "AI-powered research chatbot system with GPT-like capabilities for contact lens research. Features comprehensive admin panel for training AI models using PDFs, Excel sheets, and automated web scraping from 40+ websites.",
     tech: ["FastAPI", "Next.js", "OpenAI", "RAG", "Web Scraping"],
@@ -59,9 +220,20 @@ export const projects = [
     demo: "https://www.therightcontact.com/",
     image: "/ai-news-analysis-interface-with-text-processing.png",
     featured: true,
+    overview:
+      "A Retrieval-Augmented Generation (RAG) platform built for the contact lens industry. Users can ask complex research questions and get accurate, source-backed answers drawn from a continuously updated knowledge base.",
+    features: [
+      "Conversational AI with GPT-like interface for product research",
+      "Admin panel to upload PDFs, Excel sheets as training sources",
+      "Automated web scraping pipeline covering 40+ industry websites",
+      "Vector search for fast, accurate document retrieval",
+      "Source citation on every AI response",
+      "Role-based access for admin and end users",
+    ],
   },
   {
     title: "PRD Generator Platform",
+    slug: "prd-generator",
     description:
       "AI-driven PRD generation system that creates detailed product requirement documents through guided questionnaires. Integrated with JIRA and Figma APIs for automatic ticket creation and design generation.",
     tech: ["Django", "Next.js", "OpenAI", "JIRA API", "Figma API"],
@@ -69,33 +241,76 @@ export const projects = [
     demo: "#",
     image: "/modern-analytics-dashboard.png",
     featured: true,
+    overview:
+      "A platform that automates the creation of Product Requirement Documents. Product managers answer a guided questionnaire and the system generates a structured PRD, creates JIRA tickets, and triggers Figma design stubs — all in one workflow.",
+    features: [
+      "Guided questionnaire flow to capture product context",
+      "AI-generated PRD with structured sections and acceptance criteria",
+      "Automatic JIRA epic and story creation from PRD content",
+      "Figma API integration for design stub generation",
+      "Version history and collaborative editing",
+      "Export to PDF and Confluence-compatible formats",
+    ],
   },
   {
     title: "Real Estate Intelligence Platform",
+    slug: "real-estate-intelligence",
     description:
       "Comprehensive property data scraping system from Zillow with AI-powered scope of work generator. Features image recognition technology and GPT models for room design generation and floor plan creation.",
     tech: ["Next.js", "Django", "OpenAI", "Image Recognition", "Web Scraping"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "#",
     image: "/modern-chat-app.png",
+    overview:
+      "A real estate intelligence tool that ingests property listings from Zillow, uses computer vision to analyze room images, and generates AI-powered renovation scope of work documents and conceptual floor plans.",
+    features: [
+      "Automated Zillow property data scraping and enrichment",
+      "Image recognition to identify room types and conditions",
+      "AI scope of work generator for renovation projects",
+      "GPT-powered room redesign concept generation",
+      "Floor plan creation from property images",
+      "Exportable reports for contractors and investors",
+    ],
   },
   {
     title: "LinkedIn Ad Analytics Dashboard",
+    slug: "linkedin-ad-analytics",
     description:
       "Automated ad scraping system for comprehensive company advertising analysis across LinkedIn. Built detailed analytics engine with Stripe payment integration for premium features.",
     tech: ["Python", "LinkedIn API", "Stripe", "Analytics", "Web Scraping"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "#",
     image: "/e-commerce-platform-interface-with-shopping-cart.png",
+    overview:
+      "A SaaS analytics tool that monitors and analyzes LinkedIn advertising activity across companies. Users can track competitor ad strategies, creative trends, and campaign patterns through an intuitive dashboard.",
+    features: [
+      "Automated LinkedIn ad scraping across target companies",
+      "Competitor ad analysis with creative and copy breakdown",
+      "Engagement trend charts and campaign timeline views",
+      "Stripe payment integration for tiered subscription plans",
+      "Scheduled reports delivered via email",
+      "Searchable ad library with filtering by industry and date",
+    ],
   },
   {
     title: "Crypto Trading Analysis Chrome Extension",
+    slug: "crypto-trading-extension",
     description:
       "Published Chrome extension providing real-time AI-driven chart analysis for traders. Features OpenAI integration for pattern recognition and Firebase authentication with tiered access system.",
     tech: ["JavaScript", "Chrome API", "OpenAI", "Firebase", "Technical Analysis"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "https://chromewebstore.google.com/detail/crypto-trading-analysis-b/fgldmbbkdnnmjgkdldihfpieheomlkif",
     image: "/modern-analytics-dashboard.png",
+    overview:
+      "A published Chrome extension that brings AI-powered technical analysis directly into the browser for crypto traders. It captures chart screenshots, analyzes patterns with OpenAI vision, and delivers actionable trade insights in seconds.",
+    features: [
+      "One-click AI chart analysis from any crypto trading platform",
+      "OpenAI vision model for candlestick and pattern recognition",
+      "Support/resistance level detection and trend identification",
+      "Firebase authentication with free and premium tiers",
+      "Analysis history saved per user account",
+      "Published on Chrome Web Store with active users",
+    ],
   },
 ]
 
