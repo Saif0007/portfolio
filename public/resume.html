@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M. Saif Ur Rehman — Resume</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 10.5pt;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.45;
+      padding: 36px 44px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header { margin-bottom: 14px; }
+    .header h1 { font-size: 22pt; font-weight: 700; letter-spacing: -0.5px; color: #0f172a; }
+    .header .title { font-size: 11pt; font-weight: 600; color: #0369a1; margin: 2px 0 6px; }
+    .header .contact {
+      font-size: 9.5pt;
+      color: #475569;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+    }
+    .header .contact a { color: #0369a1; text-decoration: none; }
+
+    /* ── Divider ── */
+    hr { border: none; border-top: 1.5px solid #e2e8f0; margin: 10px 0; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 14px; }
+    .section-title {
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #0369a1;
+      border-bottom: 1.5px solid #bae6fd;
+      padding-bottom: 2px;
+      margin-bottom: 8px;
+    }
+
+    /* ── Summary ── */
+    .summary { font-size: 10pt; color: #334155; line-height: 1.55; }
+
+    /* ── Experience ── */
+    .exp-block { margin-bottom: 12px; }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .exp-title { font-size: 10.5pt; font-weight: 700; color: #0f172a; }
+    .exp-company { font-size: 10pt; color: #475569; margin: 1px 0 4px; }
+    .exp-date { font-size: 9.5pt; color: #64748b; white-space: nowrap; }
+    .exp-location { font-size: 9.5pt; color: #64748b; }
+    ul { padding-left: 16px; margin-top: 3px; }
+    ul li { margin-bottom: 3px; font-size: 10pt; color: #334155; }
+    ul li strong { color: #0f172a; }
+
+    /* ── Projects ── */
+    .project-block { margin-bottom: 11px; }
+    .project-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 2px; }
+    .project-title { font-size: 10.5pt; font-weight: 700; color: #0f172a; }
+    .project-meta { font-size: 9.5pt; color: #64748b; font-style: italic; }
+    .project-link { font-size: 9pt; color: #0369a1; text-decoration: none; }
+    .project-link:hover { text-decoration: underline; }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+    .skill-row { font-size: 10pt; color: #334155; }
+    .skill-row strong { color: #0f172a; font-weight: 600; }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 24px 32px; }
+      @page { margin: 0.4in 0.5in; size: A4; }
+      a { color: #0369a1 !important; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <h1>M. Saif Ur Rehman</h1>
+  <div class="title">Senior Full Stack AI Engineer</div>
+  <div class="contact">
+    <span>📧 <a href="mailto:syfin008@gmail.com">syfin008@gmail.com</a></span>
+    <span>📱 +92 322 401 6585</span>
+    <span>🔗 <a href="https://linkedin.com/in/saif-ur-rehman-404650218">linkedin.com/in/saif-ur-rehman-404650218</a></span>
+    <span>🌐 <a href="https://saifurrehman.dev">Portfolio</a></span>
+    <span>💼 <a href="https://www.upwork.com/freelancers/~01b3d4ebea7a54ae9a/">Upwork</a></span>
+  </div>
+</div>
+
+<hr />
+
+<!-- ══════════ SUMMARY ══════════ -->
+<div class="section">
+  <div class="section-title">Professional Summary</div>
+  <p class="summary">
+    Full Stack AI Engineer with 3+ years delivering production-grade AI systems for US-based clients — including live AI voice agents,
+    multi-tenant SaaS platforms, RAG pipelines, and autonomous ML trading systems. Specialized in Voice AI (Twilio, Retell AI, Deepgram, ElevenLabs),
+    LLMs &amp; RAG, and end-to-end engineering with Next.js, FastAPI, and Django. Proven track record of owning full project lifecycle:
+    architecture, backend, frontend, third-party integrations, and deployment on AWS.
+  </p>
+</div>
+
+<hr />
+
+<!-- ══════════ EXPERIENCE ══════════ -->
+<div class="section">
+  <div class="section-title">Professional Experience</div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <span class="exp-title">Senior Software Engineer (Team Lead)</span>
+      <span class="exp-date">October 2024 – Present</span>
+    </div>
+    <div class="exp-company">Tron AI &nbsp;·&nbsp; Lahore</div>
+    <ul>
+      <li>Built <strong>Pioneer Voice AI Platform</strong> — two production AI voice agents (Retell AI + Twilio) for a US healthcare recruitment agency: an after-hours inbound receptionist that updates Salesforce, schedules Outlook calendar events, and sends follow-up emails/SMS; and an outbound re-engagement agent that calls cold candidates in configurable batches with pre-dispatch admin notifications.</li>
+      <li>Architected <strong>Auralis Labs</strong> — a multi-tenant B2B voice AI SaaS (Deepgram + ElevenLabs + OpenAI GPT-4o + Twilio) with real-time appointment booking via Google Calendar, white-label dashboards, Supabase Row-Level Security isolation, and sub-2s voice response latency handling 30+ concurrent calls.</li>
+      <li>Delivered <strong>Pioneer Commissions Portal</strong> — internal finance platform syncing Salesforce Financial_Record__c data via REST API, running dual-engine commission calculations (5×8 matrix for recruiters, tier-based for account managers), with split commission tracking, Redis caching, and webhook-driven recalculation.</li>
+      <li>Built <strong>Trade Gekko</strong> — full-stack AI crypto trading SaaS (Django + Next.js + TensorFlow) with 42 LSTM models trained daily across 6 assets × 7 timeframes, autonomous bot execution with stop-loss/take-profit on Coinbase Advanced Trade, and Stripe-gated subscription tiers.</li>
+      <li>Mentoring a team of engineers; owning end-to-end architecture, client communication, and technical delivery across all projects.</li>
+    </ul>
+  </div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <span class="exp-title">Software Engineer</span>
+      <span class="exp-date">July 2022 – September 2024</span>
+    </div>
+    <div class="exp-company">Rolustech &nbsp;·&nbsp; Lahore</div>
+    <ul>
+      <li>Built and maintained full-stack web applications for international clients across healthcare, e-commerce, and SaaS verticals using <strong>Python Django</strong> and <strong>REST APIs</strong>.</li>
+      <li>Led backend development on multiple concurrent projects — designed data models, implemented business logic, and integrated third-party APIs to ship high-performance, production-grade applications on schedule.</li>
+      <li>Collaborated with cross-functional teams (product, design, QA) to gather requirements, conduct code reviews, and maintain high-quality, error-free codebases.</li>
+    </ul>
+  </div>
+</div>
+
+<hr />
+
+<!-- ══════════ PROJECTS ══════════ -->
+<div class="section">
+  <div class="section-title">Key Projects</div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">Pioneer Voice AI Platform</span>
+      <a class="project-link" href="https://voice-ai-live.pioneercommission.com/">voice-ai-live.pioneercommission.com</a>
+    </div>
+    <div class="project-meta">Retell AI · Twilio · Next.js · Supabase · Salesforce · Outlook API</div>
+    <ul>
+      <li>Inbound AI receptionist (Penny) handling after-hours calls: collects 14+ data points, detects client/payroll calls, updates Salesforce fields, sends follow-up email + SMS, and schedules Microsoft/Teams calendar events with recruiter.</li>
+      <li>Outbound re-engagement agent: queries Salesforce for cold candidates (6+ months inactive), dispatches batches of 50 with 30-min admin pre-notifications, captures updated profiles, enforces opt-out compliance.</li>
+      <li>Admin dashboard: call logs with transcripts, analytics, knowledge base management, user roles, batch scheduler.</li>
+    </ul>
+  </div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">Auralis Labs — Multi-Tenant Voice AI SaaS</span>
+      <a class="project-link" href="https://www.auralislabs.co/">auralislabs.co</a>
+    </div>
+    <div class="project-meta">Deepgram · ElevenLabs · Twilio · OpenAI GPT-4o · FastAPI · Next.js · Supabase · Google Calendar · Redis · AWS</div>
+    <ul>
+      <li>B2B platform: each tenant gets a dedicated Twilio number, configurable AI voice agent (prompt, voice, hours), and Google Calendar appointment booking — fully isolated via Supabase RLS.</li>
+      <li>Voice pipeline: Twilio → Deepgram STT (&lt;300ms) → GPT-4o slot-filling → ElevenLabs TTS → back to caller in under 2 seconds end-to-end.</li>
+      <li>Three-tier role system (Platform Admin / Business Owner / Viewer) with white-label dashboard and agent configuration UI.</li>
+    </ul>
+  </div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">Pioneer Commissions Portal</span>
+      <a class="project-link" href="https://pioneercommission.com/">pioneercommission.com</a>
+    </div>
+    <div class="project-meta">FastAPI · Next.js · PostgreSQL · Redis · Salesforce API · Microsoft Graph API</div>
+    <ul>
+      <li>Syncs Financial_Record__c billing data from Salesforce; runs recruiter commission matrix (5 hours tiers × 8 gross margin brackets) and separate account manager tier engine.</li>
+      <li>Handles split commissions, candidate/client reassignment, business development bonuses, quarterly bonuses, and full audit trail. Webhook-driven recalculation on Salesforce changes.</li>
+    </ul>
+  </div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">Trade Gekko — AI Crypto Trading Platform</span>
+      <a class="project-link" href="https://www.tradegekko.com/">tradegekko.com</a>
+    </div>
+    <div class="project-meta">Django · Next.js · TensorFlow/Keras · LSTM · Coinbase Advanced Trade · Stripe · APScheduler</div>
+    <ul>
+      <li>42 LSTM models (6 assets × 7 timeframes) retrained daily; hybrid signal engine combining ML predictions with RSI, MACD, Bollinger Bands, ATR, and news sentiment scoring.</li>
+      <li>Autonomous bot lifecycle: BUY → trailing stop/TP → SELL with dynamic position sizing scaled by confidence and drawdown. Live order execution via Coinbase Advanced Trade API.</li>
+      <li>Stripe subscription tiers (Starter/Pro/Elite) gating bot access; real-time PnL streaming via SSE; backtesting engine with historical analytics.</li>
+    </ul>
+  </div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">TheRightContact.com — AI Contact Lens Platform</span>
+      <a class="project-link" href="https://www.therightcontact.com/">therightcontact.com</a>
+    </div>
+    <div class="project-meta">FastAPI · Next.js · GPT-5 · RAG · Google Sheets API · AWS</div>
+    <ul>
+      <li>Custom NLP-to-Excel query engine translating natural language into live spreadsheet queries across thousands of lens records; data synced from 40+ industry websites, PDFs, and Google Sheets.</li>
+      <li>Corneal topography image analysis, multi-tier subscriptions, admin dashboard, and HIPAA-compliant AWS infrastructure.</li>
+    </ul>
+  </div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">RenovaWise — Real Estate Intelligence Platform</span>
+      <a class="project-link" href="https://www.renovawise.com/">renovawise.com</a>
+    </div>
+    <div class="project-meta">Next.js · Django · OpenAI · Image Recognition</div>
+    <ul>
+      <li>Zillow property data scraping with AI-powered scope-of-work generator, image recognition for room analysis, and GPT-powered renovation design and floor plan generation.</li>
+    </ul>
+  </div>
+
+</div>
+
+<hr />
+
+<!-- ══════════ SKILLS ══════════ -->
+<div class="section">
+  <div class="section-title">Technical Skills</div>
+  <div class="skills-grid">
+    <div class="skill-row"><strong>AI & ML:</strong> OpenAI GPT-4o/GPT-5, LSTM/TensorFlow, RAG Systems, LangChain, Prompt Engineering, NLP, Deep Learning</div>
+    <div class="skill-row"><strong>Voice AI:</strong> Retell AI, Twilio, Deepgram, ElevenLabs, WebSocket Audio Streaming</div>
+    <div class="skill-row"><strong>Frontend:</strong> Next.js 14/15, React, TypeScript, JavaScript, Tailwind CSS</div>
+    <div class="skill-row"><strong>Backend:</strong> Python FastAPI, Django, Node.js, REST APIs, WebSockets, GraphQL</div>
+    <div class="skill-row"><strong>Databases:</strong> PostgreSQL, Supabase, MySQL, MongoDB, Redis, Firebase</div>
+    <div class="skill-row"><strong>Integrations:</strong> Salesforce API, Google Calendar API, Microsoft Graph API, Stripe, Coinbase API, Zapier</div>
+    <div class="skill-row"><strong>Cloud & DevOps:</strong> AWS (EC2, S3, Lambda), Docker, Vercel, GitHub Actions, CI/CD</div>
+    <div class="skill-row"><strong>Tools:</strong> Git, Postman, JIRA, VS Code, Cursor</div>
+  </div>
+</div>
+
+<hr />
+
+<!-- ══════════ EDUCATION ══════════ -->
+<div class="section">
+  <div class="section-title">Education</div>
+  <div class="exp-header">
+    <span class="exp-title">Bachelor of Computer Science &nbsp;—&nbsp; FAST NUCES, Lahore</span>
+    <span class="exp-date">August 2018 – June 2022</span>
+  </div>
+</div>
+
+</body>
+</html>
