@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Github, ExternalLink, Globe, ArrowRight } from "lucide-react"
+import { ExternalLink, Globe, ArrowRight } from "lucide-react"
 import { projects } from "@/data/portfolio-data"
 
 interface ProjectsSectionProps {
@@ -68,13 +68,6 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                   </div>
 
                   <div className="flex flex-wrap gap-2 sm:gap-3">
-                    <a
-                      href={project.github}
-                      className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground rounded-xl transition-all duration-300 font-medium text-sm"
-                    >
-                      <Github size={16} />
-                      Code
-                    </a>
                     {project.demo && project.demo !== "#" && (
                       <a
                         href={project.demo}
@@ -100,7 +93,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
         </div>
 
         {/* Other Projects */}
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {projects
             .filter((p) => !p.featured)
             .map((project, index) => (
@@ -108,56 +101,69 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                 key={index}
                 data-animate={`project-${index}`}
                 id={`project-${index}`}
-                className={`glass rounded-xl p-5 sm:p-6 hover:scale-105 transition-all duration-300 ${
+                className={`group glass rounded-xl overflow-hidden hover:scale-[1.02] transition-all duration-300 ${
                   isVisible(`project-${index}`)
                     ? `animate-fade-in-scale opacity-100 stagger-${index + 3}`
                     : "opacity-0"
                 }`}
               >
-                <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
-                  <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/20">
-                    <Globe className="text-cyan-500" size={18} />
+                {project.image && (
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-36 object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold mb-1 sm:mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{project.description}</p>
+                )}
+
+                <div className="p-5">
+                  <div className="flex items-start gap-3 mb-3">
+                    {!project.image && (
+                      <div className="p-1.5 sm:p-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/20 shrink-0">
+                        <Globe className="text-cyan-500" size={18} />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <h3 className="text-base font-bold mb-1">{project.title}</h3>
+                      <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{project.description}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-                  {project.tech.slice(0, 3).map((tech, techIndex) => (
-                    <span key={techIndex} className="px-1.5 py-0.5 bg-muted/50 text-muted-foreground rounded text-xs">
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tech.length > 3 && (
-                    <span className="px-1.5 py-0.5 bg-muted/50 text-muted-foreground rounded text-xs">
-                      +{project.tech.length - 3} more
-                    </span>
-                  )}
-                </div>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {project.tech.slice(0, 3).map((tech, techIndex) => (
+                      <span key={techIndex} className="px-1.5 py-0.5 bg-muted/50 text-muted-foreground rounded text-xs">
+                        {tech}
+                      </span>
+                    ))}
+                    {project.tech.length > 3 && (
+                      <span className="px-1.5 py-0.5 bg-muted/50 text-muted-foreground rounded text-xs">
+                        +{project.tech.length - 3} more
+                      </span>
+                    )}
+                  </div>
 
-                <div className="flex items-center gap-3">
-                  <a href={project.github} className="text-muted-foreground hover:text-cyan-500 transition-colors">
-                    <Github size={16} />
-                  </a>
-                  {project.demo && project.demo !== "#" && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-amber-500 transition-colors"
+                  <div className="flex items-center gap-2">
+                    {project.demo && project.demo !== "#" && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-amber-500 transition-colors"
+                      >
+                        <ExternalLink size={13} />
+                        Live
+                      </a>
+                    )}
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="ml-auto flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
                     >
-                      <ExternalLink size={16} />
-                    </a>
-                  )}
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="ml-auto flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
-                  >
-                    View Details
-                    <ArrowRight size={12} />
-                  </Link>
+                      View Details
+                      <ArrowRight size={12} />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
