@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, Download, Linkedin, Github, Mail, Phone, Briefcase, ChevronDown } from "lucide-react"
+import { ArrowRight, Download, Linkedin, Github, Mail, Phone, Briefcase } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useState } from "react"
 import {
@@ -212,15 +212,6 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground/40"
-        animate={{ y: [0, 6, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <span className="text-[10px] tracking-widest uppercase font-mono">Scroll</span>
-        <ChevronDown size={14} />
-      </motion.div>
     </section>
   )
 }
