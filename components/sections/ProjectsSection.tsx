@@ -51,7 +51,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                    className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-card/30" />
                   {/* Featured badge */}
@@ -150,7 +150,7 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-36 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
                 </div>
