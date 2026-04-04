@@ -26,12 +26,10 @@ const Portfolio = () => {
   }
 
   const downloadResume = () => {
-    const link = document.createElement("a")
-    link.href = "/resume.html"
-    link.download = "Saif_Ur_Rehman_Resume.html"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+    const printWindow = window.open("/resume.html", "_blank")
+    printWindow?.addEventListener("load", () => {
+      printWindow.print()
+    })
   }
 
   return (
