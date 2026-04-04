@@ -47,12 +47,11 @@ export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
             >
               <div className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
                 {/* Image */}
-                <div className="relative lg:w-[45%] overflow-hidden shrink-0">
+                <div className="relative lg:w-[45%] shrink-0 min-h-[220px] lg:min-h-0">
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                    style={{ height: "260px", maxHeight: "260px" }}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-card/30" />
                   {/* Featured badge */}
