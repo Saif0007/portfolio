@@ -7,7 +7,7 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
           <div className="text-center md:text-left">
             <div className="text-lg sm:text-xl font-bold gradient-text mb-1 sm:mb-2">Saif Ur Rehman</div>
-            <p className="text-muted-foreground text-sm sm:text-base">© 2025 Built with Next JS & Tailwind</p>
+            <p className="text-muted-foreground text-sm sm:text-base">© 2026 Built with Next JS & Tailwind</p>
           </div>
           <div className="flex space-x-4 sm:space-x-6">
             {[
