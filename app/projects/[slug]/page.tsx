@@ -129,6 +129,25 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         {/* Divider */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent mb-10 sm:mb-14" />
 
+        {/* Screenshot Gallery */}
+        {project.images && project.images.length > 0 ? (
+          <section className="mb-10 sm:mb-14">
+            <div className={`grid gap-4 ${project.images.length > 1 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}`}>
+              {project.images.map((src, i) => (
+                <div key={i} className="rounded-2xl overflow-hidden border border-border/40">
+                  <img src={src} alt={`${project.title} screenshot ${i + 1}`} className="w-full object-cover" />
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : project.image && (
+          <section className="mb-10 sm:mb-14">
+            <div className="rounded-2xl overflow-hidden border border-border/40">
+              <img src={project.image} alt={project.title} className="w-full object-cover" />
+            </div>
+          </section>
+        )}
+
         {/* Tech Stack */}
         <section className="mb-10 sm:mb-14">
           <h2 className="text-xl font-bold mb-4 text-foreground">Tech Stack</h2>

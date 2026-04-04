@@ -71,6 +71,7 @@ export interface Project {
   github?: string
   demo?: string
   image: string
+  images?: string[]
   featured?: boolean
   // Detail page fields
   overview?: string
@@ -268,24 +269,27 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Contact Lens RAG Application",
+    title: "TheRightContact.com — AI Contact Lens Platform",
     slug: "contact-lens-rag",
     description:
-      "AI-powered research chatbot system with GPT-like capabilities for contact lens research. Features comprehensive admin panel for training AI models using PDFs, Excel sheets, and automated web scraping from 40+ websites.",
-    tech: ["FastAPI", "Next.js", "OpenAI", "RAG", "Web Scraping"],
+      "AI-powered platform for eye care professionals delivering accurate, real-time contact lens information via a custom NLP-to-Excel query engine and GPT-5. Integrates Google Sheets, PDFs, and web sources with corneal topography image analysis, multi-tier subscriptions, and admin dashboards.",
+    tech: ["Next.js", "FastAPI", "GPT-5", "RAG", "AWS", "Google Sheets API", "Web Scraping", "Image Analysis"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "https://www.therightcontact.com/",
-    image: "/ai-news-analysis-interface-with-text-processing.png",
+    image: "/contact-lens-rag-1.png",
+    images: ["/contact-lens-rag-1.png", "/contact-lens-rag-2.png"],
     featured: true,
     overview:
-      "A Retrieval-Augmented Generation (RAG) platform built for the contact lens industry. Users can ask complex research questions and get accurate, source-backed answers drawn from a continuously updated knowledge base.",
+      "TheRightContact.com is the leading digital solution for optometrists and ophthalmologists who need fast, accurate contact lens data. Built for eye care professionals, the platform combines a GPT-5 conversational interface with a custom NLP-to-Excel query engine that translates natural language into precise spreadsheet queries across thousands of lens records. Data is continuously synced from Google Sheets, PDFs, and 40+ industry web sources. The platform also includes corneal topography image analysis, multi-tier subscriptions, and full admin dashboards — all on HIPAA-compliant AWS infrastructure.",
     features: [
-      "Conversational AI with GPT-like interface for product research",
-      "Admin panel to upload PDFs, Excel sheets as training sources",
-      "Automated web scraping pipeline covering 40+ industry websites",
-      "Vector search for fast, accurate document retrieval",
-      "Source citation on every AI response",
-      "Role-based access for admin and end users",
+      "Custom NLP-to-Excel query engine — natural language questions resolved against live spreadsheet data",
+      "GPT-5 conversational interface with source-backed answers for clinical queries",
+      "Real-time data sync from Google Sheets, PDFs, and 40+ contact lens websites",
+      "Corneal topography image analysis — AI-powered interpretation of diagnostic images",
+      "Multi-tier subscription management with role-based feature access",
+      "Admin dashboard — manage data sources, monitor usage, update training content",
+      "CI/CD pipeline on AWS for automated deployments and zero-downtime updates",
+      "HIPAA-compliant infrastructure with secure healthcare data handling",
     ],
   },
   {
