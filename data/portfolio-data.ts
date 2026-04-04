@@ -211,6 +211,61 @@ export const projects: Project[] = [
     liveNote: "Live B2B platform actively onboarding businesses. Test tenant available at +1 (857) 767-7618.",
   },
   {
+    title: "Pioneer Commissions Portal",
+    slug: "pioneer-commissions-portal",
+    description:
+      "Internal commission management platform for a healthcare staffing agency. Pulls billing data from Salesforce, runs a dual-axis tiered commission calculation engine, and surfaces results through role-gated dashboards for recruiters, account managers, and leadership.",
+    tech: ["Next.js", "FastAPI", "Supabase", "Salesforce API", "TypeScript", "Microsoft Graph API"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "https://pioneercommission.com/",
+    image: "/pioneer-commissions-portal.png",
+    featured: true,
+    overview:
+      "Pioneer's recruitment team tracked candidate placements and billing through Salesforce but had no recruiter-friendly interface for commission visibility — no transparency for earners, no at-a-glance performance view for managers, and no audit trail for finance. This portal solves all three: it syncs financial records from Salesforce into Supabase, runs a dual-axis tiered commission matrix, and presents the results through clean role-gated dashboards. No Salesforce license or training required.",
+    roles: [
+      {
+        name: "Admin / Superuser",
+        description: "Full platform access — manages all users, triggers syncs, and views data across the entire organisation.",
+        permissions: [
+          "Create and manage all user accounts",
+          "Trigger Salesforce data sync and commission recalculation",
+          "View every recruiter and account manager's dashboard",
+          "Access team structure and membership management",
+        ],
+      },
+      {
+        name: "Manager (Recruitment & AM)",
+        description: "Earns commission and can view the dashboards of their direct reports.",
+        permissions: [
+          "View own commission dashboard (weekly, MTD, YTD, trend)",
+          "Drill into direct reports' individual dashboards",
+          "View team KPI summaries and tier performance",
+          "Access split commission tracker for shared deals",
+        ],
+      },
+      {
+        name: "Recruiter / Account Manager",
+        description: "Individual contributors — can only see their own earnings and performance data.",
+        permissions: [
+          "View own commission dashboard",
+          "Track weekly earnings, month-to-date progress vs. goal",
+          "Monitor tier advancement (hours + gross margin)",
+          "View gross profit breakdown by client and split deal status",
+        ],
+      },
+    ],
+    features: [
+      "Dual-axis commission matrix: 5 hours tiers × 8 gross margin brackets per recruiter",
+      "Separate calculation engine for account managers based on their own metrics",
+      "Salesforce sync — pulls weekly billing records via REST API into Supabase",
+      "Weekly commission summary, month-to-date progress vs. goal, year-over-year comparison",
+      "Configurable commission trend chart (default 26-week view)",
+      "Tier performance chart — current hours/GM vs. tier thresholds with active tier highlight",
+      "Gross profit distribution by client (donut/bar chart)",
+      "Split commission tracker — shared deals with teammate %, status (pending/approved/paid/disputed)",
+    ],
+  },
+  {
     title: "Contact Lens RAG Application",
     slug: "contact-lens-rag",
     description:
