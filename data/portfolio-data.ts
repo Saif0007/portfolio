@@ -92,7 +92,7 @@ export const projects: Project[] = [
     tech: ["Retell AI", "Twilio", "Next.js", "Supabase", "Outlook API", "Salesforce"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "https://voice-ai-live.pioneercommission.com/",
-    image: "/modern-analytics-dashboard.png",
+    image: "/pioneer-voice-ai-portal.png",
     featured: true,
     overview:
       "Built a production-grade AI voice platform for Pioneer, a healthcare recruitment agency. The platform comprises two autonomous voice agents and a comprehensive admin dashboard that gives the Pioneer internal team full visibility and control over all AI-driven calls, knowledge bases, and scheduled campaigns.",
@@ -149,7 +149,7 @@ export const projects: Project[] = [
     tech: ["Deepgram", "ElevenLabs", "Twilio", "Next.js", "FastAPI", "OpenAI GPT-4o", "Supabase", "Google Calendar", "Redis", "AWS"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "https://www.auralislabs.co/",
-    image: "/modern-analytics-dashboard.png",
+    image: "/auralis-labs-voice-ai.png",
     featured: true,
     testPhone: "+1 (857) 767-7618",
     overview:
