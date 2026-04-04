@@ -20,15 +20,16 @@ const techStack = [
 ]
 
 const codeLines = [
-  { indent: 0, tokens: [{ t: "class ", c: "text-purple-400" }, { t: "VoiceAgent", c: "text-emerald-400" }, { t: ":", c: "text-foreground" }] },
-  { indent: 1, tokens: [{ t: "def ", c: "text-purple-400" }, { t: "handle_call", c: "text-teal-400" }, { t: "(self, caller):", c: "text-foreground" }] },
-  { indent: 2, tokens: [{ t: "intent ", c: "text-foreground" }, { t: "= ", c: "text-amber-400" }, { t: "llm", c: "text-emerald-400" }, { t: ".detect(caller)", c: "text-foreground" }] },
-  { indent: 2, tokens: [{ t: "if ", c: "text-purple-400" }, { t: "intent ", c: "text-foreground" }, { t: "== ", c: "text-amber-400" }, { t: '"book_appointment"', c: "text-amber-300" }, { t: ":", c: "text-foreground" }] },
-  { indent: 3, tokens: [{ t: "calendar", c: "text-emerald-400" }, { t: ".schedule(caller)", c: "text-foreground" }] },
-  { indent: 2, tokens: [{ t: "return ", c: "text-purple-400" }, { t: "self", c: "text-teal-400" }, { t: ".respond(intent)", c: "text-foreground" }] },
+  { indent: 0, tokens: [{ t: "# Full Stack AI Platform", c: "text-muted-foreground" }] },
+  { indent: 0, tokens: [{ t: "from ", c: "text-purple-400" }, { t: "langchain", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "RAGPipeline", c: "text-teal-400" }] },
+  { indent: 0, tokens: [{ t: "from ", c: "text-purple-400" }, { t: "openai", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "GPT4", c: "text-teal-400" }] },
   { indent: 0, tokens: [] },
-  { indent: 0, tokens: [{ t: "# 🚀 Live in production", c: "text-muted-foreground" }] },
-  { indent: 0, tokens: [{ t: "agent ", c: "text-foreground" }, { t: "= ", c: "text-amber-400" }, { t: "VoiceAgent()", c: "text-emerald-400" }] },
+  { indent: 0, tokens: [{ t: "async def ", c: "text-purple-400" }, { t: "build_ai_feature", c: "text-emerald-400" }, { t: "(req):", c: "text-foreground" }] },
+  { indent: 1, tokens: [{ t: "context ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "RAGPipeline", c: "text-teal-400" }, { t: ".query(req)", c: "text-foreground" }] },
+  { indent: 1, tokens: [{ t: "response ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "GPT4", c: "text-teal-400" }, { t: ".complete(", c: "text-foreground" }] },
+  { indent: 2, tokens: [{ t: "prompt", c: "text-emerald-400" }, { t: "=context, ", c: "text-foreground" }, { t: "stream", c: "text-emerald-400" }, { t: "=", c: "text-foreground" }, { t: "True", c: "text-amber-400" }] },
+  { indent: 1, tokens: [{ t: ")", c: "text-foreground" }] },
+  { indent: 1, tokens: [{ t: "return ", c: "text-purple-400" }, { t: "StreamingResponse", c: "text-teal-400" }, { t: "(response)", c: "text-foreground" }] },
 ]
 
 
@@ -50,7 +51,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-16"
+      className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-4"
     >
       {/* Subtle grid */}
       <div
@@ -114,7 +115,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
                 Full Stack AI Engineer
               </span>
               <span className="px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono font-medium">
-                Voice AI Specialist
+                SaaS & AI Systems
               </span>
               <span className="px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-mono font-medium">
                 FAST'22
@@ -128,9 +129,9 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              Building <span className="text-emerald-400 font-semibold">production AI voice agents</span> and{" "}
-              <span className="text-purple-400 font-semibold">multi-tenant SaaS platforms</span> that go live.
-              Specialized in <span className="text-amber-400 font-semibold">LLMs, RAG, Voice AI</span>, and end-to-end full-stack engineering.
+              Building <span className="text-emerald-400 font-semibold">intelligent AI-powered products</span> from backend APIs to production — RAG systems,{" "}
+              <span className="text-purple-400 font-semibold">multi-tenant SaaS platforms</span>, LLM integrations, and full-stack applications that scale.
+              Specialized in <span className="text-amber-400 font-semibold">AI, full-stack engineering</span>, and turning complex requirements into clean, shipped systems.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -197,7 +198,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
                 <span className="w-3 h-3 rounded-full bg-red-500/70" />
                 <span className="w-3 h-3 rounded-full bg-amber-500/70" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500/70" />
-                <span className="ml-3 text-[11px] text-muted-foreground font-mono">voice_agent.py</span>
+                <span className="ml-3 text-[11px] text-muted-foreground font-mono">ai_feature.py</span>
                 <span className="ml-auto text-[10px] text-emerald-400 font-mono flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   running
@@ -251,35 +252,24 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               </div>
             </div>
 
-            {/* Stat cards — placed below the terminal, side by side */}
-            <div className="absolute -bottom-14 left-0 right-0 flex gap-3 justify-center">
-              <motion.div
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-emerald-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              >
-                <div className="text-xl font-black text-emerald-400">3+</div>
-                <div className="text-[10px] text-muted-foreground font-medium leading-tight">Live Voice<br />Agents</div>
-              </motion.div>
+            {/* Stat cards — corners of the terminal, offset outward */}
+            <motion.div
+              className="absolute -bottom-5 -left-6 flex items-center gap-3 px-4 py-3 rounded-xl border border-emerald-500/20 bg-card/95 backdrop-blur-sm shadow-xl"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+              <div className="text-2xl font-black text-emerald-400">25+</div>
+              <div className="text-[10px] text-muted-foreground font-medium leading-tight">Projects<br />Shipped</div>
+            </motion.div>
 
-              <motion.div
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-purple-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              >
-                <div className="text-xl font-black text-purple-400">25+</div>
-                <div className="text-[10px] text-muted-foreground font-medium leading-tight">Projects<br />Shipped</div>
-              </motion.div>
-
-              <motion.div
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-amber-500/20 bg-card/90 backdrop-blur-sm shadow-lg"
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-              >
-                <div className="text-xl font-black text-amber-400">3+</div>
-                <div className="text-[10px] text-muted-foreground font-medium leading-tight">Years<br />Experience</div>
-              </motion.div>
-            </div>
+            <motion.div
+              className="absolute -top-5 -right-6 flex items-center gap-3 px-4 py-3 rounded-xl border border-purple-500/20 bg-card/95 backdrop-blur-sm shadow-xl"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            >
+              <div className="text-2xl font-black text-purple-400">3+</div>
+              <div className="text-[10px] text-muted-foreground font-medium leading-tight">Years<br />Experience</div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

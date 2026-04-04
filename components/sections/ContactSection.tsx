@@ -91,7 +91,7 @@ export const ContactSection = ({ isVisible }: ContactSectionProps) => {
             Let's <span className="gradient-text">Connect</span>
           </h2>
           <p className="text-muted-foreground text-base max-w-xl">
-            Looking to build a production AI voice agent, a multi-tenant SaaS platform, or an intelligent system integrated with your existing tools? Let's talk.
+            Looking to build an AI-powered product, a multi-tenant SaaS platform, or an intelligent system integrated with your existing tools? Let's talk.
           </p>
         </div>
 

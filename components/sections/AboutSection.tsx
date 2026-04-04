@@ -16,29 +16,29 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
   const stats = [
     { number: "3+", label: "Years Experience", color: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/5" },
     { number: "25+", label: "Projects Delivered", color: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/5" },
-    { number: "3", label: "Live Voice Agents", color: "text-purple-400", border: "border-purple-500/20", bg: "bg-purple-500/5" },
+    { number: "3", label: "AI Products Live", color: "text-purple-400", border: "border-purple-500/20", bg: "bg-purple-500/5" },
     { number: "5+", label: "Industries Served", color: "text-teal-400", border: "border-teal-500/20", bg: "bg-teal-500/5" },
   ]
 
   const specializations = [
     {
-      icon: Mic,
-      title: "AI Voice Agents",
-      description: "Production inbound & outbound voice agents with Twilio, Retell AI, Deepgram, and ElevenLabs — live in healthcare recruitment and B2B SaaS.",
+      icon: BrainCircuit,
+      title: "AI & Full Stack Engineering",
+      description: "End-to-end AI-powered products — RAG pipelines, LLM integrations, GPT-powered apps, and full-stack systems from API to UI, deployed on AWS.",
       color: "text-emerald-400",
       bg: "bg-emerald-500/5 border-emerald-500/15",
     },
     {
       icon: LayoutDashboard,
-      title: "Multi-Tenant SaaS",
-      description: "White-label B2B platforms with role-based access, tenant isolation, Stripe billing, and full admin dashboards.",
+      title: "Multi-Tenant SaaS Platforms",
+      description: "White-label B2B platforms with role-based access, tenant isolation, Stripe billing, and full admin dashboards — built to scale.",
       color: "text-purple-400",
       bg: "bg-purple-500/5 border-purple-500/15",
     },
     {
-      icon: BrainCircuit,
-      title: "AI & ML Systems",
-      description: "RAG pipelines, LSTM trading models, GPT-powered apps, and enterprise integrations with Salesforce, Google Calendar, and more.",
+      icon: Mic,
+      title: "AI Voice & Automation",
+      description: "Production voice agents and intelligent automation with Twilio, Retell AI, Deepgram, ElevenLabs, Salesforce, and Google Calendar integrations.",
       color: "text-amber-400",
       bg: "bg-amber-500/5 border-amber-500/15",
     },
@@ -75,7 +75,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
           >
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               As a <span className="text-emerald-400 font-semibold">Full Stack AI Engineer</span>, I build production AI systems that are live and actively used — not demos. That includes{" "}
-              <span className="text-purple-400 font-semibold">AI voice agents</span> handling real inbound and outbound calls, multi-tenant SaaS platforms with white-label dashboards, RAG-based knowledge systems, and enterprise integrations with Salesforce, Twilio, Google Calendar, and more.
+              <span className="text-purple-400 font-semibold">full-stack AI products</span> — RAG-based knowledge systems, multi-tenant SaaS platforms with white-label dashboards, LLM integrations, and enterprise connections with Salesforce, Twilio, Google Calendar, and more.
             </p>
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               I bring{" "}
