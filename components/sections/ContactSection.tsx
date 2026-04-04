@@ -74,9 +74,7 @@ export const ContactSection = ({ isVisible }: ContactSectionProps) => {
             <div>
               <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Get In Touch</h3>
               <p className="text-muted-foreground leading-relaxed text-lg mb-6 sm:mb-8">
-                Looking for an AI Engineer to build GPT-powered chatbots, RAG systems, or intelligent automation? I'm
-                available for freelance projects and full-time opportunities. Let's discuss how AI can transform your
-                business!
+                Looking to build a production AI voice agent, a multi-tenant SaaS platform, or an intelligent system integrated with your existing tools? I'm available for freelance projects and full-time opportunities — let's talk about what you're building.
               </p>
             </div>
 

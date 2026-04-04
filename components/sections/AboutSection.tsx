@@ -16,6 +16,8 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
   const stats = [
     { number: "3+", label: "Years Experience", color: "text-cyan-500" },
     { number: "25+", label: "Projects Delivered", color: "text-amber-500" },
+    { number: "3", label: "Live Voice AI Agents", color: "text-purple-500" },
+    { number: "5+", label: "Industries Served", color: "text-emerald-500" },
   ]
 
   const certifications = [
@@ -62,10 +64,8 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              As a <span className="text-cyan-400 font-semibold">Full Stack AI Engineer</span>, I specialize in
-              building scalable AI-powered web applications, GPT-based chatbots, and end-to-end automation using LLMs,
-              Deep Learning, and NLP. With hands-on expertise in AI model development and full-stack engineering, I've
-              delivered intelligent systems that combine real-time AI with modern frontend and backend technologies.
+              As a <span className="text-cyan-400 font-semibold">Full Stack AI Engineer</span>, I build production AI systems that are live and actively used — not demos. That includes{" "}
+              <span className="text-purple-400 font-semibold">AI voice agents</span> handling real inbound and outbound calls, multi-tenant SaaS platforms with white-label dashboards, RAG-based knowledge systems, and enterprise integrations with Salesforce, Twilio, Google Calendar, and more.
             </motion.p>
             <motion.p
               className="text-base sm:text-lg text-muted-foreground leading-relaxed"
@@ -73,14 +73,12 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Whether it's fine-tuning LLMs, developing custom RAG systems, or deploying AI apps on the cloud, I bring{" "}
-              <span className="text-amber-400 font-semibold">robust, production-ready solutions</span> tailored to your
-              business goals. I've worked across FinTech, E-commerce, Healthcare, and EdTech industries, delivering
-              end-to-end solutions from AI training to frontend integration.
+              I bring{" "}
+              <span className="text-amber-400 font-semibold">end-to-end ownership</span> — from architecture and backend APIs to dashboards and deployment on AWS. I've shipped across Healthcare Recruitment, FinTech, Real Estate, E-commerce, and Optometry, working directly with US-based clients and founders to turn complex requirements into clean, scalable systems.
             </motion.p>
 
             <motion.div
-              className="grid grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8"
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}

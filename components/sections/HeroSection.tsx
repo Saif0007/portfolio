@@ -192,31 +192,31 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
           >
-            Building scalable{" "}
+            Building{" "}
             <motion.span
               className="text-cyan-400 font-semibold"
               whileHover={{ scale: 1.05, color: "#22d3ee" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              AI-powered applications, GPT-based chatbots
+              production AI voice agents
             </motion.span>
-            , and intelligent automation systems.
-            <br className="hidden sm:block" />
-            Specialized in{" "}
+            ,{" "}
             <motion.span
               className="text-purple-400 font-semibold"
               whileHover={{ scale: 1.05, color: "#c084fc" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              LLMs, RAG, Deep Learning
+              multi-tenant SaaS platforms
             </motion.span>
-            ,{" "}
+            , and intelligent systems that go live.
+            <br className="hidden sm:block" />
+            Specialized in{" "}
             <motion.span
               className="text-amber-400 font-semibold"
               whileHover={{ scale: 1.05, color: "#fbbf24" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              full-stack development
+              LLMs, RAG, Voice AI
             </motion.span>
             , and{" "}
             <motion.span
@@ -224,7 +224,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               whileHover={{ scale: 1.05, color: "#34d399" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              cloud deployment
+              end-to-end full-stack engineering
             </motion.span>
             .
           </motion.p>

@@ -1,5 +1,6 @@
 export const skills = {
   ai: [
+    "AI Voice Agents",
     "GPT Fine-Tuning",
     "RAG Systems",
     "LangChain",
@@ -38,6 +39,11 @@ export const skills = {
   databases: ["PostgreSQL", "MySQL", "MongoDB", "Supabase", "Firebase", "SQL Server"],
   cloud: ["AWS (EC2, S3, Lambda)", "Docker", "Vercel", "Heroku", "CI/CD Pipelines"],
   tools: [
+    "Twilio",
+    "Retell AI",
+    "Deepgram",
+    "ElevenLabs",
+    "Salesforce API",
     "Git",
     "VS Code",
     "Cursor",
@@ -45,7 +51,6 @@ export const skills = {
     "JIRA",
     "Zapier",
     "Stripe Integration",
-    "Payment Gateways",
   ],
 }
 
@@ -382,7 +387,7 @@ export const experience = [
     duration: "October 2024 - Present",
     location: "Lahore",
     description:
-      "Leading development teams in building cutting-edge AI-powered solutions. Architecting scalable software systems, mentoring junior developers, and driving technical decision-making across projects.",
+      "Leading delivery of production AI systems for US-based clients. Built two live AI voice agents for Pioneer Healthcare Recruitment (Retell AI + Twilio + Salesforce + Outlook) and a multi-tenant B2B voice AI SaaS platform (Auralis Labs) handling real-time appointment booking via Deepgram, ElevenLabs, and Google Calendar. Delivered an internal commissions portal syncing live Salesforce financial data through a dual-engine calculation matrix. Mentoring a team of engineers and owning end-to-end architecture, client communication, and technical delivery.",
     current: true,
   },
   {
@@ -391,7 +396,7 @@ export const experience = [
     duration: "July 2022 - September 2024",
     location: "Lahore",
     description:
-      "Developed and deployed dynamic web applications using Python Django and REST APIs. Spearheaded backend development, implemented advanced debugging techniques, and collaborated with cross-functional teams to deliver high-performance applications.",
+      "Built and maintained full-stack web applications for international clients across healthcare, e-commerce, and SaaS verticals using Python Django and REST APIs. Led backend development on multiple concurrent projects, implemented complex business logic, and collaborated with cross-functional teams to ship high-performance, production-grade applications on schedule.",
     current: false,
   },
 ]
