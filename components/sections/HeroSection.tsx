@@ -20,16 +20,16 @@ const techStack = [
 ]
 
 const codeLines = [
-  { indent: 0, tokens: [{ t: "# Full Stack AI Platform", c: "text-muted-foreground" }] },
-  { indent: 0, tokens: [{ t: "from ", c: "text-purple-400" }, { t: "langchain", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "RAGPipeline", c: "text-teal-400" }] },
-  { indent: 0, tokens: [{ t: "from ", c: "text-purple-400" }, { t: "openai", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "GPT4", c: "text-teal-400" }] },
-  { indent: 0, tokens: [] },
-  { indent: 0, tokens: [{ t: "async def ", c: "text-purple-400" }, { t: "build_ai_feature", c: "text-emerald-400" }, { t: "(req):", c: "text-foreground" }] },
-  { indent: 1, tokens: [{ t: "context ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "RAGPipeline", c: "text-teal-400" }, { t: ".query(req)", c: "text-foreground" }] },
-  { indent: 1, tokens: [{ t: "response ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "GPT4", c: "text-teal-400" }, { t: ".complete(", c: "text-foreground" }] },
-  { indent: 2, tokens: [{ t: "prompt", c: "text-emerald-400" }, { t: "=context, ", c: "text-foreground" }, { t: "stream", c: "text-emerald-400" }, { t: "=", c: "text-foreground" }, { t: "True", c: "text-amber-400" }] },
-  { indent: 1, tokens: [{ t: ")", c: "text-foreground" }] },
-  { indent: 1, tokens: [{ t: "return ", c: "text-purple-400" }, { t: "StreamingResponse", c: "text-teal-400" }, { t: "(response)", c: "text-foreground" }] },
+  { tokens: [{ t: "# Full Stack AI Platform", c: "text-muted-foreground" }] },
+  { tokens: [{ t: "from ", c: "text-purple-400" }, { t: "langchain", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "RAGPipeline", c: "text-teal-400" }] },
+  { tokens: [{ t: "from ", c: "text-purple-400" }, { t: "openai", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "GPT4", c: "text-teal-400" }] },
+  { tokens: [] },
+  { tokens: [{ t: "async def ", c: "text-purple-400" }, { t: "build_ai_feature", c: "text-emerald-400" }, { t: "(req):", c: "text-foreground" }] },
+  { tokens: [{ t: "    context ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "RAGPipeline", c: "text-teal-400" }, { t: ".query(req)", c: "text-foreground" }] },
+  { tokens: [{ t: "    response ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "GPT4", c: "text-teal-400" }, { t: ".complete(", c: "text-foreground" }] },
+  { tokens: [{ t: "        prompt", c: "text-emerald-400" }, { t: "=context, ", c: "text-foreground" }, { t: "stream", c: "text-emerald-400" }, { t: "=", c: "text-foreground" }, { t: "True", c: "text-amber-400" }] },
+  { tokens: [{ t: "    )", c: "text-foreground" }] },
+  { tokens: [{ t: "    return ", c: "text-purple-400" }, { t: "StreamingResponse", c: "text-teal-400" }, { t: "(response)", c: "text-foreground" }] },
 ]
 
 
@@ -219,7 +219,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
                     transition={{ delay: 0.6 + i * 0.12, duration: 0.3 }}
                   >
                     <span className="text-muted-foreground/30 w-6 shrink-0 text-right mr-4 select-none text-[10px] leading-6">{i + 1}</span>
-                    <span style={{ paddingLeft: `${line.indent * 16}px` }} className="flex flex-wrap">
+                    <span className="whitespace-pre">
                       {line.tokens.map((tok, j) => (
                         <span key={j} className={tok.c}>{tok.t}</span>
                       ))}
