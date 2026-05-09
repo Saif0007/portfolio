@@ -14,8 +14,8 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   const stats = [
-    { number: "3+", label: "Years Experience", color: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/5" },
-    { number: "25+", label: "Projects Delivered", color: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/5" },
+    { number: "5+", label: "Years Experience", color: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/5" },
+    { number: "30+", label: "Projects Delivered", color: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/5" },
     { number: "3", label: "AI Products Live", color: "text-purple-400", border: "border-purple-500/20", bg: "bg-purple-500/5" },
     { number: "5+", label: "Industries Served", color: "text-teal-400", border: "border-teal-500/20", bg: "bg-teal-500/5" },
   ]
@@ -118,7 +118,6 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
               <div className="border-l-2 border-emerald-500 pl-4">
                 <h4 className="text-base font-bold text-emerald-400">Bachelor of Computer Science</h4>
                 <p className="text-foreground font-medium text-sm mt-0.5">FAST NUCES, Lahore</p>
-                <p className="text-muted-foreground text-xs mt-1">August 2018 — June 2022</p>
               </div>
             </div>
 

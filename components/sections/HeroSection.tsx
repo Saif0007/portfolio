@@ -261,7 +261,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              <div className="text-2xl font-black text-emerald-400">25+</div>
+              <div className="text-2xl font-black text-emerald-400">30+</div>
               <div className="text-[10px] text-muted-foreground font-medium leading-tight">Projects<br />Shipped</div>
             </motion.div>
 
@@ -270,7 +270,7 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             >
-              <div className="text-2xl font-black text-purple-400">3+</div>
+              <div className="text-2xl font-black text-purple-400">5+</div>
               <div className="text-[10px] text-muted-foreground font-medium leading-tight">Years<br />Experience</div>
             </motion.div>
 

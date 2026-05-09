@@ -415,7 +415,7 @@ export const experience = [
   {
     company: "Tron AI",
     position: "Senior Software Engineer (Team Lead)",
-    duration: "October 2024 - Present",
+    duration: "Present",
     location: "Lahore",
     description:
       "Leading delivery of production AI systems for US-based clients. Built two live AI voice agents for Pioneer Healthcare Recruitment (Retell AI + Twilio + Salesforce + Outlook) and a multi-tenant B2B voice AI SaaS platform (Auralis Labs) handling real-time appointment booking via Deepgram, ElevenLabs, and Google Calendar. Delivered an internal commissions portal syncing live Salesforce financial data through a dual-engine calculation matrix. Mentoring a team of engineers and owning end-to-end architecture, client communication, and technical delivery.",
@@ -424,7 +424,7 @@ export const experience = [
   {
     company: "Rolustech",
     position: "Software Engineer",
-    duration: "July 2022 - September 2024",
+    duration: "Previous Role",
     location: "Lahore",
     description:
       "Built and maintained full-stack web applications for international clients across healthcare, e-commerce, and SaaS verticals using Python Django and REST APIs. Led backend development on multiple concurrent projects, implemented complex business logic, and collaborated with cross-functional teams to ship high-performance, production-grade applications on schedule.",
