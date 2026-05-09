@@ -16,8 +16,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
   const stats = [
     { number: "5+", label: "Years Experience", color: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/5" },
     { number: "30+", label: "Projects Delivered", color: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/5" },
-    { number: "3", label: "AI Products Live", color: "text-purple-400", border: "border-purple-500/20", bg: "bg-purple-500/5" },
-    { number: "5+", label: "Industries Served", color: "text-teal-400", border: "border-teal-500/20", bg: "bg-teal-500/5" },
+    { number: "10+", label: "Industries Served", color: "text-teal-400", border: "border-teal-500/20", bg: "bg-teal-500/5" },
   ]
 
   const specializations = [
