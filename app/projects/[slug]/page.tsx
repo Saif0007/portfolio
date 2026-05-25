@@ -130,7 +130,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent mb-10 sm:mb-14" />
 
         {/* Screenshot Gallery */}
-        {project.images && project.images.length > 0 ? (
+        {!project.noDetailImage && project.images && project.images.length > 0 ? (
           <section className="mb-10 sm:mb-14">
             <div className={`grid gap-4 ${project.images.length > 1 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}`}>
               {project.images.map((src, i) => (
@@ -140,7 +140,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               ))}
             </div>
           </section>
-        ) : project.image && (
+        ) : !project.noDetailImage && project.image && (
           <section className="mb-10 sm:mb-14">
             <div className="rounded-2xl overflow-hidden border border-border/40">
               <img src={project.image} alt={project.title} className="w-full object-cover" />

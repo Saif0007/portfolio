@@ -94,6 +94,7 @@ export interface Project {
   challenges?: string[]
   liveNote?: string
   testPhone?: string
+  noDetailImage?: boolean
 }
 
 export const projects: Project[] = [
@@ -359,6 +360,7 @@ export const projects: Project[] = [
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "#",
     image: "/pioneer-commissions-portal.png",
+    noDetailImage: true,
     featured: true,
     overview:
       "Pioneer's recruiters were manually assembling candidate submission documents from multiple Salesforce screens — a slow, error-prone process that delayed submissions to account managers. This FastAPI service eliminates that entirely. A custom Salesforce button on the Job Applicant record calls the API, which pulls all candidate data across four Salesforce objects in a single flow, renders a fully editable preview in the browser, and on confirmation streams a pixel-perfect branded PDF or DOCX back to the recruiter. A Salesforce Apex trigger enforces data completeness upstream, blocking any stage change to 'Submitted to Account Manager' unless all required fields and related records are present — so the document generator never receives incomplete data.",
