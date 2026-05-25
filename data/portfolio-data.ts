@@ -281,6 +281,42 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "Pioneer Submissions Document Automation",
+    slug: "pioneer-submissions-doc-automation",
+    description:
+      "Salesforce-integrated FastAPI service that auto-generates branded candidate submission documents (PDF + DOCX) for Pioneer Healthcare Recruitment. A single button click in Salesforce pulls live candidate data, renders an editable preview, and streams a pixel-perfect two-page document in seconds.",
+    tech: ["FastAPI", "Python", "Salesforce API", "python-docx", "LibreOffice", "WeasyPrint", "Jinja2", "SOQL"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "#",
+    image: "/pioneer-commissions-portal.png",
+    featured: true,
+    overview:
+      "Pioneer's recruiters were manually assembling candidate submission documents from multiple Salesforce screens — a slow, error-prone process that delayed submissions to account managers. This FastAPI service eliminates that entirely. A custom Salesforce button on the Job Applicant record calls the API, which pulls all candidate data across four Salesforce objects in a single flow, renders a fully editable preview in the browser, and on confirmation streams a pixel-perfect branded PDF or DOCX back to the recruiter. A Salesforce Apex trigger enforces data completeness upstream, blocking any stage change to 'Submitted to Account Manager' unless all required fields and related records are present — so the document generator never receives incomplete data.",
+    pipeline: [
+      "Recruiter clicks 'Generate Submission Doc' button on a Salesforce Job Applicant record",
+      "Salesforce opens /submission/{job_applicant_id} — FastAPI authenticates via OAuth2 Client Credentials and queries AVTRRT__Job_Applicant__c for all profile fields",
+      "Parallel SOQL queries fetch Employment History, Educational History, and References from three related Salesforce objects",
+      "Stage gate check: if Job Applicant is not at 'Submitted to Account Manager', a branded error page is returned instead",
+      "All data is injected into a Jinja2 HTML form — recruiter reviews and edits any field before generating",
+      "On submit, FastAPI calls the document generator: python-docx builds the DOCX with exact Pioneer branding (orange border, Inter font, blue-grey headings, yellow education band)",
+      "LibreOffice headless converts DOCX to PDF with full fidelity; WeasyPrint is the fallback if LibreOffice is unavailable",
+      "Completed PDF or DOCX is streamed directly to the recruiter's browser as a file download",
+    ],
+    features: [
+      "One-click document generation from Salesforce — zero manual data entry by the recruiter",
+      "Pulls data from 4 Salesforce objects: Job Applicant, Employment History, Educational History, References",
+      "Editable preview before export — recruiters can adjust any field without touching Salesforce",
+      "Dual export formats: PDF (via LibreOffice headless) and DOCX (via python-docx), both streamed to browser",
+      "Pixel-perfect Pioneer branding: orange #ED5A04 page border, Pioneer logo, compass footer icon on every page, blue-grey section headings, yellow education band",
+      "Apex trigger (JobApplicantValidation) blocks stage advancement unless all 10+ required fields and at least 1 Employment + 1 Education record exist",
+      "Stage gate in the API — returns a branded 403 page if the Job Applicant is not yet at the correct stage",
+      "Salesforce Screen Flow (Applicant_status_update_Screen_Flow) for guided status updates within Salesforce UI",
+      "Health endpoint verifies live Salesforce OAuth connectivity on every deploy",
+      "Smart blank-page prevention — pages are only rendered when they contain actual data",
+    ],
+    liveNote: "Live and actively used by the Pioneer Healthcare Recruitment team.",
+  },
+  {
     title: "Trade Gekko — AI Crypto Trading Platform",
     slug: "trade-gekko",
     description:
