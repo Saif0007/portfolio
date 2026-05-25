@@ -288,7 +288,12 @@ export const projects: Project[] = [
     tech: ["FastAPI", "Playwright", "Bright Data", "Next.js", "Supabase", "Salesforce API", "AWS S3", "TypeScript", "Anthropic Claude"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "https://license.pioneercommission.com/",
-    image: "/modern-analytics-dashboard.png",
+    image: "/Pioneer-Healthcare-License-Verification-Agent-05-25-2026_02_59_PM.png",
+    images: [
+      "/Pioneer-Healthcare-License-Verification-Agent-05-25-2026_02_59_PM.png",
+      "/Pioneer-Healthcare-License-Verification-Agent-05-25-2026_03_08_PM.png",
+      "/Pioneer-Healthcare-License-Verification-Agent-05-25-2026_03_09_PM.png",
+    ],
     featured: true,
     overview:
       "Pioneer's compliance team was manually verifying every healthcare candidate's license on state board websites — a time-consuming, error-prone process with no audit trail. This system eliminates it entirely across three coordinated services: a FastAPI backend that orchestrates the flow and owns the Salesforce integration, a headless Playwright scraper service that navigates state and national licensing boards (bypassing Cloudflare, Turnstile, reCAPTCHA, and hCaptcha via Bright Data's residential proxy network and 2Captcha fallback), and a Next.js compliance dashboard at license.pioneercommission.com where the team monitors every verification job, sees PDF evidence, and receives real-time notifications. When a Job Applicant advances to 'Submitted to Account Manager' in Salesforce and their license is unverified, an Apex trigger fires a webhook, the pipeline runs fully automated, and License__c records with attached PDF screenshots land back in Salesforce — all without a human touching a browser.",
