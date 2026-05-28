@@ -156,18 +156,18 @@ export const projects: Project[] = [
     liveNote: "Live and actively used by the Pioneer internal team.",
   },
   {
-    title: "Auralis Labs — Multi-Tenant Voice AI Platform",
+    title: "Sentire Systems — Multi-Tenant Voice AI Platform",
     slug: "auralis-labs-voice-ai",
     description:
       "Production-grade B2B multi-tenant conversational AI voice platform that handles inbound calls, books appointments in real time, and ships a white-label dashboard — all fully isolated per tenant business.",
     tech: ["Deepgram", "ElevenLabs", "Twilio", "Next.js", "FastAPI", "OpenAI GPT-4o", "Supabase", "Google Calendar", "Redis", "AWS"],
     github: "https://github.com/Saif-Ur-Rehman0",
-    demo: "https://www.auralislabs.co/",
+    demo: "https://www.sentiresystems.com/",
     image: "/auralis-labs-voice-ai.png",
     featured: true,
     testPhone: "+1 (857) 767-7618",
     overview:
-      "Built a production-grade multi-tenant SaaS voice AI platform for Maximus Virgili (Auralis Labs). Each business that onboards gets their own dedicated phone number, a fully configurable AI voice agent with a custom personality, real-time Google Calendar integration for appointment booking, and a white-label dashboard. The platform is architected from day one for B2B scale — adding a new industry vertical (dental, med spa, salon) is a configuration change, not a code change.",
+      "Built a production-grade multi-tenant SaaS voice AI platform for Sentire Systems. Each business that onboards gets their own dedicated phone number, a fully configurable AI voice agent with a custom personality, real-time Google Calendar integration for appointment booking, and a white-label dashboard. The platform is architected from day one for B2B scale — adding a new industry vertical (dental, med spa, salon) is a configuration change, not a code change.",
     pipeline: [
       "Caller dials the tenant's dedicated Twilio number",
       "Twilio streams call audio over WebSocket to FastAPI orchestrator",
@@ -180,7 +180,7 @@ export const projects: Project[] = [
     roles: [
       {
         name: "Platform Admin",
-        description: "Auralis Labs team — manages the entire platform across all tenant businesses.",
+        description: "Sentire Systems team — manages the entire platform across all tenant businesses.",
         permissions: [
           "Create and manage tenant business accounts",
           "Assign Twilio numbers to tenants",
@@ -222,7 +222,7 @@ export const projects: Project[] = [
       "30+ concurrent calls per instance with horizontal scaling",
       "Multi-tenant data isolation enforced via Supabase Row-Level Security",
     ],
-    liveNote: "Live B2B platform actively onboarding businesses. Test tenant available at +1 (857) 767-7618.",
+    liveNote: "Live B2B platform at sentiresystems.com, actively onboarding businesses. Test tenant available at +1 (857) 767-7618.",
   },
   {
     title: "Pioneer Commissions Portal",
