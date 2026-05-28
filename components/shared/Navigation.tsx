@@ -1,3 +1,8 @@
+"use client"
+
+import { useState } from "react"
+import { Menu, X } from "lucide-react"
+
 interface NavigationProps {
   activeSection: string
   isScrolled: boolean
@@ -5,6 +10,14 @@ interface NavigationProps {
 }
 
 export const Navigation = ({ activeSection, isScrolled, scrollToSection }: NavigationProps) => {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const navItems = ["About", "Skills", "Projects", "Experience", "Contact"]
+
+  const handleNav = (item: string) => {
+    scrollToSection(item.toLowerCase())
+    setMobileOpen(false)
+  }
+
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
@@ -23,9 +36,9 @@ export const Navigation = ({ activeSection, isScrolled, scrollToSection }: Navig
             </span>
           </div>
 
-          {/* Nav links */}
+          {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-1">
-            {["About", "Skills", "Projects", "Experience", "Contact"].map((item) => (
+            {navItems.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -43,15 +56,55 @@ export const Navigation = ({ activeSection, isScrolled, scrollToSection }: Navig
             ))}
           </div>
 
-          {/* CTA */}
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold rounded-lg transition-colors"
-          >
-            Hire Me
-          </button>
+          {/* Right: CTA + hamburger */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold rounded-lg transition-colors"
+            >
+              Hire Me
+            </button>
+
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="md:hidden p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-emerald-500/40 transition-all"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile menu drawer */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-border bg-[#060d1f]/98 backdrop-blur-xl">
+          <div className="px-4 py-4 space-y-1">
+            {navItems.map((item) => (
+              <button
+                key={item}
+                onClick={() => handleNav(item)}
+                className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  activeSection === item.toLowerCase()
+                    ? "text-emerald-400 bg-emerald-500/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+            <div className="pt-2 border-t border-border">
+              <button
+                onClick={() => handleNav("contact")}
+                className="w-full px-4 py-3 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold rounded-lg transition-colors"
+              >
+                Hire Me
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   )
 }

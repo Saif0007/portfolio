@@ -255,9 +255,9 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
               </div>
             </div>
 
-            {/* Stat cards — anchored to terminal corners */}
+            {/* Stat cards — anchored to terminal corners, hidden on small screens */}
             <motion.div
-              className="absolute -bottom-5 -left-5 flex items-center gap-3 px-4 py-3 rounded-xl border border-emerald-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
+              className="absolute -bottom-5 -left-5 hidden sm:flex items-center gap-3 px-4 py-3 rounded-xl border border-emerald-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
@@ -266,13 +266,25 @@ export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloa
             </motion.div>
 
             <motion.div
-              className="absolute -top-5 -right-5 flex items-center gap-3 px-4 py-3 rounded-xl border border-purple-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
+              className="absolute -top-5 -right-5 hidden sm:flex items-center gap-3 px-4 py-3 rounded-xl border border-purple-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             >
               <div className="text-2xl font-black text-purple-400">5+</div>
               <div className="text-[10px] text-muted-foreground font-medium leading-tight">Years<br />Experience</div>
             </motion.div>
+
+            {/* Mobile stat row — visible only when floating cards are hidden */}
+            <div className="flex sm:hidden justify-center gap-4 mt-6">
+              <div className="flex flex-col items-center px-5 py-3 rounded-xl border border-emerald-500/20 bg-card/80">
+                <span className="text-xl font-black text-emerald-400">30+</span>
+                <span className="text-[10px] text-muted-foreground font-medium mt-0.5">Projects Shipped</span>
+              </div>
+              <div className="flex flex-col items-center px-5 py-3 rounded-xl border border-purple-500/20 bg-card/80">
+                <span className="text-xl font-black text-purple-400">5+</span>
+                <span className="text-[10px] text-muted-foreground font-medium mt-0.5">Years Experience</span>
+              </div>
+            </div>
 
             </div>{/* end inner wrapper */}
           </motion.div>

@@ -83,7 +83,7 @@ export const AboutSection = ({ isVisible }: AboutSectionProps) => {
 
             {/* Stats */}
             <motion.div
-              className="grid grid-cols-2 gap-3 pt-4"
+              className="grid grid-cols-3 gap-3 pt-4"
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
