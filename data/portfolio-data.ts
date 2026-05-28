@@ -225,6 +225,30 @@ export const projects: Project[] = [
     liveNote: "Live B2B platform at sentiresystems.com, actively onboarding businesses. Test tenant available at +1 (857) 767-7618.",
   },
   {
+    title: "Trade Gekko — AI Crypto Trading Platform",
+    slug: "trade-gekko",
+    description:
+      "Full-stack SaaS platform that lets subscribers deploy autonomous AI trading bots on Coinbase. Generates signals from 42 LSTM models across 6 crypto assets and 7 timeframes, executes live market orders with stop-loss/take-profit, and gates features behind Stripe subscription tiers.",
+    tech: ["Django", "Next.js", "TensorFlow", "LSTM", "Coinbase API", "Stripe", "PostgreSQL", "APScheduler"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "https://www.tradegekko.com/",
+    image: "/trade-gekko.png",
+    featured: true,
+    overview:
+      "Trade Gekko is a production SaaS platform where subscribers connect their Coinbase account and deploy AI-driven trading bots across 6 crypto assets (BTC, ETH, SOL, XRP, DOGE, LINK) over 7 timeframes (1m → 1d). The platform trains 42 LSTM models daily, generates signals every 15 minutes using a hybrid ML + technical analysis pipeline, and executes live market orders autonomously — complete with trailing stop-loss, take-profit, dynamic position sizing, and multi-timeframe confirmation guards.",
+    features: [
+      "42 LSTM models — one per symbol × timeframe, retrained daily at 12 AM UTC",
+      "Hybrid signal engine: LSTM predictions combined with RSI, MACD, Bollinger Bands, Fibonacci, ATR, and news sentiment scoring",
+      "Autonomous bot lifecycle: BUY → position management → SELL with trailing stop-loss and take-profit",
+      "Dynamic position sizing: scales with ML confidence, drawdown streak, and live volatility (high-vol halves size)",
+      "Multi-timeframe confirmation — higher TF SELL blocks lower TF BUY to prevent counter-trend entries",
+      "Signal quality filters: min 35% confidence, trend strength ≥ 2%, R/R ≥ 1.2, no EXTREME risk signals",
+      "Live Coinbase Advanced Trade order execution with Fernet-encrypted per-user API keys",
+      "Real-time PnL streaming via SSE, backtesting engine, and timeframe performance optimizer (runs daily)",
+      "Stripe subscription tiers (Starter / Pro / Elite) with plan-gated bot access and webhook-synced status",
+    ],
+  },
+  {
     title: "Pioneer Commissions Portal",
     slug: "pioneer-commissions-portal",
     description:
@@ -279,6 +303,30 @@ export const projects: Project[] = [
       "Full commission audit trail — every calculation is versioned and explainable",
       "Weekly, MTD, YTD dashboards with year-over-year comparison and 26-week trend charts",
       "Tier performance chart — live hours/GM vs. tier thresholds with active tier highlight",
+    ],
+  },
+  {
+    title: "TheRightContact.com — AI Contact Lens Platform",
+    slug: "contact-lens-rag",
+    description:
+      "AI-powered platform for eye care professionals delivering accurate, real-time contact lens information via a custom NLP-to-Excel query engine and GPT-5. Integrates Google Sheets, PDFs, and web sources with corneal topography image analysis, multi-tier subscriptions, and admin dashboards.",
+    tech: ["Next.js", "FastAPI", "GPT-5", "RAG", "AWS", "Google Sheets API", "Web Scraping", "Image Analysis"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "https://www.therightcontact.com/",
+    image: "/contact-lens-rag-1.png",
+    images: ["/contact-lens-rag-1.png", "/contact-lens-rag-2.png"],
+    featured: true,
+    overview:
+      "TheRightContact.com is the leading digital solution for optometrists and ophthalmologists who need fast, accurate contact lens data. Built for eye care professionals, the platform combines a GPT-5 conversational interface with a custom NLP-to-Excel query engine that translates natural language into precise spreadsheet queries across thousands of lens records. Data is continuously synced from Google Sheets, PDFs, and 40+ industry web sources. The platform also includes corneal topography image analysis, multi-tier subscriptions, and full admin dashboards — all on HIPAA-compliant AWS infrastructure.",
+    features: [
+      "Custom NLP-to-Excel query engine — natural language questions resolved against live spreadsheet data",
+      "GPT-5 conversational interface with source-backed answers for clinical queries",
+      "Real-time data sync from Google Sheets, PDFs, and 40+ contact lens websites",
+      "Corneal topography image analysis — AI-powered interpretation of diagnostic images",
+      "Multi-tier subscription management with role-based feature access",
+      "Admin dashboard — manage data sources, monitor usage, update training content",
+      "CI/CD pipeline on AWS for automated deployments and zero-downtime updates",
+      "HIPAA-compliant infrastructure with secure healthcare data handling",
     ],
   },
   {
@@ -352,6 +400,27 @@ export const projects: Project[] = [
     liveNote: "Live at license.pioneercommission.com — actively used by the Pioneer Healthcare compliance team.",
   },
   {
+    title: "PRD Generator Platform",
+    slug: "prd-generator",
+    description:
+      "AI-driven PRD generation system that creates detailed product requirement documents through guided questionnaires. Integrated with JIRA and Figma APIs for automatic ticket creation and design generation. Built as an internal tool for a product team — no public demo.",
+    tech: ["Django", "Next.js", "OpenAI", "JIRA API", "Figma API"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "#",
+    image: "/modern-analytics-dashboard.png",
+    featured: true,
+    overview:
+      "A platform that automates the creation of Product Requirement Documents. Product managers answer a guided questionnaire and the system generates a structured PRD, creates JIRA tickets, and triggers Figma design stubs — all in one workflow.",
+    features: [
+      "Guided questionnaire flow to capture product context",
+      "AI-generated PRD with structured sections and acceptance criteria",
+      "Automatic JIRA epic and story creation from PRD content",
+      "Figma API integration for design stub generation",
+      "Version history and collaborative editing",
+      "Export to PDF and Confluence-compatible formats",
+    ],
+  },
+  {
     title: "Pioneer Submissions Document Automation",
     slug: "pioneer-submissions-doc-automation",
     description:
@@ -387,75 +456,6 @@ export const projects: Project[] = [
       "Smart blank-page prevention — pages are only rendered when they contain actual data",
     ],
     liveNote: "Live and actively used by the Pioneer Healthcare Recruitment team.",
-  },
-  {
-    title: "Trade Gekko — AI Crypto Trading Platform",
-    slug: "trade-gekko",
-    description:
-      "Full-stack SaaS platform that lets subscribers deploy autonomous AI trading bots on Coinbase. Generates signals from 42 LSTM models across 6 crypto assets and 7 timeframes, executes live market orders with stop-loss/take-profit, and gates features behind Stripe subscription tiers.",
-    tech: ["Django", "Next.js", "TensorFlow", "LSTM", "Coinbase API", "Stripe", "PostgreSQL", "APScheduler"],
-    github: "https://github.com/Saif-Ur-Rehman0",
-    demo: "https://www.tradegekko.com/",
-    image: "/trade-gekko.png",
-    featured: true,
-    overview:
-      "Trade Gekko is a production SaaS platform where subscribers connect their Coinbase account and deploy AI-driven trading bots across 6 crypto assets (BTC, ETH, SOL, XRP, DOGE, LINK) over 7 timeframes (1m → 1d). The platform trains 42 LSTM models daily, generates signals every 15 minutes using a hybrid ML + technical analysis pipeline, and executes live market orders autonomously — complete with trailing stop-loss, take-profit, dynamic position sizing, and multi-timeframe confirmation guards.",
-    features: [
-      "42 LSTM models — one per symbol × timeframe, retrained daily at 12 AM UTC",
-      "Hybrid signal engine: LSTM predictions combined with RSI, MACD, Bollinger Bands, Fibonacci, ATR, and news sentiment scoring",
-      "Autonomous bot lifecycle: BUY → position management → SELL with trailing stop-loss and take-profit",
-      "Dynamic position sizing: scales with ML confidence, drawdown streak, and live volatility (high-vol halves size)",
-      "Multi-timeframe confirmation — higher TF SELL blocks lower TF BUY to prevent counter-trend entries",
-      "Signal quality filters: min 35% confidence, trend strength ≥ 2%, R/R ≥ 1.2, no EXTREME risk signals",
-      "Live Coinbase Advanced Trade order execution with Fernet-encrypted per-user API keys",
-      "Real-time PnL streaming via SSE, backtesting engine, and timeframe performance optimizer (runs daily)",
-      "Stripe subscription tiers (Starter / Pro / Elite) with plan-gated bot access and webhook-synced status",
-    ],
-  },
-  {
-    title: "TheRightContact.com — AI Contact Lens Platform",
-    slug: "contact-lens-rag",
-    description:
-      "AI-powered platform for eye care professionals delivering accurate, real-time contact lens information via a custom NLP-to-Excel query engine and GPT-5. Integrates Google Sheets, PDFs, and web sources with corneal topography image analysis, multi-tier subscriptions, and admin dashboards.",
-    tech: ["Next.js", "FastAPI", "GPT-5", "RAG", "AWS", "Google Sheets API", "Web Scraping", "Image Analysis"],
-    github: "https://github.com/Saif-Ur-Rehman0",
-    demo: "https://www.therightcontact.com/",
-    image: "/contact-lens-rag-1.png",
-    images: ["/contact-lens-rag-1.png", "/contact-lens-rag-2.png"],
-    featured: true,
-    overview:
-      "TheRightContact.com is the leading digital solution for optometrists and ophthalmologists who need fast, accurate contact lens data. Built for eye care professionals, the platform combines a GPT-5 conversational interface with a custom NLP-to-Excel query engine that translates natural language into precise spreadsheet queries across thousands of lens records. Data is continuously synced from Google Sheets, PDFs, and 40+ industry web sources. The platform also includes corneal topography image analysis, multi-tier subscriptions, and full admin dashboards — all on HIPAA-compliant AWS infrastructure.",
-    features: [
-      "Custom NLP-to-Excel query engine — natural language questions resolved against live spreadsheet data",
-      "GPT-5 conversational interface with source-backed answers for clinical queries",
-      "Real-time data sync from Google Sheets, PDFs, and 40+ contact lens websites",
-      "Corneal topography image analysis — AI-powered interpretation of diagnostic images",
-      "Multi-tier subscription management with role-based feature access",
-      "Admin dashboard — manage data sources, monitor usage, update training content",
-      "CI/CD pipeline on AWS for automated deployments and zero-downtime updates",
-      "HIPAA-compliant infrastructure with secure healthcare data handling",
-    ],
-  },
-  {
-    title: "PRD Generator Platform",
-    slug: "prd-generator",
-    description:
-      "AI-driven PRD generation system that creates detailed product requirement documents through guided questionnaires. Integrated with JIRA and Figma APIs for automatic ticket creation and design generation. Built as an internal tool for a product team — no public demo.",
-    tech: ["Django", "Next.js", "OpenAI", "JIRA API", "Figma API"],
-    github: "https://github.com/Saif-Ur-Rehman0",
-    demo: "#",
-    image: "/modern-analytics-dashboard.png",
-    featured: true,
-    overview:
-      "A platform that automates the creation of Product Requirement Documents. Product managers answer a guided questionnaire and the system generates a structured PRD, creates JIRA tickets, and triggers Figma design stubs — all in one workflow.",
-    features: [
-      "Guided questionnaire flow to capture product context",
-      "AI-generated PRD with structured sections and acceptance criteria",
-      "Automatic JIRA epic and story creation from PRD content",
-      "Figma API integration for design stub generation",
-      "Version history and collaborative editing",
-      "Export to PDF and Confluence-compatible formats",
-    ],
   },
   {
     title: "Real Estate Intelligence Platform",
