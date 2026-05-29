@@ -103,8 +103,8 @@
 <div class="section">
   <div class="section-title">Professional Summary</div>
   <p class="summary">
-    Full Stack AI Engineer with 3+ years delivering production-grade AI systems for US-based clients — including live AI voice agents,
-    multi-tenant SaaS platforms, RAG pipelines, and autonomous ML trading systems. Specialized in Voice AI (Twilio, Retell AI, Deepgram, ElevenLabs),
+    Full Stack AI Engineer with 5+ years delivering production-grade AI systems for US-based clients across 10+ industries — including live AI voice agents,
+    multi-tenant SaaS platforms, RAG pipelines, automated compliance systems, and autonomous ML trading platforms. Specialized in Voice AI (Twilio, Retell AI, Deepgram, ElevenLabs),
     LLMs &amp; RAG, and end-to-end engineering with Next.js, FastAPI, and Django. Proven track record of owning full project lifecycle:
     architecture, backend, frontend, third-party integrations, and deployment on AWS.
   </p>
@@ -119,13 +119,14 @@
   <div class="exp-block">
     <div class="exp-header">
       <span class="exp-title">Senior Software Engineer (Team Lead)</span>
-      <span class="exp-date">October 2024 – Present</span>
     </div>
-    <div class="exp-company">Tron AI &nbsp;·&nbsp; Lahore</div>
+    <div class="exp-company">Tron AI &nbsp;·&nbsp; Lahore &nbsp;·&nbsp; Current</div>
     <ul>
       <li>Built <strong>Pioneer Voice AI Platform</strong> — two production AI voice agents (Retell AI + Twilio) for a US healthcare recruitment agency: an after-hours inbound receptionist that updates Salesforce, schedules Outlook calendar events, and sends follow-up emails/SMS; and an outbound re-engagement agent that calls cold candidates in configurable batches with pre-dispatch admin notifications.</li>
-      <li>Architected <strong>Auralis Labs</strong> — a multi-tenant B2B voice AI SaaS (Deepgram + ElevenLabs + OpenAI GPT-4o + Twilio) with real-time appointment booking via Google Calendar, white-label dashboards, Supabase Row-Level Security isolation, and sub-2s voice response latency handling 30+ concurrent calls.</li>
+      <li>Architected <strong>Sentire Systems</strong> — a multi-tenant B2B voice AI SaaS (Deepgram + ElevenLabs + OpenAI GPT-4o + Twilio) with real-time appointment booking via Google Calendar, white-label dashboards, Supabase Row-Level Security isolation, and sub-2s voice response latency handling 30+ concurrent calls.</li>
       <li>Delivered <strong>Pioneer Commissions Portal</strong> — internal finance platform syncing Salesforce Financial_Record__c data via REST API, running dual-engine commission calculations (5×8 matrix for recruiters, tier-based for account managers), with split commission tracking, Redis caching, and webhook-driven recalculation.</li>
+      <li>Built <strong>Pioneer License Verification Agent</strong> — fully automated 3-service compliance system (FastAPI + Playwright + Next.js) that verifies healthcare licenses against 13 discipline types on state boards and national registries, bypasses CAPTCHAs via Bright Data + 2Captcha, and writes License__c records with PDF evidence back to Salesforce.</li>
+      <li>Delivered <strong>Pioneer Submissions Doc Automation</strong> — FastAPI service generating pixel-perfect branded PDF/DOCX candidate submissions from a single Salesforce button click, pulling data across 4 Salesforce objects with an editable preview and Apex trigger data-gate.</li>
       <li>Built <strong>Trade Gekko</strong> — full-stack AI crypto trading SaaS (Django + Next.js + TensorFlow) with 42 LSTM models trained daily across 6 assets × 7 timeframes, autonomous bot execution with stop-loss/take-profit on Coinbase Advanced Trade, and Stripe-gated subscription tiers.</li>
       <li>Mentoring a team of engineers; owning end-to-end architecture, client communication, and technical delivery across all projects.</li>
     </ul>
@@ -134,7 +135,6 @@
   <div class="exp-block">
     <div class="exp-header">
       <span class="exp-title">Software Engineer</span>
-      <span class="exp-date">July 2022 – September 2024</span>
     </div>
     <div class="exp-company">Rolustech &nbsp;·&nbsp; Lahore</div>
     <ul>
@@ -166,14 +166,38 @@
 
   <div class="project-block">
     <div class="project-header">
-      <span class="project-title">Auralis Labs — Multi-Tenant Voice AI SaaS</span>
-      <a class="project-link" href="https://www.auralislabs.co/">auralislabs.co</a>
+      <span class="project-title">Sentire Systems — Multi-Tenant Voice AI SaaS</span>
+      <a class="project-link" href="https://www.sentiresystems.com/">sentiresystems.com</a>
     </div>
     <div class="project-meta">Deepgram · ElevenLabs · Twilio · OpenAI GPT-4o · FastAPI · Next.js · Supabase · Google Calendar · Redis · AWS</div>
     <ul>
       <li>B2B platform: each tenant gets a dedicated Twilio number, configurable AI voice agent (prompt, voice, hours), and Google Calendar appointment booking — fully isolated via Supabase RLS.</li>
       <li>Voice pipeline: Twilio → Deepgram STT (&lt;300ms) → GPT-4o slot-filling → ElevenLabs TTS → back to caller in under 2 seconds end-to-end.</li>
       <li>Three-tier role system (Platform Admin / Business Owner / Viewer) with white-label dashboard and agent configuration UI.</li>
+    </ul>
+  </div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">Pioneer License Verification Agent</span>
+      <a class="project-link" href="https://license.pioneercommission.com/">license.pioneercommission.com</a>
+    </div>
+    <div class="project-meta">FastAPI · Playwright · Bright Data · Next.js · Supabase · Salesforce API · AWS S3</div>
+    <ul>
+      <li>End-to-end automated compliance pipeline: Salesforce Apex trigger → webhook → Playwright scraper → License__c records + PDF evidence back in Salesforce, zero human involvement.</li>
+      <li>Covers 13 discipline types across state boards and 6 national registries (ASHA, NBCOT, Nursys, PT Compact, NASP, BACB); 4-layer CAPTCHA bypass via Bright Data residential proxies and 2Captcha.</li>
+      <li>Next.js compliance dashboard with job tracking, PDF evidence viewer, analytics, and real-time notifications.</li>
+    </ul>
+  </div>
+
+  <div class="project-block">
+    <div class="project-header">
+      <span class="project-title">Pioneer Submissions Document Automation</span>
+    </div>
+    <div class="project-meta">FastAPI · Python · Salesforce API · python-docx · LibreOffice · WeasyPrint · Jinja2</div>
+    <ul>
+      <li>One-click PDF/DOCX candidate submission document generation from Salesforce — pulls data from 4 objects (Job Applicant, Employment History, Education, References) and renders an editable browser preview before export.</li>
+      <li>Apex trigger (JobApplicantValidation) gates stage advancement on required field completeness; LibreOffice headless PDF conversion with WeasyPrint fallback; pixel-perfect Pioneer branding throughout.</li>
     </ul>
   </div>
 
@@ -214,17 +238,6 @@
     </ul>
   </div>
 
-  <div class="project-block">
-    <div class="project-header">
-      <span class="project-title">RenovaWise — Real Estate Intelligence Platform</span>
-      <a class="project-link" href="https://www.renovawise.com/">renovawise.com</a>
-    </div>
-    <div class="project-meta">Next.js · Django · OpenAI · Image Recognition</div>
-    <ul>
-      <li>Zillow property data scraping with AI-powered scope-of-work generator, image recognition for room analysis, and GPT-powered renovation design and floor plan generation.</li>
-    </ul>
-  </div>
-
 </div>
 
 <hr />
@@ -239,8 +252,8 @@
     <div class="skill-row"><strong>Backend:</strong> Python FastAPI, Django, Node.js, REST APIs, WebSockets, GraphQL</div>
     <div class="skill-row"><strong>Databases:</strong> PostgreSQL, Supabase, MySQL, MongoDB, Redis, Firebase</div>
     <div class="skill-row"><strong>Integrations:</strong> Salesforce API, Google Calendar API, Microsoft Graph API, Stripe, Coinbase API, Zapier</div>
+    <div class="skill-row"><strong>Automation:</strong> Playwright, Bright Data, 2Captcha, python-docx, LibreOffice, WeasyPrint, AWS S3</div>
     <div class="skill-row"><strong>Cloud & DevOps:</strong> AWS (EC2, S3, Lambda), Docker, Vercel, GitHub Actions, CI/CD</div>
-    <div class="skill-row"><strong>Tools:</strong> Git, Postman, JIRA, VS Code, Cursor</div>
   </div>
 </div>
 
@@ -251,7 +264,6 @@
   <div class="section-title">Education</div>
   <div class="exp-header">
     <span class="exp-title">Bachelor of Computer Science &nbsp;—&nbsp; FAST NUCES, Lahore</span>
-    <span class="exp-date">August 2018 – June 2022</span>
   </div>
 </div>
 
