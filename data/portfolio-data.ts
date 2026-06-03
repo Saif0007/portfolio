@@ -256,7 +256,7 @@ export const projects: Project[] = [
     tech: ["FastAPI", "Next.js", "LangChain", "Anthropic Claude", "Pinecone", "Supabase", "Deepgram", "GoHighLevel API", "n8n", "AWS ECS", "Redis"],
     github: "https://github.com/Saif-Ur-Rehman0",
     demo: "https://www.truemortgages.com/",
-    image: "/modern-analytics-dashboard.png",
+    image: "/True-Mortgages-—-Admin-Portal-06-03-2026_07_45_PM.png",
     featured: true,
     overview:
       "Built a centralized AI platform for Xavier Alcala's mortgage business (XA Financial Services / True Mortgages). The system ingests all existing GoHighLevel call recordings, SMS threads, and email conversations — Deepgram transcribes the calls, LangChain chunks and embeds everything into Pinecone, and the RAG pipeline trains the AI on Xavier's actual communication style. When a lead texts in at 9pm, the AI responds through GHL the way Xavier would — not generic bot text, but his tone, phrasing, and objection-handling style drawn from 15,000+ real conversations. The admin portal gives Xavier a single command center: a natural language chat interface to query the AI brain ('what objections came up most this month?'), a pattern analysis engine surfacing conversion trends and rep performance, a content generation module for social posts and email sequences in brand voice, and full lead and application management. The platform also powers the truemortgages.com website with GHL-integrated lead capture and a templated sub-website system for each team member — giving every rep their own A2P-compliant web presence under a shared brand. Milestone 3 connects Arrive LOS to extract 1003 mortgage application data directly from conversation history.",
