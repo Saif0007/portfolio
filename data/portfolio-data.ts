@@ -249,6 +249,77 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "True Mortgages — AI-Powered Mortgage Platform",
+    slug: "true-mortgages-ai-platform",
+    description:
+      "AI brain for a US mortgage business that ingests call recordings, SMS threads, and emails to auto-respond to GoHighLevel leads in the owner's communication style. Full admin portal with RAG-powered natural language queries, pattern analysis, content generation, lead management, and Arrive LOS integration for automated 1003 application generation.",
+    tech: ["FastAPI", "Next.js", "LangChain", "Anthropic Claude", "Pinecone", "Supabase", "Deepgram", "GoHighLevel API", "n8n", "AWS ECS", "Redis"],
+    github: "https://github.com/Saif-Ur-Rehman0",
+    demo: "https://www.truemortgages.com/",
+    image: "/modern-analytics-dashboard.png",
+    featured: true,
+    overview:
+      "Built a centralized AI platform for Xavier Alcala's mortgage business (XA Financial Services / True Mortgages). The system ingests all existing GoHighLevel call recordings, SMS threads, and email conversations — Deepgram transcribes the calls, LangChain chunks and embeds everything into Pinecone, and the RAG pipeline trains the AI on Xavier's actual communication style. When a lead texts in at 9pm, the AI responds through GHL the way Xavier would — not generic bot text, but his tone, phrasing, and objection-handling style drawn from 15,000+ real conversations. The admin portal gives Xavier a single command center: a natural language chat interface to query the AI brain ('what objections came up most this month?'), a pattern analysis engine surfacing conversion trends and rep performance, a content generation module for social posts and email sequences in brand voice, and full lead and application management. The platform also powers the truemortgages.com website with GHL-integrated lead capture and a templated sub-website system for each team member — giving every rep their own A2P-compliant web presence under a shared brand. Milestone 3 connects Arrive LOS to extract 1003 mortgage application data directly from conversation history.",
+    pipeline: [
+      "Lead sends SMS to Xavier's GoHighLevel number — GHL fires a webhook to n8n",
+      "n8n forwards the message payload to the FastAPI AI server",
+      "FastAPI queries Pinecone: retrieve the most relevant past responses, scripts, and conversation examples matching Xavier's style",
+      "FastAPI queries Supabase: pull the lead's full history, status, and prior context",
+      "LangChain constructs the prompt: RAG context + lead history + Xavier's style guide + topic guardrails",
+      "Anthropic Claude generates an SMS response that matches Xavier's voice — tone, phrasing, and objection-handling drawn from real conversations",
+      "FastAPI sends the response back to n8n → n8n pushes it through GHL → SMS delivered to the lead",
+      "Full conversation logged in Supabase and re-vectorized into Pinecone for continuous learning",
+    ],
+    roles: [
+      {
+        name: "Admin (Xavier)",
+        description: "Full platform access across all sub-accounts — owns settings, data, and user management.",
+        permissions: [
+          "Access all sub-accounts and their leads, conversations, and analytics",
+          "Query the AI brain via natural language chat interface",
+          "Trigger data ingestion and re-embedding from GHL",
+          "Generate content: social posts, email sequences, SMS copy in brand voice",
+          "View pattern analysis: top objections, conversion scripts, rep performance",
+          "Manage team users and their sub-account assignments",
+        ],
+      },
+      {
+        name: "Rep (Team Member)",
+        description: "Sub-account scoped — sees only their own leads and generated content.",
+        permissions: [
+          "View own lead list, conversations, and activity feed",
+          "Generate content within their sub-account",
+          "View their own performance analytics",
+          "No access to other reps' data — enforced via Supabase RLS",
+        ],
+      },
+      {
+        name: "Assistant",
+        description: "Read-only access with limited actions for support staff.",
+        permissions: [
+          "View leads, conversations, and activity",
+          "No settings changes or user management",
+          "Cannot trigger ingestion or send messages",
+        ],
+      },
+    ],
+    features: [
+      "Full GHL data ingestion pipeline: call recordings → Deepgram transcription → LangChain chunking → vector embeddings → Pinecone, covering 15,000+ existing leads",
+      "AI SMS and email auto-response via GHL — responses generated in Xavier's communication style using RAG context from real conversations",
+      "Natural language AI brain chat: Xavier types 'what objections came up most this month?' and gets ranked insights backed by actual Pinecone-retrieved data",
+      "Pattern analysis engine: identifies top objections, conversion scripts, rep performance differences, lead drop-off points across all GHL conversations",
+      "Content generation module: social media posts, email sequences, SMS copy — all generated in Xavier's brand voice",
+      "Admin portal: dashboard with AI activity feed, response metrics, lead engagement stats, and conversion trends",
+      "Multi sub-account support with full data isolation via Supabase Row-Level Security — reps cannot access each other's data",
+      "truemortgages.com main website (Next.js SSR, schema markup, SEO) with lead capture forms piped directly into GHL",
+      "Templated team member website system: each rep gets their own site (irvingrivera.com, rudysoto.com) — same brand, swappable name/bio/headshot, wildcard DNS routing",
+      "Arrive LOS integration (Milestone 3): LangChain extracts 1003 mortgage application fields from conversation history, flags low-confidence fields for human review before submission",
+      "AI safety guardrails: topic restriction (no rate quotes or approval promises), hallucination confidence scoring (< 85% confidence → human review queue), human escalation on angry/complex leads, full audit trail of every AI message sent",
+      "Deployed on AWS ECS Fargate with CloudFront CDN, GitHub Actions CI/CD, Sentry error tracking, and PostHog analytics",
+    ],
+    liveNote: "Live at truemortgages.com — AI brain actively handling lead engagement for XA Financial Services.",
+  },
+  {
     title: "Pioneer Commissions Portal",
     slug: "pioneer-commissions-portal",
     description:
