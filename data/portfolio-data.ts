@@ -477,7 +477,7 @@ export const projects: Project[] = [
       "AI-driven PRD generation system that creates detailed product requirement documents through guided questionnaires. Integrated with JIRA and Figma APIs for automatic ticket creation and design generation. Built as an internal tool for a product team — no public demo.",
     tech: ["Django", "Next.js", "OpenAI", "JIRA API", "Figma API"],
     github: "https://github.com/Saif-Ur-Rehman0",
-    demo: "#",
+    demo: "https://www.saasbeautiful.ai/signup",
     image: "/modern-analytics-dashboard.png",
     featured: true,
     overview:
