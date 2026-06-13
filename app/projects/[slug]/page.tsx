@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, ExternalLink, Phone, CheckCircle2, Globe, Code, Shield } from "lucide-react"
+import { ArrowLeft, ExternalLink, Phone, Globe, Code, Shield, Check } from "lucide-react"
 import { projects } from "@/data/portfolio-data"
 
 interface PageProps {
@@ -21,94 +21,94 @@ export async function generateMetadata({ params }: PageProps) {
   }
 }
 
+// ── Shared style helpers ───────────────────────────────────────────────────
+const syne: React.CSSProperties = { fontFamily: "var(--font-syne), Syne, sans-serif" }
+const mono: React.CSSProperties = { fontFamily: "var(--font-jetbrains), monospace" }
+const eyebrow: React.CSSProperties = { ...mono, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: "#FFB454" }
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params
   const project = projects.find((p) => p.slug === slug)
-
   if (!project) notFound()
 
-  const isPioneer = project.slug === "pioneer-voice-ai"
-  const isAuralis = project.slug === "auralis-labs-voice-ai"
-  const isVoiceProject = isPioneer || isAuralis
-
-  const roleColors = [
-    { border: "border-purple-500/20", bg: "from-purple-500/5 to-teal-500/5", dot: "bg-purple-400", text: "text-purple-400" },
-    { border: "border-emerald-500/20",   bg: "from-emerald-500/5 to-teal-500/5",   dot: "bg-emerald-400",   text: "text-emerald-400" },
-    { border: "border-teal-500/20",   bg: "from-teal-500/5 to-indigo-500/5", dot: "bg-teal-400",   text: "text-teal-400" },
-  ]
+  const isPioneer   = project.slug === "pioneer-voice-ai"
+  const isAuralis   = project.slug === "auralis-labs-voice-ai"
+  const isVoiceProj = isPioneer || isAuralis
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Background gradient blobs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl" />
+    <div style={{ minHeight: "100vh", background: "var(--background)", color: "var(--ink)" }}>
+
+      {/* Ambient orb */}
+      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: "20%", left: "-10%", width: 480, height: 480, borderRadius: "50%", background: "radial-gradient(circle, rgba(255,180,84,.06) 0%, transparent 70%)", filter: "blur(40px)" }} />
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+      <div style={{ position: "relative", zIndex: 1, maxWidth: 960, margin: "0 auto", padding: "clamp(24px,5vw,48px) clamp(20px,5vw,64px) 80px" }}>
+
         {/* Back link */}
         <Link
           href="/#projects"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-emerald-500 transition-colors mb-10 group text-sm"
+          style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--ink-dim)", textDecoration: "none", ...mono, fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 48, transition: "color .3s" }}
+          className="detail-back-link"
         >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft size={14} />
           Back to Portfolio
         </Link>
 
-        {/* Header */}
-        <div className="mb-10 sm:mb-14">
-          <div className="flex flex-wrap items-center gap-2 mb-4">
+        {/* ── Header ─────────────────────────────────────────────────────── */}
+        <div style={{ marginBottom: 56 }}>
+          {/* Badges */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
             {project.featured && (
-              <span className="inline-block px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-xs font-bold">
+              <span style={{ ...mono, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", padding: "5px 14px", borderRadius: 100, border: "1px solid rgba(255,180,84,.4)", color: "#FFB454", background: "rgba(255,180,84,.08)" }}>
                 Featured Project
               </span>
             )}
             {isAuralis && (
-              <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500/20 to-teal-500/20 text-purple-400 border border-purple-500/30 rounded-full text-xs font-bold">
+              <span style={{ ...mono, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", padding: "5px 14px", borderRadius: 100, border: "1px solid var(--line)", color: "var(--cool)", background: "rgba(139,147,201,.06)" }}>
                 B2B SaaS · Multi-Tenant
               </span>
             )}
             {isPioneer && (
-              <span className="inline-block px-3 py-1 bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">
+              <span style={{ ...mono, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", padding: "5px 14px", borderRadius: 100, border: "1px solid var(--line)", color: "var(--cool)", background: "rgba(139,147,201,.06)" }}>
                 Healthcare Recruitment
               </span>
             )}
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black mb-4 bg-gradient-to-r from-emerald-400 via-teal-400 to-purple-400 bg-clip-text text-transparent leading-tight">
+          <h1 style={{ ...syne, fontWeight: 800, fontSize: "clamp(32px,6vw,64px)", lineHeight: 1.06, letterSpacing: "-.02em", marginBottom: 20 }}>
             {project.title}
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
+
+          <p style={{ fontSize: 17, lineHeight: 1.7, color: "var(--ink-dim)", maxWidth: 720, marginBottom: 24 }}>
             {project.description}
           </p>
 
-          {/* Test phone for Auralis */}
+          {/* Auralis test phone */}
           {isAuralis && project.testPhone && (
-            <div className="mt-4 flex items-center gap-2">
-              <a
-                href={`tel:${project.testPhone.replace(/\s|\(|\)|-/g, "")}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-mono hover:bg-green-500/20 transition-colors"
-              >
-                <Phone size={14} />
-                Test tenant: {project.testPhone}
-              </a>
-              <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                Live
-              </span>
-            </div>
+            <a
+              href={`tel:${project.testPhone.replace(/[\s()+-]/g, "")}`}
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 18px", borderRadius: 10, border: "1px solid rgba(255,180,84,.25)", color: "#FFB454", ...mono, fontSize: 13, textDecoration: "none", background: "rgba(255,180,84,.05)", marginBottom: 24 }}
+            >
+              <Phone size={14} />
+              Test tenant: {project.testPhone}
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FFB454", animation: "ping-amber 1.8s cubic-bezier(0,0,.2,1) infinite", flexShrink: 0 }} />
+            </a>
           )}
 
-          {/* Action buttons */}
-          <div className="flex flex-wrap gap-3 mt-6">
+          {/* CTA buttons */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
             {project.demo && project.demo !== "#" && (
               <a
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl transition-all duration-300 font-medium text-sm"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", background: "#FFB454", color: "#0A0C14", ...mono, fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", borderRadius: 100, textDecoration: "none", fontWeight: 700, transition: "transform .3s, box-shadow .3s" }}
+                className="detail-cta-primary"
               >
-                <Globe size={16} />
+                <Globe size={15} />
                 Live Website
               </a>
             )}
@@ -117,9 +117,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground rounded-xl transition-all duration-300 font-medium text-sm"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 24px", border: "1px solid var(--line)", color: "var(--ink-dim)", ...mono, fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", borderRadius: 100, textDecoration: "none", transition: "border-color .3s, color .3s" }}
+                className="detail-cta-secondary"
               >
-                <Code size={16} />
+                <Code size={15} />
                 View Code
               </a>
             )}
@@ -127,65 +128,71 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent mb-10 sm:mb-14" />
+        <div style={{ width: "100%", height: 1, background: "linear-gradient(90deg, transparent, rgba(255,180,84,.25), transparent)", marginBottom: 56 }} />
 
-        {/* Screenshot Gallery */}
-        {!project.noDetailImage && project.images && project.images.length > 0 ? (
-          <section className="mb-10 sm:mb-14">
-            <div className={`grid gap-4 ${project.images.length > 1 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}`}>
-              {project.images.map((src, i) => (
-                <div key={i} className="rounded-2xl overflow-hidden border border-border/40">
-                  <img src={src} alt={`${project.title} screenshot ${i + 1}`} className="w-full object-cover" />
+        {/* ── Screenshot / Image ─────────────────────────────────────────── */}
+        {!project.noDetailImage && (project.images?.length || project.image) && (
+          <section style={{ marginBottom: 56 }}>
+            <div style={{ display: "grid", gridTemplateColumns: (project.images?.length ?? 0) > 1 ? "repeat(2,1fr)" : "1fr", gap: 16 }}>
+              {(project.images ?? (project.image ? [project.image] : [])).map((src, i) => (
+                <div key={i} style={{ borderRadius: 14, overflow: "hidden", border: "1px solid var(--line)" }}>
+                  <img src={src} alt={`${project.title} screenshot ${i + 1}`} style={{ width: "100%", display: "block", objectFit: "cover" }} />
                 </div>
               ))}
             </div>
           </section>
-        ) : !project.noDetailImage && project.image && (
-          <section className="mb-10 sm:mb-14">
-            <div className="rounded-2xl overflow-hidden border border-border/40">
-              <img src={project.image} alt={project.title} className="w-full object-cover" />
-            </div>
-          </section>
         )}
 
-        {/* Tech Stack */}
-        <section className="mb-10 sm:mb-14">
-          <h2 className="text-xl font-bold mb-4 text-foreground">Tech Stack</h2>
-          <div className="flex flex-wrap gap-2">
+        {/* ── Tech Stack ─────────────────────────────────────────────────── */}
+        <section style={{ marginBottom: 56 }}>
+          <div style={{ ...eyebrow, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ width: 28, height: 1, background: "#FFB454", display: "inline-block" }} />
+            Tech Stack
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
             {project.tech.map((t) => (
-              <span
-                key={t}
-                className="px-3 py-1.5 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 text-emerald-400 rounded-full text-sm font-medium border border-emerald-500/20"
-              >
+              <span key={t} style={{ ...mono, fontSize: 12, letterSpacing: ".08em", padding: "6px 14px", borderRadius: 100, border: "1px solid var(--line)", color: "var(--ink-dim)", background: "var(--surface)", transition: "border-color .3s, color .3s" }} className="detail-tag">
                 {t}
               </span>
             ))}
           </div>
         </section>
 
-        {/* Overview */}
+        {/* ── Overview ───────────────────────────────────────────────────── */}
         {project.overview && (
-          <section className="mb-10 sm:mb-14">
-            <h2 className="text-xl font-bold mb-4 text-foreground">Overview</h2>
-            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{project.overview}</p>
+          <section style={{ marginBottom: 56 }}>
+            <div style={{ ...eyebrow, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ width: 28, height: 1, background: "#FFB454", display: "inline-block" }} />
+              Overview
+            </div>
+            <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--ink-dim)", maxWidth: 780 }}>
+              {project.overview}
+            </p>
           </section>
         )}
 
-        {/* Voice Pipeline — Auralis */}
+        {/* ── Voice Pipeline — Auralis ───────────────────────────────────── */}
         {isAuralis && project.pipeline && (
-          <section className="mb-10 sm:mb-14">
-            <h2 className="text-xl font-bold mb-6 text-foreground">How a Call Works</h2>
-            <div className="relative">
-              {/* Vertical line */}
-              <div className="absolute left-4 top-4 bottom-4 w-px bg-gradient-to-b from-emerald-500/50 via-teal-500/30 to-transparent" />
-              <ol className="space-y-4 pl-12">
+          <section style={{ marginBottom: 56 }}>
+            <div style={{ ...eyebrow, marginBottom: 28, display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ width: 28, height: 1, background: "#FFB454", display: "inline-block" }} />
+              How a Call Works
+            </div>
+            <div style={{ position: "relative", paddingLeft: 36 }}>
+              <div style={{ position: "absolute", left: 7, top: 0, bottom: 0, width: 1, background: "var(--line)" }} />
+              <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 24 }}>
                 {project.pipeline.map((step, i) => (
-                  <li key={i} className="relative">
-                    {/* Step dot */}
-                    <span className="absolute -left-8 flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+                  <li key={i} style={{ position: "relative" }}>
+                    <span style={{
+                      position: "absolute", left: -36, top: 2,
+                      width: 22, height: 22, borderRadius: "50%",
+                      border: "1px solid rgba(255,180,84,.4)", background: "var(--bg)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      ...mono, fontSize: 10, color: "#FFB454",
+                    }}>
                       {i + 1}
                     </span>
-                    <p className="text-sm text-muted-foreground leading-relaxed pt-1">{step}</p>
+                    <p style={{ fontSize: 15, color: "var(--ink-dim)", lineHeight: 1.7, margin: 0 }}>{step}</p>
                   </li>
                 ))}
               </ol>
@@ -193,34 +200,34 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Pioneer Voice Agents */}
+        {/* ── Pioneer Voice Agents ───────────────────────────────────────── */}
         {isPioneer && project.agents && (
-          <section className="mb-10 sm:mb-14">
-            <h2 className="text-xl font-bold mb-6 text-foreground">AI Voice Agents</h2>
-            <div className="grid sm:grid-cols-2 gap-5">
+          <section style={{ marginBottom: 56 }}>
+            <div style={{ ...eyebrow, marginBottom: 28, display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ width: 28, height: 1, background: "#FFB454", display: "inline-block" }} />
+              AI Voice Agents
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
               {project.agents.map((agent) => (
-                <div
-                  key={agent.name}
-                  className="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 p-6"
-                >
-                  <div className="flex items-start justify-between mb-3 gap-3">
+                <div key={agent.name} style={{ border: "1px solid var(--line)", borderRadius: 16, padding: 28, background: "var(--surface)" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 12 }}>
                     <div>
-                      <h3 className="text-lg font-bold text-foreground">{agent.name}</h3>
-                      <span className="text-xs text-emerald-400 font-medium">{agent.role}</span>
+                      <h3 style={{ ...syne, fontWeight: 700, fontSize: 18, marginBottom: 4 }}>{agent.name}</h3>
+                      <span style={{ ...mono, fontSize: 11, letterSpacing: ".1em", color: "#FFB454", textTransform: "uppercase" }}>{agent.role}</span>
                     </div>
                     <a
                       href={`tel:${agent.phone.replace(/[\s()+-]/g, "")}`}
-                      className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono hover:bg-emerald-500/20 transition-colors"
+                      style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "7px 12px", borderRadius: 8, border: "1px solid rgba(255,180,84,.3)", color: "#FFB454", ...mono, fontSize: 12, textDecoration: "none", background: "rgba(255,180,84,.06)", flexShrink: 0, whiteSpace: "nowrap" }}
                     >
                       <Phone size={12} />
                       {agent.phone}
                     </a>
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">{agent.description}</p>
-                  <ul className="space-y-2">
+                  <p style={{ color: "var(--ink-dim)", fontSize: 14, lineHeight: 1.7, marginBottom: 18 }}>{agent.description}</p>
+                  <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 10 }}>
                     {agent.capabilities.map((cap) => (
-                      <li key={cap} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" />
+                      <li key={cap} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 14, color: "var(--ink-dim)" }}>
+                        <Check size={14} style={{ color: "#FFB454", flexShrink: 0, marginTop: 3 }} />
                         {cap}
                       </li>
                     ))}
@@ -229,36 +236,36 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               ))}
             </div>
             {project.liveNote && (
-              <div className="mt-4 flex items-center gap-2 text-xs text-emerald-400">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 8, ...mono, fontSize: 12, color: "#FFB454" }}>
+                <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#FFB454", flexShrink: 0, animation: "ping-amber 1.8s cubic-bezier(0,0,.2,1) infinite" }} />
                 {project.liveNote}
               </div>
             )}
           </section>
         )}
 
-        {/* User Roles — Auralis */}
+        {/* ── User Roles — Auralis ───────────────────────────────────────── */}
         {isAuralis && project.roles && (
-          <section className="mb-10 sm:mb-14">
-            <h2 className="text-xl font-bold mb-2 text-foreground">User Roles & Access Control</h2>
-            <p className="text-muted-foreground text-sm mb-6">Three-tier role system with strict access controls per tenant.</p>
-            <div className="grid sm:grid-cols-3 gap-4">
+          <section style={{ marginBottom: 56 }}>
+            <div style={{ ...eyebrow, marginBottom: 8, display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ width: 28, height: 1, background: "#FFB454", display: "inline-block" }} />
+              User Roles & Access Control
+            </div>
+            <p style={{ color: "var(--ink-dim)", fontSize: 14, marginBottom: 28 }}>Three-tier role system with strict access controls per tenant.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
               {project.roles.map((role, i) => {
-                const colors = roleColors[i % roleColors.length]
+                const accent = i === 0 ? "#FFB454" : i === 1 ? "#8B93C9" : "var(--ink-dim)"
                 return (
-                  <div
-                    key={role.name}
-                    className={`rounded-2xl border ${colors.border} bg-gradient-to-br ${colors.bg} p-5`}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={`w-2 h-2 rounded-full ${colors.dot}`} />
-                      <h3 className={`text-sm font-bold ${colors.text}`}>{role.name}</h3>
+                  <div key={role.name} style={{ border: "1px solid var(--line)", borderRadius: 14, padding: 22, background: "var(--surface)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: accent, flexShrink: 0 }} />
+                      <h3 style={{ ...syne, fontWeight: 700, fontSize: 15, color: accent }}>{role.name}</h3>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-4 leading-relaxed">{role.description}</p>
-                    <ul className="space-y-1.5">
+                    <p style={{ fontSize: 13, color: "var(--ink-dim)", marginBottom: 14, lineHeight: 1.6 }}>{role.description}</p>
+                    <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
                       {role.permissions.map((perm) => (
-                        <li key={perm} className="flex items-start gap-2 text-xs text-muted-foreground">
-                          <Shield size={10} className={`${colors.text} mt-0.5 shrink-0`} />
+                        <li key={perm} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: "var(--ink-dim)" }}>
+                          <Shield size={11} style={{ color: accent, flexShrink: 0, marginTop: 2 }} />
                           {perm}
                         </li>
                       ))}
@@ -270,41 +277,43 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Features / Capabilities */}
+        {/* ── Features ───────────────────────────────────────────────────── */}
         {project.features && project.features.length > 0 && (
-          <section className="mb-10 sm:mb-14">
-            <h2 className="text-xl font-bold mb-6 text-foreground">
-              {isVoiceProject ? "Dashboard & Platform Features" : "Key Features"}
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-3">
+          <section style={{ marginBottom: 56 }}>
+            <div style={{ ...eyebrow, marginBottom: 24, display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ width: 28, height: 1, background: "#FFB454", display: "inline-block" }} />
+              {isVoiceProj ? "Dashboard & Platform Features" : "Key Features"}
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 12 }}>
               {project.features.map((feature) => (
                 <div
                   key={feature}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40"
+                  style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "14px 18px", border: "1px solid var(--line)", borderRadius: 12, background: "var(--surface)", fontSize: 14, color: "var(--ink-dim)", lineHeight: 1.6 }}
                 >
-                  <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 shrink-0" />
-                  <span className="text-sm text-muted-foreground">{feature}</span>
+                  <Check size={15} style={{ color: "#FFB454", flexShrink: 0, marginTop: 2 }} />
+                  {feature}
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        {/* Auralis live note */}
+        {/* ── Auralis live note ──────────────────────────────────────────── */}
         {isAuralis && project.liveNote && (
-          <div className="mb-10 flex items-center gap-2 text-xs text-green-400 bg-green-500/5 border border-green-500/20 rounded-xl px-4 py-3">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
+          <div style={{ marginBottom: 48, display: "flex", alignItems: "center", gap: 10, padding: "14px 20px", border: "1px solid rgba(255,180,84,.2)", borderRadius: 12, background: "rgba(255,180,84,.04)", ...mono, fontSize: 12, color: "#FFB454" }}>
+            <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#FFB454", flexShrink: 0, animation: "ping-amber 1.8s cubic-bezier(0,0,.2,1) infinite" }} />
             {project.liveNote}
           </div>
         )}
 
-        {/* Bottom CTA */}
-        <div className="border-t border-border/40 pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        {/* ── Bottom CTA ─────────────────────────────────────────────────── */}
+        <div style={{ borderTop: "1px solid var(--line)", paddingTop: 40, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
           <Link
             href="/#projects"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-emerald-500 transition-colors group text-sm"
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--ink-dim)", textDecoration: "none", ...mono, fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", transition: "color .3s" }}
+            className="detail-back-link"
           >
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft size={14} />
             All Projects
           </Link>
           {project.demo && project.demo !== "#" && (
@@ -312,7 +321,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "#FFB454", textDecoration: "none", ...mono, fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", transition: "opacity .3s" }}
+              className="detail-live-link"
             >
               <ExternalLink size={14} />
               {project.demo}
@@ -320,6 +330,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           )}
         </div>
       </div>
+
+      <style>{`
+        .detail-back-link:hover { color: #FFB454 !important; }
+        .detail-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,180,84,.35); }
+        .detail-cta-secondary:hover { border-color: rgba(255,180,84,.4) !important; color: var(--ink) !important; }
+        .detail-tag:hover { border-color: rgba(255,180,84,.35) !important; color: var(--ink) !important; }
+        .detail-live-link:hover { opacity: .7; }
+      `}</style>
     </div>
   )
 }
