@@ -1,9 +1,16 @@
 "use client"
 
 import { useRef } from "react"
-import { useInView } from "framer-motion"
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion"
 import Link from "next/link"
 import { projects } from "@/data/portfolio-data"
+
+const EASE = [0.16, 1, 0.3, 1] as const
 
 const codeSnippets: Record<string, string> = {
   "pioneer-voice-ai": `POST /api/voice/outbound
@@ -20,7 +27,7 @@ const codeSnippets: Record<string, string> = {
 { signal: "BUY" }`,
   "true-mortgages-ai-platform": `POST /api/mortgage/query
 { context: rag_docs,
-  answer: claude_v3,
+  model: "claude-3",
   latency: "320ms" }`,
   "pioneer-commissions-portal": `SELECT earnings
 FROM salesforce_sync
@@ -44,199 +51,157 @@ WHERE month = current
 // 100s of docs/run`,
 }
 
-export const ProjectsSection = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
+function TiltCard({ project, index }: { project: ReturnType<typeof projects.filter>[number]; index: number }) {
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const sx = useSpring(mx, { stiffness: 300, damping: 28 })
+  const sy = useSpring(my, { stiffness: 300, damping: 28 })
+  const rotateX = useTransform(sy, [-0.5, 0.5], [8, -8])
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-8, 8])
+  const glowX = useTransform(mx, [-0.5, 0.5], [0, 100])
+  const glowY = useTransform(my, [-0.5, 0.5], [0, 100])
 
+  const code = codeSnippets[project.slug] || `// ${project.title}\n// live ✓`
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+          opacity: 1, y: 0,
+          transition: { duration: 0.7, ease: EASE, delay: index * 0.09 },
+        },
+      }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      onMouseMove={e => {
+        const r = e.currentTarget.getBoundingClientRect()
+        mx.set((e.clientX - r.left) / r.width - 0.5)
+        my.set((e.clientY - r.top) / r.height - 0.5)
+      }}
+      onMouseLeave={() => { mx.set(0); my.set(0) }}
+    >
+      <Link
+        href={`/projects/${project.slug}`}
+        className="project-card"
+        style={{ textDecoration: "none", color: "inherit", display: "block", position: "relative", overflow: "hidden" }}
+      >
+        {/* Mouse-follow glow */}
+        <motion.div
+          style={{
+            position: "absolute",
+            width: 200,
+            height: 200,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(255,180,84,.12) 0%, transparent 70%)",
+            pointerEvents: "none",
+            left: glowX.get() + "%",
+            top: glowY.get() + "%",
+            transform: "translate(-50%,-50%)",
+            opacity: 0,
+          }}
+          whileHover={{ opacity: 1 }}
+        />
+
+        {/* Code thumbnail */}
+        <div style={{ borderRadius: 10, background: "#0D1017", border: "1px solid rgba(232,230,223,0.07)", padding: "18px 20px", marginBottom: 22, minHeight: 92, overflow: "hidden" }}>
+          <pre style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, lineHeight: 1.75, color: "#8B93C9", margin: 0, whiteSpace: "pre" }}>
+            {code}
+          </pre>
+        </div>
+
+        {/* Title row */}
+        <h3 style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 700, fontSize: 19, marginBottom: 8, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          {project.title}
+          <motion.span
+            initial={{ x: -6, opacity: 0 }}
+            whileHover={{ x: 0, opacity: 1 }}
+            style={{ fontSize: 18, color: "var(--ink-dim)", flexShrink: 0, marginLeft: 8 }}
+          >
+            ↗
+          </motion.span>
+        </h3>
+
+        <p style={{ color: "var(--ink-dim)", fontSize: 14, lineHeight: 1.65, marginBottom: 18 }}>
+          {project.description.length > 110 ? project.description.slice(0, 107) + "…" : project.description}
+        </p>
+
+        {/* Tags */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+          {project.tech.slice(0, 4).map(tag => (
+            <span key={tag} style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 11, letterSpacing: ".08em", padding: "4px 10px", borderRadius: 100, border: "1px solid var(--line)", color: "var(--ink-dim)" }}>
+              {tag}
+            </span>
+          ))}
+          {project.demo && project.demo !== "#" && (
+            <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 11, letterSpacing: ".08em", padding: "4px 10px", borderRadius: 100, border: "1px solid rgba(255,180,84,.35)", color: "#FFB454" }}>
+              Live ✓
+            </span>
+          )}
+        </div>
+      </Link>
+    </motion.div>
+  )
+}
+
+export const ProjectsSection = () => {
   const featured = projects.filter(p => p.featured).slice(0, 8)
 
   return (
-    <section id="projects" ref={ref} style={{ padding: "clamp(80px,10vw,140px) clamp(20px,5vw,64px)" }}>
+    <section id="projects" style={{ padding: "clamp(80px,10vw,140px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <div
+
+        <motion.div
           className="eyebrow"
-          style={{ opacity: isInView ? 1 : 0, transform: isInView ? "none" : "translateY(10px)", transition: "opacity .6s, transform .6s" }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE }}
         >
           Selected Work
+        </motion.div>
+
+        <div style={{ overflow: "hidden" }}>
+          <motion.h2
+            initial={{ y: "105%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.05 }}
+            style={{
+              fontFamily: "var(--font-syne), Syne, sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(36px,6vw,72px)",
+              lineHeight: 1.05,
+              letterSpacing: "-.02em",
+              marginBottom: 12,
+              marginTop: 16,
+            }}
+          >
+            Things I&apos;ve shipped that{" "}
+            <span style={{ color: "#FFB454" }}>people actually use.</span>
+          </motion.h2>
         </div>
 
-        <h2
-          style={{
-            fontFamily: "var(--font-syne), Syne, sans-serif",
-            fontWeight: 800,
-            fontSize: "clamp(36px,6vw,72px)",
-            lineHeight: 1.05,
-            letterSpacing: "-.02em",
-            marginBottom: 16,
-            marginTop: 16,
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? "none" : "translateY(20px)",
-            transition: "opacity .7s .1s, transform .7s .1s",
-          }}
-        >
-          Things I&apos;ve shipped that{" "}
-          <span style={{ color: "#FFB454" }}>people actually use.</span>
-        </h2>
-
-        <p
-          style={{
-            color: "var(--ink-dim)",
-            fontSize: 16,
-            marginBottom: 64,
-            opacity: isInView ? 1 : 0,
-            transition: "opacity .7s .2s",
-          }}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          style={{ color: "var(--ink-dim)", fontSize: 16, marginBottom: 60 }}
         >
           Production systems — live in the real world, not portfolio demos.
-        </p>
+        </motion.p>
 
-        <div className="work-grid">
-          {featured.map((project, i) => {
-            const code = codeSnippets[project.slug] || `// ${project.title}\n// live ✓`
-            const isEven = i % 2 === 0
-            return (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className="project-card"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "block",
-                  opacity: isInView ? 1 : 0,
-                  transform: isInView ? "none" : `translateY(${isEven ? 28 : 14}px)`,
-                  transition: `opacity .7s ${0.1 + i * 0.08}s, transform .7s ${0.1 + i * 0.08}s`,
-                }}
-                onMouseMove={e => {
-                  const el = e.currentTarget as HTMLElement
-                  const rect = el.getBoundingClientRect()
-                  const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12
-                  const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10
-                  el.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-4px)`
-                }}
-                onMouseLeave={e => {
-                  ;(e.currentTarget as HTMLElement).style.transform = ""
-                }}
-              >
-                {/* Code thumbnail */}
-                <div
-                  style={{
-                    borderRadius: 10,
-                    background: "#0D1017",
-                    border: "1px solid rgba(232,230,223,0.07)",
-                    padding: "18px 20px",
-                    marginBottom: 22,
-                    minHeight: 90,
-                    overflow: "hidden",
-                    position: "relative",
-                  }}
-                >
-                  <pre
-                    style={{
-                      fontFamily: "var(--font-jetbrains), monospace",
-                      fontSize: 12,
-                      lineHeight: 1.7,
-                      color: "#8B93C9",
-                      margin: 0,
-                      whiteSpace: "pre",
-                      transition: "transform .4s cubic-bezier(.16,1,.3,1)",
-                    }}
-                  >
-                    {code}
-                  </pre>
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(135deg,rgba(255,180,84,.06),rgba(139,147,201,.04))",
-                      opacity: 0,
-                      transition: "opacity .4s",
-                      borderRadius: 10,
-                    }}
-                    className="thumb-overlay"
-                  />
-                </div>
-
-                {/* Title */}
-                <h3
-                  style={{
-                    fontFamily: "var(--font-syne), Syne, sans-serif",
-                    fontWeight: 700,
-                    fontSize: 20,
-                    marginBottom: 8,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  {project.title}
-                  <span
-                    style={{
-                      fontSize: 18,
-                      color: "var(--ink-dim)",
-                      transform: "translate(-4px,4px)",
-                      opacity: 0,
-                      transition: "transform .35s, opacity .35s",
-                    }}
-                    className="card-arrow"
-                  >
-                    ↗
-                  </span>
-                </h3>
-
-                {/* Description */}
-                <p
-                  style={{
-                    color: "var(--ink-dim)",
-                    fontSize: 14,
-                    lineHeight: 1.6,
-                    marginBottom: 18,
-                  }}
-                >
-                  {project.description.length > 120
-                    ? project.description.slice(0, 117) + "…"
-                    : project.description}
-                </p>
-
-                {/* Tags */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {project.tech.slice(0, 4).map(tag => (
-                    <span
-                      key={tag}
-                      style={{
-                        fontFamily: "var(--font-jetbrains), monospace",
-                        fontSize: 11,
-                        letterSpacing: ".08em",
-                        padding: "4px 10px",
-                        borderRadius: 100,
-                        border: "1px solid var(--line)",
-                        color: "var(--ink-dim)",
-                        transition: "border-color .3s",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  {project.demo && project.demo !== "#" && (
-                    <span
-                      style={{
-                        fontFamily: "var(--font-jetbrains), monospace",
-                        fontSize: 11,
-                        letterSpacing: ".08em",
-                        padding: "4px 10px",
-                        borderRadius: 100,
-                        border: "1px solid rgba(255,180,84,.3)",
-                        color: "#FFB454",
-                      }}
-                    >
-                      Live ✓
-                    </span>
-                  )}
-                </div>
-              </Link>
-            )
-          })}
-        </div>
+        <motion.div
+          className="work-grid"
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {featured.map((project, i) => (
+            <TiltCard key={project.slug} project={project} index={i} />
+          ))}
+        </motion.div>
       </div>
     </section>
   )

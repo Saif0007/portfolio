@@ -32,17 +32,27 @@ export const Cursor = () => {
     }
     loop()
 
-    const targets = document.querySelectorAll("a, button, .project-card, .skill-row-item, .stat-card")
     const onEnter = () => ring.classList.add("hot")
     const onLeave = () => ring.classList.remove("hot")
-    targets.forEach(el => {
-      el.addEventListener("mouseenter", onEnter)
-      el.addEventListener("mouseleave", onLeave)
-    })
+
+    const attach = () => {
+      document.querySelectorAll("a, button, .project-card").forEach(el => {
+        el.addEventListener("mouseenter", onEnter)
+        el.addEventListener("mouseleave", onLeave)
+      })
+    }
+
+    // Attach after a brief delay to ensure DOM is painted
+    const t = setTimeout(attach, 600)
 
     return () => {
       window.removeEventListener("mousemove", onMove)
       cancelAnimationFrame(animId)
+      clearTimeout(t)
+      document.querySelectorAll("a, button, .project-card").forEach(el => {
+        el.removeEventListener("mouseenter", onEnter)
+        el.removeEventListener("mouseleave", onLeave)
+      })
     }
   }, [])
 

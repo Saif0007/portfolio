@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import { BackgroundElements } from "@/components/shared/BackgroundElements"
 import { Cursor } from "@/components/shared/Cursor"
 import { Preloader } from "@/components/shared/Preloader"
@@ -29,9 +30,15 @@ const Portfolio = () => {
 
   return (
     <>
-      {!loaded && <Preloader onDone={() => setLoaded(true)} />}
+      <AnimatePresence>
+        {!loaded && <Preloader onDone={() => setLoaded(true)} />}
+      </AnimatePresence>
 
-      <div style={{ opacity: loaded ? 1 : 0, transition: "opacity .6s" }}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loaded ? 1 : 0 }}
+        transition={{ duration: 0.7 }}
+      >
         <BackgroundElements />
         <Cursor />
         <ScrollProgress />
@@ -43,7 +50,7 @@ const Portfolio = () => {
         <ExperienceSection />
         <ContactSection />
         <Footer />
-      </div>
+      </motion.div>
     </>
   )
 }

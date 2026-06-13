@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, Linkedin, Briefcase, Mail } from "lucide-react"
+import { Github, Linkedin } from "lucide-react"
 
 export const Footer = () => {
   const scrollToTop = () => {

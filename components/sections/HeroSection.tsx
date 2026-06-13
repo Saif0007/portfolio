@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import { Github, Linkedin, Briefcase } from "lucide-react"
 
 const techStack = [
@@ -17,6 +17,10 @@ interface HeroSectionProps {
 
 export const HeroSection = ({ scrollToSection, downloadResume }: HeroSectionProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollY } = useScroll()
+  const rawY = useTransform(scrollY, [0, 600], [0, -90])
+  const parallaxY = useSpring(rawY, { stiffness: 80, damping: 20 })
 
   useEffect(() => {
     const cv = canvasRef.current
@@ -90,18 +94,18 @@ export const HeroSection = ({ scrollToSection, downloadResume }: HeroSectionProp
   }
   const wordVariant = {
     hidden: { y: "110%" },
-    visible: { y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as number[] } },
+    visible: { y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
   }
 
   return (
-    <section id="hero" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", padding: "140px clamp(20px,5vw,64px) 0" }}>
+    <section id="hero" ref={sectionRef} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", padding: "140px clamp(20px,5vw,64px) 0" }}>
       {/* Dot grid canvas */}
       <canvas
         ref={canvasRef}
         style={{ position: "absolute", inset: 0, zIndex: 0, opacity: 0.55, width: "100%", height: "100%" }}
       />
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 900 }}>
+      <motion.div style={{ position: "relative", zIndex: 1, maxWidth: 900, y: parallaxY }}>
         {/* Status badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -204,7 +208,7 @@ export const HeroSection = ({ scrollToSection, downloadResume }: HeroSectionProp
             ))}
           </div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Rotating badge */}
       <div style={{ position: "absolute", right: "clamp(20px,6vw,80px)", bottom: 120, width: 128, height: 128, zIndex: 2 }} className="hidden lg:block">
