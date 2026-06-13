@@ -1,115 +1,163 @@
-import { Briefcase, Calendar, MapPin } from "lucide-react"
+"use client"
+
+import { useRef, useEffect } from "react"
+import { useInView } from "framer-motion"
 import { experience } from "@/data/portfolio-data"
 
-interface ExperienceSectionProps {
-  isVisible: (id: string) => boolean
-}
+export const ExperienceSection = () => {
+  const ref = useRef<HTMLDivElement>(null)
+  const fillRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
 
-export const ExperienceSection = ({ isVisible }: ExperienceSectionProps) => {
+  useEffect(() => {
+    const fill = fillRef.current
+    const section = sectionRef.current
+    if (!fill || !section) return
+
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect()
+      const windowH = window.innerHeight
+      const progress = Math.min(1, Math.max(0, (windowH - rect.top) / (rect.height + windowH * 0.5)))
+      fill.style.height = progress * 100 + "%"
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
-    <section id="experience" className="py-16 sm:py-24 bg-card">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-
-        {/* Section header */}
+    <section
+      id="experience"
+      ref={sectionRef}
+      style={{ padding: "clamp(80px,10vw,140px) clamp(20px,5vw,64px)", background: "var(--surface)", borderTop: "1px solid var(--line)" }}
+    >
+      <div style={{ maxWidth: 1100, margin: "0 auto" }} ref={ref}>
         <div
-          id="experience-header"
-          data-animate="experience-header"
-          className={`mb-14 transition-all duration-700 ${
-            isVisible("experience-header") ? "animate-slide-in-up opacity-100" : "opacity-0"
-          }`}
+          className="eyebrow"
+          style={{ opacity: isInView ? 1 : 0, transform: isInView ? "none" : "translateY(10px)", transition: "opacity .6s, transform .6s" }}
         >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="w-8 h-px bg-amber-500" />
-            <span className="text-amber-400 text-xs font-mono tracking-widest uppercase">Work History</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-foreground">
-            Experience
-          </h2>
+          Experience
         </div>
 
+        <h2
+          style={{
+            fontFamily: "var(--font-syne), Syne, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(36px,6vw,72px)",
+            lineHeight: 1.05,
+            letterSpacing: "-.02em",
+            marginBottom: 64,
+            marginTop: 16,
+            opacity: isInView ? 1 : 0,
+            transform: isInView ? "none" : "translateY(20px)",
+            transition: "opacity .7s .1s, transform .7s .1s",
+          }}
+        >
+          Where I&apos;ve <span style={{ color: "#FFB454" }}>been.</span>
+        </h2>
+
         {/* Timeline */}
-        <div className="relative pl-10 sm:pl-14">
-          {/* Vertical line */}
-          <div className="absolute left-3 sm:left-5 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500 via-emerald-500/30 to-transparent" />
+        <div
+          style={{
+            position: "relative",
+            maxWidth: 820,
+          }}
+        >
+          {/* Static track line */}
+          <div
+            style={{
+              position: "absolute",
+              left: 7,
+              top: 6,
+              bottom: 6,
+              width: 1,
+              background: "var(--line)",
+            }}
+          />
+          {/* Amber fill */}
+          <div
+            ref={fillRef}
+            className="timeline-fill"
+          />
 
-          <div className="space-y-10">
-            {experience.map((exp, index) => (
+          {experience.map((exp, i) => (
+            <div
+              key={i}
+              style={{
+                position: "relative",
+                paddingLeft: 44,
+                paddingBottom: i < experience.length - 1 ? 54 : 0,
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? "none" : "translateY(20px)",
+                transition: `opacity .7s ${0.2 + i * 0.15}s, transform .7s ${0.2 + i * 0.15}s`,
+              }}
+            >
+              {/* Dot */}
               <div
-                key={index}
-                id={`experience-${index}`}
-                data-animate={`experience-${index}`}
-                className={`relative transition-all duration-700 ${
-                  isVisible(`experience-${index}`)
-                    ? `animate-slide-in-up opacity-100 stagger-${index + 1}`
-                    : "opacity-0"
-                }`}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  top: 6,
+                  width: 15,
+                  height: 15,
+                  borderRadius: "50%",
+                  border: `2px solid #FFB454`,
+                  background: exp.current ? "#FFB454" : "var(--bg)",
+                  boxShadow: exp.current ? "0 0 16px rgba(255,180,84,.5)" : "none",
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Role label */}
+              <div
+                style={{
+                  fontFamily: "var(--font-jetbrains), monospace",
+                  fontSize: 12,
+                  letterSpacing: ".14em",
+                  color: "#FFB454",
+                  textTransform: "uppercase",
+                  marginBottom: 8,
+                }}
               >
-                {/* Timeline dot */}
-                <div className="absolute -left-10 sm:-left-14 top-1 flex flex-col items-center">
-                  <div
-                    className={`w-4 h-4 rounded-full border-2 z-10 ${
-                      exp.current
-                        ? "bg-emerald-500 border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.5)]"
-                        : "bg-card border-border"
-                    }`}
-                  />
-                </div>
-
-                {/* Card */}
-                <div className="rounded-2xl border border-border bg-background hover:border-emerald-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(16,185,129,0.06)] overflow-hidden">
-                  {/* Top accent bar */}
-                  {exp.current && (
-                    <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 to-teal-500" />
-                  )}
-
-                  <div className="p-6 sm:p-8">
-                    {/* Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
-                      <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-xl shrink-0 ${
-                          exp.current
-                            ? "bg-emerald-500/10 border border-emerald-500/20"
-                            : "bg-muted/20 border border-border"
-                        }`}>
-                          <Briefcase className={exp.current ? "text-emerald-400" : "text-muted-foreground"} size={18} />
-                        </div>
-                        <div>
-                          <h3 className="text-lg sm:text-xl font-bold text-emerald-400 leading-tight">
-                            {exp.position}
-                          </h3>
-                          <h4 className="text-base font-semibold text-foreground mt-0.5">{exp.company}</h4>
-                          {exp.current && (
-                            <span className="inline-flex items-center gap-1.5 mt-1.5 px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-full text-xs font-semibold border border-emerald-500/20">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                              Current
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex flex-row sm:flex-col sm:items-end gap-3 sm:gap-1.5 shrink-0">
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                          <Calendar size={12} />
-                          <span className="font-medium">{exp.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                          <MapPin size={12} />
-                          <span className="font-medium">{exp.location}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    {exp.description && (
-                      <p className="text-muted-foreground text-sm leading-relaxed border-t border-border/50 pt-4">
-                        {exp.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
+                {exp.current ? "Present" : exp.duration}
               </div>
-            ))}
-          </div>
+
+              <h3
+                style={{
+                  fontFamily: "var(--font-syne), Syne, sans-serif",
+                  fontWeight: 700,
+                  fontSize: 22,
+                  marginBottom: 4,
+                }}
+              >
+                {exp.position}
+              </h3>
+
+              <div
+                style={{
+                  color: "var(--cool)",
+                  fontSize: 14,
+                  marginBottom: 12,
+                }}
+              >
+                {exp.company} · {exp.location}
+              </div>
+
+              {exp.description && (
+                <p
+                  style={{
+                    color: "var(--ink-dim)",
+                    fontSize: 15,
+                    lineHeight: 1.65,
+                    maxWidth: 600,
+                  }}
+                >
+                  {exp.description}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>

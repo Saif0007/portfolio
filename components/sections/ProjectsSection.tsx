@@ -1,214 +1,241 @@
+"use client"
+
+import { useRef } from "react"
+import { useInView } from "framer-motion"
 import Link from "next/link"
-import { ExternalLink, ArrowRight, Globe } from "lucide-react"
 import { projects } from "@/data/portfolio-data"
 
-interface ProjectsSectionProps {
-  isVisible: (id: string) => boolean
+const codeSnippets: Record<string, string> = {
+  "pioneer-voice-ai": `POST /api/voice/outbound
+{ agent: "Penny",
+  calls: 50,
+  salesforce: "synced ✓" }`,
+  "auralis-labs-voice-ai": `ws.on("voice", deepgram)
+// tenants: 12
+// latency: 180ms
+// calendar: synced ✓`,
+  "trade-gekko": `LSTM.predict(candles)
+// accuracy: 78.4%
+// trades: live
+{ signal: "BUY" }`,
+  "true-mortgages-ai-platform": `POST /api/mortgage/query
+{ context: rag_docs,
+  answer: claude_v3,
+  latency: "320ms" }`,
+  "pioneer-commissions-portal": `SELECT earnings
+FROM salesforce_sync
+WHERE month = current
+-- 12 commission types`,
+  "contact-lens-rag": `GET /api/lens/recommend
+{ sku: "ACUVUE",
+  match: 94%,
+  source: "RAG" }`,
+  "pioneer-license-verification-agent": `playwright.scrape(
+  state_board_sites, 48
+)
+// verified: ✓ live`,
+  "prd-generator": `openai.generate(prd)
+→ jira.create_ticket()
+→ figma.export()
+// shipped: ✓`,
+  "pioneer-submissions-doc-automation": `salesforce.query(contacts)
+→ docx.render(template)
+→ pdf.export()
+// 100s of docs/run`,
 }
 
-export const ProjectsSection = ({ isVisible }: ProjectsSectionProps) => {
-  const featured = projects.filter((p) => p.featured)
-  const others = projects.filter((p) => !p.featured)
+export const ProjectsSection = () => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
+
+  const featured = projects.filter(p => p.featured).slice(0, 8)
 
   return (
-    <section id="projects" className="py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-
-        {/* Section header */}
+    <section id="projects" ref={ref} style={{ padding: "clamp(80px,10vw,140px) clamp(20px,5vw,64px)" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div
-          id="projects-header"
-          data-animate="projects-header"
-          className={`mb-12 sm:mb-16 transition-all duration-700 ${
-            isVisible("projects-header") ? "animate-slide-in-up opacity-100" : "opacity-0"
-          }`}
+          className="eyebrow"
+          style={{ opacity: isInView ? 1 : 0, transform: isInView ? "none" : "translateY(10px)", transition: "opacity .6s, transform .6s" }}
         >
-          <div className="flex items-center gap-3 mb-3">
-            <span className="w-8 h-px bg-emerald-500" />
-            <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">Selected Work</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-foreground mb-2">
-            Featured <span className="gradient-text">Projects</span>
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl">
-            Production systems live in the real world — not portfolio demos.
-          </p>
+          Selected Work
         </div>
 
-        {/* Featured Projects — horizontal cards */}
-        <div className="space-y-6 mb-14">
-          {featured.map((project, index) => (
-            <div
-              key={index}
-              id={`featured-project-${index}`}
-              data-animate={`featured-project-${index}`}
-              className={`group rounded-2xl border border-border bg-card overflow-hidden transition-all duration-700 hover:border-emerald-500/30 hover:shadow-[0_0_40px_rgba(16,185,129,0.08)] ${
-                isVisible(`featured-project-${index}`) ? "animate-fade-in-scale opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
-                {/* Image */}
-                <div className="relative lg:w-[45%] shrink-0 min-h-[220px] lg:min-h-0">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
+        <h2
+          style={{
+            fontFamily: "var(--font-syne), Syne, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(36px,6vw,72px)",
+            lineHeight: 1.05,
+            letterSpacing: "-.02em",
+            marginBottom: 16,
+            marginTop: 16,
+            opacity: isInView ? 1 : 0,
+            transform: isInView ? "none" : "translateY(20px)",
+            transition: "opacity .7s .1s, transform .7s .1s",
+          }}
+        >
+          Things I&apos;ve shipped that{" "}
+          <span style={{ color: "#FFB454" }}>people actually use.</span>
+        </h2>
+
+        <p
+          style={{
+            color: "var(--ink-dim)",
+            fontSize: 16,
+            marginBottom: 64,
+            opacity: isInView ? 1 : 0,
+            transition: "opacity .7s .2s",
+          }}
+        >
+          Production systems — live in the real world, not portfolio demos.
+        </p>
+
+        <div className="work-grid">
+          {featured.map((project, i) => {
+            const code = codeSnippets[project.slug] || `// ${project.title}\n// live ✓`
+            const isEven = i % 2 === 0
+            return (
+              <Link
+                key={project.slug}
+                href={`/projects/${project.slug}`}
+                className="project-card"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "block",
+                  opacity: isInView ? 1 : 0,
+                  transform: isInView ? "none" : `translateY(${isEven ? 28 : 14}px)`,
+                  transition: `opacity .7s ${0.1 + i * 0.08}s, transform .7s ${0.1 + i * 0.08}s`,
+                }}
+                onMouseMove={e => {
+                  const el = e.currentTarget as HTMLElement
+                  const rect = el.getBoundingClientRect()
+                  const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12
+                  const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10
+                  el.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-4px)`
+                }}
+                onMouseLeave={e => {
+                  ;(e.currentTarget as HTMLElement).style.transform = ""
+                }}
+              >
+                {/* Code thumbnail */}
+                <div
+                  style={{
+                    borderRadius: 10,
+                    background: "#0D1017",
+                    border: "1px solid rgba(232,230,223,0.07)",
+                    padding: "18px 20px",
+                    marginBottom: 22,
+                    minHeight: 90,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <pre
+                    style={{
+                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontSize: 12,
+                      lineHeight: 1.7,
+                      color: "#8B93C9",
+                      margin: 0,
+                      whiteSpace: "pre",
+                      transition: "transform .4s cubic-bezier(.16,1,.3,1)",
+                    }}
+                  >
+                    {code}
+                  </pre>
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(135deg,rgba(255,180,84,.06),rgba(139,147,201,.04))",
+                      opacity: 0,
+                      transition: "opacity .4s",
+                      borderRadius: 10,
+                    }}
+                    className="thumb-overlay"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-card/30" />
-                  {/* Featured badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-2.5 py-1 bg-emerald-500 text-white text-xs font-bold rounded-md">
-                      Featured
-                    </span>
-                  </div>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xs font-mono text-muted-foreground">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="w-6 h-px bg-border" />
-                      {project.demo && project.demo !== "#" && (
-                        <span className="flex items-center gap-1 text-xs text-emerald-400">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          Live
-                        </span>
-                      )}
-                    </div>
+                {/* Title */}
+                <h3
+                  style={{
+                    fontFamily: "var(--font-syne), Syne, sans-serif",
+                    fontWeight: 700,
+                    fontSize: 20,
+                    marginBottom: 8,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {project.title}
+                  <span
+                    style={{
+                      fontSize: 18,
+                      color: "var(--ink-dim)",
+                      transform: "translate(-4px,4px)",
+                      opacity: 0,
+                      transition: "transform .35s, opacity .35s",
+                    }}
+                    className="card-arrow"
+                  >
+                    ↗
+                  </span>
+                </h3>
 
-                    <h3 className="text-2xl sm:text-3xl font-black text-foreground mb-3 group-hover:text-emerald-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6 text-sm sm:text-base">
-                      {project.description}
-                    </p>
+                {/* Description */}
+                <p
+                  style={{
+                    color: "var(--ink-dim)",
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    marginBottom: 18,
+                  }}
+                >
+                  {project.description.length > 120
+                    ? project.description.slice(0, 117) + "…"
+                    : project.description}
+                </p>
 
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {project.tech.slice(0, 6).map((tech, i) => (
-                        <span
-                          key={i}
-                          className="px-2.5 py-1 bg-background border border-border text-muted-foreground rounded-md text-xs font-mono"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.tech.length > 6 && (
-                        <span className="px-2.5 py-1 bg-background border border-border text-muted-foreground rounded-md text-xs font-mono">
-                          +{project.tech.length - 6}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-3">
-                    {project.demo && project.demo !== "#" && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-white rounded-xl transition-colors font-semibold text-sm"
-                      >
-                        <Globe size={14} />
-                        Live Site
-                      </a>
-                    )}
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 border border-border hover:border-emerald-500/50 text-muted-foreground hover:text-emerald-400 rounded-xl transition-all font-semibold text-sm"
+                {/* Tags */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {project.tech.slice(0, 4).map(tag => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontFamily: "var(--font-jetbrains), monospace",
+                        fontSize: 11,
+                        letterSpacing: ".08em",
+                        padding: "4px 10px",
+                        borderRadius: 100,
+                        border: "1px solid var(--line)",
+                        color: "var(--ink-dim)",
+                        transition: "border-color .3s",
+                      }}
                     >
-                      Case Study
-                      <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Section sub-header */}
-        <div className="flex items-center gap-3 mb-8">
-          <span className="w-8 h-px bg-amber-500" />
-          <span className="text-amber-400 text-xs font-mono tracking-widest uppercase">More Projects</span>
-        </div>
-
-        {/* Other Projects — clean list-style cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {others.map((project, index) => (
-            <div
-              key={index}
-              id={`project-${index}`}
-              data-animate={`project-${index}`}
-              className={`group rounded-xl border border-border bg-card overflow-hidden hover:border-emerald-500/30 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.06)] ${
-                isVisible(`project-${index}`) ? "animate-fade-in-scale opacity-100" : "opacity-0"
-              }`}
-            >
-              {project.image && (
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-36 object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                </div>
-              )}
-
-              <div className="p-5">
-                <div className="flex items-start gap-3 mb-3">
-                  {!project.image && (
-                    <div className="p-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg shrink-0">
-                      <Globe className="text-emerald-500" size={14} />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-foreground mb-1 group-hover:text-emerald-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">
-                      {project.description}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {project.tech.slice(0, 3).map((tech, i) => (
-                    <span key={i} className="px-1.5 py-0.5 bg-background border border-border text-muted-foreground rounded text-[10px] font-mono">
-                      {tech}
+                      {tag}
                     </span>
                   ))}
-                  {project.tech.length > 3 && (
-                    <span className="px-1.5 py-0.5 bg-background border border-border text-muted-foreground rounded text-[10px] font-mono">
-                      +{project.tech.length - 3}
+                  {project.demo && project.demo !== "#" && (
+                    <span
+                      style={{
+                        fontFamily: "var(--font-jetbrains), monospace",
+                        fontSize: 11,
+                        letterSpacing: ".08em",
+                        padding: "4px 10px",
+                        borderRadius: 100,
+                        border: "1px solid rgba(255,180,84,.3)",
+                        color: "#FFB454",
+                      }}
+                    >
+                      Live ✓
                     </span>
                   )}
                 </div>
-
-                <div className="flex items-center justify-between">
-                  {project.demo && project.demo !== "#" ? (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-amber-400 transition-colors"
-                    >
-                      <ExternalLink size={11} />
-                      Live
-                    </a>
-                  ) : <span />}
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
-                  >
-                    Details
-                    <ArrowRight size={11} />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
+              </Link>
+            )
+          })}
         </div>
       </div>
     </section>

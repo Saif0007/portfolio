@@ -1,110 +1,138 @@
 "use client"
 
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { useState, useEffect } from "react"
 
 interface NavigationProps {
-  activeSection: string
-  isScrolled: boolean
-  scrollToSection: (sectionId: string) => void
+  scrollToSection: (id: string) => void
 }
 
-export const Navigation = ({ activeSection, isScrolled, scrollToSection }: NavigationProps) => {
+export const Navigation = ({ scrollToSection }: NavigationProps) => {
+  const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const navItems = ["About", "Skills", "Projects", "Experience", "Contact"]
+  const [lastY, setLastY] = useState(0)
 
-  const handleNav = (item: string) => {
-    scrollToSection(item.toLowerCase())
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 40)
+      setHidden(y > 400 && y > lastY)
+      setLastY(y)
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [lastY])
+
+  const navItems = [
+    { label: "Work", id: "projects" },
+    { label: "About", id: "about" },
+    { label: "Experience", id: "experience" },
+  ]
+
+  const handleNav = (id: string) => {
+    scrollToSection(id)
     setMobileOpen(false)
+    document.body.style.overflow = ""
+  }
+
+  const toggleMobile = () => {
+    const next = !mobileOpen
+    setMobileOpen(next)
+    document.body.style.overflow = next ? "hidden" : ""
   }
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
-        isScrolled
-          ? "bg-[#060d1f]/95 backdrop-blur-xl border-emerald-500/20 shadow-[0_1px_30px_rgba(16,185,129,0.08)]"
-          : "bg-transparent border-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-6 rounded-sm bg-emerald-500 inline-block" />
-            <span className="text-lg sm:text-xl font-bold text-foreground tracking-tight">
-              Saif <span className="text-emerald-400">Ur Rehman</span>
+    <>
+      <nav
+        style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "20px clamp(20px,5vw,64px)",
+          backdropFilter: "blur(14px)",
+          background: scrolled ? "rgba(10,12,20,0.92)" : "linear-gradient(rgba(10,12,20,.85),rgba(10,12,20,.2))",
+          borderBottom: `1px solid ${scrolled ? "rgba(232,230,223,0.09)" : "transparent"}`,
+          transform: hidden ? "translateY(-100%)" : "translateY(0)",
+          transition: "transform .45s, border-color .4s, background .4s",
+        }}
+      >
+        {/* Logo */}
+        <button
+          onClick={() => handleNav("hero")}
+          style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 800, fontSize: 18, letterSpacing: ".04em", color: "var(--ink)", background: "none", border: "none", cursor: "pointer" }}
+        >
+          Saif<span style={{ color: "#FFB454" }}>.</span>dev
+        </button>
+
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-9">
+          {navItems.map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => handleNav(id)}
+              className="nav-link-line relative"
+              style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-dim)", background: "none", border: "none", cursor: "pointer", transition: "color .3s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--ink)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-dim)")}
+            >
+              {label}
+            </button>
+          ))}
+          <button
+            onClick={() => handleNav("contact")}
+            style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", color: "#0A0C14", background: "#FFB454", padding: "10px 20px", borderRadius: 100, border: "none", cursor: "pointer", transition: "transform .3s, box-shadow .3s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 30px rgba(255,180,84,.35)" }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = "" }}
+          >
+            Let&apos;s talk
+          </button>
+        </div>
+
+        {/* Hamburger */}
+        <button
+          className="md:hidden"
+          onClick={toggleMobile}
+          aria-label="Menu"
+          style={{ background: "none", border: "none", cursor: "pointer", width: 34, height: 24, position: "relative", zIndex: 1002 }}
+        >
+          {[3, 11, 19].map((top, i) => (
+            <span
+              key={i}
+              style={{
+                position: "absolute", left: 0, width: "100%", height: 2, background: "var(--ink)",
+                top: mobileOpen ? (i === 0 ? 11 : i === 1 ? 11 : 11) : top,
+                transform: mobileOpen ? (i === 0 ? "rotate(45deg)" : i === 1 ? "none" : "rotate(-45deg)") : "none",
+                opacity: mobileOpen && i === 1 ? 0 : 1,
+                transition: "transform .35s, top .35s, opacity .3s",
+              }}
+            />
+          ))}
+        </button>
+      </nav>
+
+      {/* Mobile overlay */}
+      <div className={`mobile-menu-overlay${mobileOpen ? " open" : ""}`}>
+        {navItems.map(({ label, id }) => (
+          <button
+            key={id}
+            onClick={() => handleNav(id)}
+            className="mobile-menu-link"
+            style={{ background: "none", border: "none", cursor: "pointer", textAlign: "left" }}
+          >
+            <span style={{ color: "#FFB454", fontFamily: "var(--font-jetbrains), monospace", fontSize: 14, verticalAlign: "super" }}>
+              0{navItems.findIndex(n => n.id === id) + 1}
             </span>
-          </div>
-
-          {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
-                className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-lg ${
-                  activeSection === item.toLowerCase()
-                    ? "text-emerald-400 bg-emerald-500/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                }`}
-              >
-                {activeSection === item.toLowerCase() && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-emerald-400" />
-                )}
-                {item}
-              </button>
-            ))}
-          </div>
-
-          {/* Right: CTA + hamburger */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold rounded-lg transition-colors"
-            >
-              Hire Me
-            </button>
-
-            {/* Hamburger — mobile only */}
-            <button
-              onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-emerald-500/40 transition-all"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
-        </div>
+            {" "}{label}
+          </button>
+        ))}
+        <button
+          onClick={() => handleNav("contact")}
+          className="mobile-menu-link"
+          style={{ background: "none", border: "none", cursor: "pointer", textAlign: "left" }}
+        >
+          <span style={{ color: "#FFB454", fontFamily: "var(--font-jetbrains), monospace", fontSize: 14, verticalAlign: "super" }}>04</span>
+          {" "}Contact
+        </button>
       </div>
-
-      {/* Mobile menu drawer */}
-      {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-[#060d1f]/98 backdrop-blur-xl">
-          <div className="px-4 py-4 space-y-1">
-            {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => handleNav(item)}
-                className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                  activeSection === item.toLowerCase()
-                    ? "text-emerald-400 bg-emerald-500/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-            <div className="pt-2 border-t border-border">
-              <button
-                onClick={() => handleNav("contact")}
-                className="w-full px-4 py-3 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold rounded-lg transition-colors"
-              >
-                Hire Me
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </nav>
+    </>
   )
 }

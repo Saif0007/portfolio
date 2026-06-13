@@ -1,303 +1,238 @@
 "use client"
 
-import { ArrowRight, Download, Linkedin, Github, Mail, Phone, Briefcase } from "lucide-react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useState } from "react"
-import { containerVariants, slideUpVariants, scaleVariants } from "@/lib/animations/variants"
+import { useEffect, useRef } from "react"
+import { motion } from "framer-motion"
+import { Github, Linkedin, Briefcase } from "lucide-react"
+
+const techStack = [
+  "Next.js", "FastAPI", "Python", "LangChain", "OpenAI", "Retell AI",
+  "Twilio", "Deepgram", "ElevenLabs", "Supabase", "PostgreSQL", "Redis",
+  "AWS", "Docker", "Salesforce", "Stripe", "TypeScript", "TailwindCSS",
+]
 
 interface HeroSectionProps {
-  mousePosition: { x: number; y: number }
-  isVisible: (id: string) => boolean
-  scrollToSection: (sectionId: string) => void
+  scrollToSection: (id: string) => void
   downloadResume: () => void
 }
 
-const techStack = [
-  "Next.js", "React", "Python", "FastAPI", "Django",
-  "OpenAI", "LangChain", "Retell AI", "Twilio", "Deepgram",
-  "ElevenLabs", "Supabase", "PostgreSQL", "Redis", "AWS",
-  "Docker", "Stripe", "Salesforce", "TypeScript", "TailwindCSS",
-]
+export const HeroSection = ({ scrollToSection, downloadResume }: HeroSectionProps) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
-const codeLines = [
-  { tokens: [{ t: "# Full Stack AI Platform", c: "text-muted-foreground" }] },
-  { tokens: [{ t: "from ", c: "text-purple-400" }, { t: "langchain", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "RAGPipeline", c: "text-teal-400" }] },
-  { tokens: [{ t: "from ", c: "text-purple-400" }, { t: "openai", c: "text-emerald-400" }, { t: " import ", c: "text-purple-400" }, { t: "GPT4", c: "text-teal-400" }] },
-  { tokens: [] },
-  { tokens: [{ t: "async def ", c: "text-purple-400" }, { t: "build_ai_feature", c: "text-emerald-400" }, { t: "(req):", c: "text-foreground" }] },
-  { tokens: [{ t: "    context ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "RAGPipeline", c: "text-teal-400" }, { t: ".query(req)", c: "text-foreground" }] },
-  { tokens: [{ t: "    response ", c: "text-foreground" }, { t: "= await ", c: "text-amber-400" }, { t: "GPT4", c: "text-teal-400" }, { t: ".complete(", c: "text-foreground" }] },
-  { tokens: [{ t: "        prompt", c: "text-emerald-400" }, { t: "=context, ", c: "text-foreground" }, { t: "stream", c: "text-emerald-400" }, { t: "=", c: "text-foreground" }, { t: "True", c: "text-amber-400" }] },
-  { tokens: [{ t: "    )", c: "text-foreground" }] },
-  { tokens: [{ t: "    return ", c: "text-purple-400" }, { t: "StreamingResponse", c: "text-teal-400" }, { t: "(response)", c: "text-foreground" }] },
-]
+  useEffect(() => {
+    const cv = canvasRef.current
+    if (!cv) return
+    const ctx = cv.getContext("2d")
+    if (!ctx) return
 
+    type Dot = { x: number; y: number; ox: number; oy: number }
+    let dots: Dot[] = []
+    let mx = -999, my = -999
+    let animId: number
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
-export const HeroSection = ({ mousePosition, isVisible, scrollToSection, downloadResume }: HeroSectionProps) => {
-  const { scrollY } = useScroll()
-  const opacity = useTransform(scrollY, [0, 300], [1, 0])
-  const yParallax = useTransform(scrollY, [0, 300], [0, 60])
+    const buildGrid = () => {
+      cv.width = cv.offsetWidth * window.devicePixelRatio
+      cv.height = cv.offsetHeight * window.devicePixelRatio
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0)
+      dots = []
+      const gap = 46
+      for (let x = gap / 2; x < cv.offsetWidth; x += gap)
+        for (let y = gap / 2; y < cv.offsetHeight; y += gap)
+          dots.push({ x, y, ox: x, oy: y })
+    }
+    buildGrid()
 
-  const [hoveredButton, setHoveredButton] = useState<string | null>(null)
+    const handleResize = () => buildGrid()
+    window.addEventListener("resize", handleResize)
 
-  const socialLinks = [
-    { icon: Linkedin, href: "https://linkedin.com/in/saif-ur-rehman-404650218", label: "LinkedIn", color: "hover:border-teal-500/50 hover:text-teal-400" },
-    { icon: Github, href: "https://github.com/Saif-Ur-Rehman0", label: "GitHub", color: "hover:border-slate-400/50 hover:text-slate-300" },
-    { icon: Briefcase, href: "https://www.upwork.com/freelancers/~01b3d4ebea7a54ae9a/", label: "Upwork", color: "hover:border-green-500/50 hover:text-green-400" },
-    { icon: Mail, href: "mailto:syfin008@gmail.com", label: "Email", color: "hover:border-amber-500/50 hover:text-amber-400" },
-    { icon: Phone, href: "tel:+923224016585", label: "Phone", color: "hover:border-emerald-500/50 hover:text-emerald-400" },
-  ]
+    const parent = cv.parentElement
+    const onMove = (e: MouseEvent) => {
+      const r = cv.getBoundingClientRect()
+      mx = e.clientX - r.left
+      my = e.clientY - r.top
+    }
+    const onLeave = () => { mx = -999; my = -999 }
+    parent?.addEventListener("mousemove", onMove)
+    parent?.addEventListener("mouseleave", onLeave)
+
+    const draw = () => {
+      ctx.clearRect(0, 0, cv.offsetWidth, cv.offsetHeight)
+      for (const d of dots) {
+        const dx = d.ox - mx, dy = d.oy - my
+        const dist = Math.hypot(dx, dy)
+        const force = Math.max(0, 1 - dist / 180)
+        if (!reduced) {
+          d.x += (d.ox + (dx / (dist || 1)) * force * 26 - d.x) * 0.12
+          d.y += (d.oy + (dy / (dist || 1)) * force * 26 - d.y) * 0.12
+        }
+        ctx.beginPath()
+        ctx.arc(d.x, d.y, 1.2 + force * 1.8, 0, Math.PI * 2)
+        ctx.fillStyle = force > 0.05
+          ? `rgba(255,180,84,${0.25 + force * 0.7})`
+          : "rgba(139,147,201,0.2)"
+        ctx.fill()
+      }
+      animId = requestAnimationFrame(draw)
+    }
+    draw()
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+      parent?.removeEventListener("mousemove", onMove)
+      parent?.removeEventListener("mouseleave", onLeave)
+      cancelAnimationFrame(animId)
+    }
+  }, [])
+
+  const rowVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.12 } },
+  }
+  const wordVariant = {
+    hidden: { y: "110%" },
+    visible: { y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as number[] } },
+  }
 
   return (
-    <section
-      id="hero"
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-4"
-    >
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(16,185,129,0.5) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(16,185,129,0.5) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
+    <section id="hero" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", padding: "140px clamp(20px,5vw,64px) 0" }}>
+      {/* Dot grid canvas */}
+      <canvas
+        ref={canvasRef}
+        style={{ position: "absolute", inset: 0, zIndex: 0, opacity: 0.55, width: "100%", height: "100%" }}
       />
 
-      {/* Glow orbs */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%)",
-          top: "5%", left: "0%",
-        }}
-      />
-      <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 70%)",
-          bottom: "10%", right: "5%",
-        }}
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <div style={{ position: "relative", zIndex: 1, maxWidth: 900 }}>
+        {/* Status badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-dim)", border: "1px solid var(--line)", borderRadius: 100, padding: "8px 18px", marginBottom: 38, background: "rgba(17,20,31,.6)" }}
+        >
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#FFB454", position: "relative", flexShrink: 0 }}>
+            <span style={{ position: "absolute", inset: -4, borderRadius: "50%", border: "1px solid #FFB454", animation: "ping-amber 1.8s cubic-bezier(0,0,.2,1) infinite" }} />
+          </span>
+          Available for new projects · Lahore / Remote
+        </motion.div>
 
-      <motion.div
-        className="max-w-7xl mx-auto px-4 sm:px-6 w-full"
-        style={{ opacity }}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-8">
+        {/* Hero headline */}
+        <motion.h1
+          variants={rowVariants}
+          initial="hidden"
+          animate="visible"
+          style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 800, fontSize: "clamp(52px,10.5vw,140px)", lineHeight: 0.95, letterSpacing: "-.02em", textTransform: "uppercase", marginBottom: 40 }}
+        >
+          <span className="hero-row">
+            <motion.span variants={wordVariant} style={{ display: "inline-block" }}>
+              Full Stack
+            </motion.span>
+          </span>
+          <span className="hero-row">
+            <motion.span variants={wordVariant} style={{ display: "inline-block", color: "transparent", WebkitTextStroke: "1.5px var(--ink)" }}>
+              AI &amp;
+            </motion.span>
+          </span>
+          <span className="hero-row">
+            <motion.span variants={wordVariant} style={{ display: "inline-block" }}>
+              Systems{" "}
+              <span style={{ color: "#FFB454" }}>Builder</span>
+            </motion.span>
+          </span>
+        </motion.h1>
 
-          {/* ── LEFT: Text content ── */}
-          <div className="flex flex-col justify-center order-2 lg:order-1">
+        {/* Sub row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.55 }}
+          style={{ display: "flex", gap: 48, flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between" }}
+        >
+          <p style={{ maxWidth: 440, color: "var(--ink-dim)", fontSize: 17, lineHeight: 1.6 }}>
+            I&apos;m <span style={{ color: "var(--ink)", fontWeight: 600 }}>Saif Ur Rehman</span> — I design, build and ship production AI systems end-to-end:{" "}
+            <span style={{ color: "#FFB454" }}>RAG pipelines</span>, voice agents, multi-tenant SaaS, and full-stack applications that run in the real world.
+          </p>
 
-            {/* Status badge */}
-            <motion.div className="mb-7" variants={slideUpVariants}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold border border-emerald-500/30 text-emerald-400 bg-emerald-500/5 tracking-wide uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Available for new opportunities
-              </span>
-            </motion.div>
-
-            {/* Name */}
-            <motion.div className="mb-5" variants={slideUpVariants}>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-none tracking-tight">
-                <span className="block text-foreground mb-1">M. Saif</span>
-                <span className="block gradient-text">Ur Rehman</span>
-              </h1>
-            </motion.div>
-
-            {/* Title tags */}
-            <motion.div className="flex flex-wrap gap-2 mb-6" variants={slideUpVariants}>
-              <span className="px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium">
-                Full Stack AI Engineer
-              </span>
-              <span className="px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono font-medium">
-                SaaS & AI Systems
-              </span>
-              <span className="px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-mono font-medium">
-                FAST'22
-              </span>
-            </motion.div>
-
-            {/* Description */}
-            <motion.p
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              Building <span className="text-emerald-400 font-semibold">intelligent AI-powered products</span> from backend APIs to production — RAG systems,{" "}
-              <span className="text-purple-400 font-semibold">multi-tenant SaaS platforms</span>, LLM integrations, and full-stack applications that scale.
-              Specialized in <span className="text-amber-400 font-semibold">AI, full-stack engineering</span>, and turning complex requirements into clean, shipped systems.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-wrap gap-3 mb-8"
-              variants={containerVariants}
-            >
-              <motion.button
-                onClick={() => scrollToSection("projects")}
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-sm rounded-xl transition-all duration-200"
-                whileHover={{ scale: 1.03, boxShadow: "0 0 25px rgba(16,185,129,0.4)" }}
-                whileTap={{ scale: 0.97 }}
-              >
-                View My Work
-                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-
-              <motion.button
-                onClick={downloadResume}
-                className="group inline-flex items-center gap-2 px-6 py-3 border border-border hover:border-emerald-500/50 text-muted-foreground hover:text-foreground font-bold text-sm rounded-xl transition-all duration-200 bg-card/50"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Download size={15} className="group-hover:-translate-y-0.5 transition-transform" />
-                Download Resume
-              </motion.button>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div className="flex gap-2" variants={containerVariants}>
-              {socialLinks.map(({ icon: Icon, href, color, label }, index) => (
-                <motion.a
-                  key={index}
-                  href={href}
-                  aria-label={label}
-                  className={`p-2.5 rounded-lg border border-border text-muted-foreground transition-all duration-200 ${color}`}
-                  variants={scaleVariants}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Icon size={15} />
-                </motion.a>
-              ))}
-            </motion.div>
+          {/* Scroll hint */}
+          <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 11, letterSpacing: ".2em", textTransform: "uppercase", color: "var(--ink-dim)", display: "flex", alignItems: "center", gap: 12 }}>
+            Scroll{" "}
+            <span style={{ display: "block", width: 1, height: 46, background: "var(--line)" }} className="scroll-drip" />
           </div>
+        </motion.div>
 
-          {/* ── RIGHT: Animated code visual ── */}
-          <motion.div
-            className="flex items-center justify-center order-1 lg:order-2"
-            style={{ y: yParallax }}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.3 }}
+        {/* CTA + social row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.75 }}
+          style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 16, marginTop: 48 }}
+        >
+          <button
+            onClick={() => scrollToSection("projects")}
+            style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", color: "#0A0C14", background: "#FFB454", padding: "14px 28px", borderRadius: 100, border: "none", cursor: "pointer", transition: "transform .3s, box-shadow .3s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 30px rgba(255,180,84,.4)" }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = "" }}
           >
-            {/* Inner wrapper — stat cards anchor to this */}
-            <div className="relative w-full max-w-[440px] mx-auto">
-            {/* Outer glow ring */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-[380px] h-[380px] rounded-full border border-emerald-500/10 animate-spin-slow" />
-            </div>
+            View Work
+          </button>
+          <button
+            onClick={downloadResume}
+            style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-dim)", background: "none", padding: "13px 28px", borderRadius: 100, border: "1px solid var(--line)", cursor: "pointer", transition: "border-color .3s, color .3s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,180,84,.5)"; (e.currentTarget as HTMLElement).style.color = "var(--ink)" }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--line)"; (e.currentTarget as HTMLElement).style.color = "var(--ink-dim)" }}
+          >
+            Resume
+          </button>
 
-            {/* Main terminal card */}
-            <div className="relative w-full rounded-2xl border border-border bg-[#0a1628] shadow-[0_0_60px_rgba(16,185,129,0.1)] overflow-hidden">
+          <div style={{ display: "flex", gap: 12, marginLeft: 4 }}>
+            {[
+              { icon: Github, href: "https://github.com/Saif-Ur-Rehman0", label: "GitHub" },
+              { icon: Linkedin, href: "https://linkedin.com/in/saif-ur-rehman-404650218", label: "LinkedIn" },
+              { icon: Briefcase, href: "https://www.upwork.com/freelancers/~01b3d4ebea7a54ae9a/", label: "Upwork" },
+            ].map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                style={{ width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", border: "1px solid var(--line)", color: "var(--ink-dim)", transition: "border-color .3s, color .3s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,180,84,.5)"; (e.currentTarget as HTMLElement).style.color = "#FFB454" }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--line)"; (e.currentTarget as HTMLElement).style.color = "var(--ink-dim)" }}
+              >
+                <Icon size={15} />
+              </a>
+            ))}
+          </div>
+        </motion.div>
+      </div>
 
-              {/* Terminal title bar */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-[#060d1f]">
-                <span className="w-3 h-3 rounded-full bg-red-500/70" />
-                <span className="w-3 h-3 rounded-full bg-amber-500/70" />
-                <span className="w-3 h-3 rounded-full bg-emerald-500/70" />
-                <span className="ml-3 text-[11px] text-muted-foreground font-mono">ai_feature.py</span>
-                <span className="ml-auto text-[10px] text-emerald-400 font-mono flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  running
-                </span>
-              </div>
-
-              {/* Code lines */}
-              <div className="px-5 py-5 font-mono text-[12px] leading-6 space-y-0.5">
-                {codeLines.map((line, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + i * 0.12, duration: 0.3 }}
-                  >
-                    <span className="text-muted-foreground/30 w-6 shrink-0 text-right mr-4 select-none text-[10px] leading-6">{i + 1}</span>
-                    <span className="whitespace-pre">
-                      {line.tokens.map((tok, j) => (
-                        <span key={j} className={tok.c}>{tok.t}</span>
-                      ))}
-                    </span>
-                  </motion.div>
-                ))}
-
-                {/* Blinking cursor */}
-                <motion.div
-                  className="flex mt-1"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 2 }}
-                >
-                  <span className="text-muted-foreground/30 w-6 shrink-0 text-right mr-4 text-[10px] leading-6 select-none">
-                    {codeLines.length + 1}
-                  </span>
-                  <motion.span
-                    className="w-2 h-4 bg-emerald-400 inline-block self-center"
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  />
-                </motion.div>
-              </div>
-
-              {/* Bottom status bar */}
-              <div className="flex items-center gap-3 px-5 py-2 border-t border-border bg-[#060d1f] text-[10px] font-mono">
-                <span className="text-emerald-400">✓ 0 errors</span>
-                <span className="text-muted-foreground/50">|</span>
-                <span className="text-muted-foreground">Python 3.11</span>
-                <span className="text-muted-foreground/50">|</span>
-                <span className="text-amber-400">FastAPI</span>
-              </div>
-            </div>
-
-            {/* Stat cards — anchored to terminal corners, hidden on small screens */}
-            <motion.div
-              className="absolute -bottom-5 -left-5 hidden sm:flex items-center gap-3 px-4 py-3 rounded-xl border border-emerald-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            >
-              <div className="text-2xl font-black text-emerald-400">30+</div>
-              <div className="text-[10px] text-muted-foreground font-medium leading-tight">Projects<br />Shipped</div>
-            </motion.div>
-
-            <motion.div
-              className="absolute -top-5 -right-5 hidden sm:flex items-center gap-3 px-4 py-3 rounded-xl border border-purple-500/20 bg-card/95 backdrop-blur-sm shadow-xl z-10"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            >
-              <div className="text-2xl font-black text-purple-400">5+</div>
-              <div className="text-[10px] text-muted-foreground font-medium leading-tight">Years<br />Experience</div>
-            </motion.div>
-
-            {/* Mobile stat row — visible only when floating cards are hidden */}
-            <div className="flex sm:hidden justify-center gap-4 mt-6">
-              <div className="flex flex-col items-center px-5 py-3 rounded-xl border border-emerald-500/20 bg-card/80">
-                <span className="text-xl font-black text-emerald-400">30+</span>
-                <span className="text-[10px] text-muted-foreground font-medium mt-0.5">Projects Shipped</span>
-              </div>
-              <div className="flex flex-col items-center px-5 py-3 rounded-xl border border-purple-500/20 bg-card/80">
-                <span className="text-xl font-black text-purple-400">5+</span>
-                <span className="text-[10px] text-muted-foreground font-medium mt-0.5">Years Experience</span>
-              </div>
-            </div>
-
-            </div>{/* end inner wrapper */}
-          </motion.div>
+      {/* Rotating badge */}
+      <div style={{ position: "absolute", right: "clamp(20px,6vw,80px)", bottom: 120, width: 128, height: 128, zIndex: 2 }} className="hidden lg:block">
+        <svg viewBox="0 0 120 120" width="100%" height="100%" className="rotating-badge">
+          <defs>
+            <path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
+          </defs>
+          <text>
+            <textPath href="#circ" style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 10.5, letterSpacing: ".28em", fill: "var(--ink-dim)", textTransform: "uppercase" }}>
+              open to work · open to work ·{" "}
+            </textPath>
+          </text>
+        </svg>
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, color: "#FFB454" }}>
+          ✦
         </div>
-      </motion.div>
+      </div>
 
-      {/* Tech Marquee */}
-      <div className="w-full border-t border-b border-border/60 py-3 overflow-hidden mt-10">
-        <div className="flex animate-marquee gap-8 whitespace-nowrap" style={{ width: "max-content" }}>
+      {/* Tech marquee */}
+      <div style={{ position: "relative", zIndex: 1, borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", overflow: "hidden", padding: "22px 0", background: "var(--surface)", display: "flex", whiteSpace: "nowrap", marginTop: 80 }}>
+        <div style={{ display: "flex", animation: "scrollx 32s linear infinite" }}>
           {[...techStack, ...techStack].map((tech, i) => (
-            <span key={i} className="inline-flex items-center gap-2 text-muted-foreground text-xs font-mono shrink-0">
-              <span className="text-emerald-500 text-xs">▸</span>
+            <span
+              key={i}
+              style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 13, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-dim)", padding: "0 28px", display: "flex", alignItems: "center", gap: 28 }}
+            >
               {tech}
+              <span style={{ color: "#FFB454", fontSize: 8 }}>◆</span>
             </span>
           ))}
         </div>
